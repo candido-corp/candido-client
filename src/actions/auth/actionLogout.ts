@@ -1,8 +1,8 @@
 import { json, redirect } from 'react-router-dom';
-import { API_V1_logout } from '../../api/v1/auth/API_V1_logout';
+import AuthService from '../../services/auth/AuthService';
 
 export default async function action() {
-  const response = await API_V1_logout();
+  const response = await new AuthService().logout();
 
   if (response.status === 422 || response.status === 401) {
     return response;

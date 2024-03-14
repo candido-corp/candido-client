@@ -9,7 +9,9 @@ import './index.css';
 import logoutAction from './actions/auth/actionLogout';
 import loginAction from './actions/auth/actionLogin';
 import registerAction from './actions/auth/actionRegister';
+import registerVerifyByEmailLoader from './loaders/loaderRegisterVerifyByEmail';
 import { EnumRoutes } from './models/enums/EnumRoutes';
+import RegisterVerifyByEmailPage from './pages/auth/RegisterVerifyByEmail';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,11 @@ const router = createBrowserRouter([
         path: EnumRoutes.REGISTER,
         element: <RegisterPage />,
         action: registerAction,
+      },
+      {
+        path: EnumRoutes.REGISTER_VERIFY_BY_EMAIL,
+        element: <RegisterVerifyByEmailPage />,
+        loader: registerVerifyByEmailLoader,
       },
       {
         path: EnumRoutes.LOGOUT,

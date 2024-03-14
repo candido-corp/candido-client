@@ -5,7 +5,7 @@ const MainNavigation = () => {
   return (
     <header>
       <nav>
-        <ul>
+        <ul className="flex gap-6">
           <li>
             <NavLink to="/" end>
               Home

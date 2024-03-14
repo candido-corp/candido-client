@@ -1,6 +1,6 @@
 import { json, redirect } from 'react-router-dom';
 import { RequestRegisterData } from '../../models/requests/RequestRegisterData';
-import { API_V1_register_email_verification } from '../../api/v1/auth/API_V1_register_email_verification';
+import AuthService from '../../services/auth/AuthService';
 
 export default async function action({
   request,
@@ -16,7 +16,9 @@ export default async function action({
     confirm_password: data.get('confirm-password') as string,
   };
 
-  const response = await API_V1_register_email_verification(registerData);
+  const response = await new AuthService().registerEmailVerification(
+    registerData
+  );
 
   if (response.status === 422 || response.status === 401) {
     return response;

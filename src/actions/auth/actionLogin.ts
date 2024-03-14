@@ -1,6 +1,6 @@
 import { json, redirect } from 'react-router-dom';
 import { RequestLoginData } from '../../models/requests/RequestLoginData';
-import { API_V1_login } from '../../api/v1/auth/API_V1_login';
+import AuthService from '../../services/auth/AuthService';
 
 export default async function action({
   request,
@@ -13,7 +13,7 @@ export default async function action({
     password: data.get('password') as string,
   };
 
-  const response = await API_V1_login(loginData);
+  const response = await new AuthService().login(loginData);
 
   if (response.status === 422 || response.status === 401) {
     return response;
