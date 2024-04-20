@@ -1,17 +1,19 @@
 // import { useState } from 'react';
-import { Form, Link, useActionData, useNavigation } from 'react-router-dom';
+import { Form, Link, useNavigation } from 'react-router-dom';
 import { EnumRoutes } from '../models/enums/EnumRoutes';
 
 const LoginForm = () => {
-  const data = useActionData();
+  const params = new URLSearchParams(location.search);
+  const from = params.get('from') || '/';
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state === 'submitting';
+  // const actionData = useActionData() as { error: string } | undefined;
 
   return (
     <>
       <Form method="post">
-        <h1>Log in</h1>
+        <input type="hidden" name="redirectTo" value={from} />
         {/* {data && data.errors && (
           <ul>
             {Object.values(data.errors).map((err) => (
@@ -34,7 +36,7 @@ const LoginForm = () => {
           />
         </p>
         <p>
-          <label htmlFor="image">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             id="password"
             className="border-2 border-black"
@@ -45,9 +47,12 @@ const LoginForm = () => {
           />
         </p>
         <div>
-          <Link to={EnumRoutes.REGISTER}>Create new user</Link>
-          <button disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Save'}
+          <Link to={EnumRoutes.REGISTER} className="font-bold">
+            Create new user
+          </Link>
+          <span className="px-5">or</span>
+          <button type="submit" disabled={isSubmitting} className="font-bold">
+            {isSubmitting ? 'Submitting...' : 'Sign in'}
           </button>
         </div>
       </Form>

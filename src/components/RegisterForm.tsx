@@ -2,7 +2,10 @@
 import { Form, useActionData, useNavigation } from 'react-router-dom';
 
 const RegisterForm = () => {
-  const data = useActionData();
+  const params = new URLSearchParams(location.search);
+  const from = params.get('from') || '/';
+
+  // const data = useActionData();
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state === 'submitting';
@@ -10,6 +13,7 @@ const RegisterForm = () => {
   return (
     <>
       <Form method="post">
+        <input type="hidden" name="redirectTo" value={from} />
         {/* {data && data.errors && (
           <ul>
             {Object.values(data.errors).map((err) => (
@@ -76,8 +80,8 @@ const RegisterForm = () => {
           />
         </p>
         <div>
-          <button disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Save'}
+          <button disabled={isSubmitting} className="font-bold">
+            {isSubmitting ? 'Submitting...' : 'Sign up'}
           </button>
         </div>
       </Form>

@@ -9,4 +9,5 @@ export interface AuthServiceInterface {
   ): Promise<Response>;
   login(data: RequestLoginData): Promise<Response>;
   logout(): Promise<Response>;
+  account(): Promise<Response>;
 }

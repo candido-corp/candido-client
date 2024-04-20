@@ -1,8 +1,8 @@
 import { EnumMiddlewareRoutes } from '../../../models/enums/EnumMiddlewareRoutes';
 
-export async function API_V1_logout(): Promise<Response> {
+export async function API_V1_account(): Promise<Response> {
   return await fetch(
-    import.meta.env.VITE_MIDDLEWARE_BASE_URL + EnumMiddlewareRoutes.LOGOUT,
+    import.meta.env.VITE_MIDDLEWARE_BASE_URL + EnumMiddlewareRoutes.ACCOUNT,
     {
       method: 'GET',
       headers: {

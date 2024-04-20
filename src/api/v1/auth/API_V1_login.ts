@@ -10,6 +10,7 @@ export async function API_V1_login(data: RequestLoginData): Promise<Response> {
         'Content-type': 'application/json',
       },
       body: JSON.stringify(data),
+      credentials: 'include',
     }
   );
 }
