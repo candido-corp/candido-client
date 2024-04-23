@@ -1,9 +1,12 @@
-import { LoaderFunctionArgs, json } from 'react-router-dom';
+import { LoaderFunctionArgs, json, redirect } from 'react-router-dom';
 import AuthService from '../services/auth/AuthService';
-import { loaderProtected } from './loaderProtected';
+import { protectedLoaderRedirect } from '../utils/routesHelper';
 
 export default async function loader(args: LoaderFunctionArgs) {
-  loaderProtected(args);
+  const redirectRoute = protectedLoaderRedirect(args.request.url);
+  if (redirectRoute) {
+    return redirect(redirectRoute);
+  }
 
   try {
     const response = await new AuthService().account();
