@@ -1,4 +1,4 @@
-import { authProvider } from '../components/Auth';
+import { authProvider } from './Auth';
 import { EnumRoutes } from '../models/enums/EnumRoutes';
 
 export function protectedLoaderRedirect(url: string): string | null {

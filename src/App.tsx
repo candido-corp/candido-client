@@ -14,7 +14,7 @@ import accountLoader from './loaders/loaderAccount';
 import { EnumRoutes } from './models/enums/EnumRoutes';
 import RegisterVerifyByEmailPage from './pages/auth/RegisterVerifyByEmail';
 import Account from './pages/account/Account';
-import { authProvider } from './components/Auth';
+import { authProvider } from './utils/Auth';
 import loginLoader from './loaders/auth/loaderLogin';
 
 function App() {

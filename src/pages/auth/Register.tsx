@@ -1,5 +1,5 @@
 import PageContent from '../../components/PageContent';
-import RegisterForm from '../../components/RegisterForm';
+import RegisterForm from '../../components/auth/RegisterForm';
 
 const RegisterPage = () => {
   return (

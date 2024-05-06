@@ -1,5 +1,5 @@
 import { redirect } from 'react-router-dom';
-import { authProvider } from '../../components/Auth';
+import { authProvider } from '../../utils/Auth';
 import { EnumRoutes } from '../../models/enums/EnumRoutes';
 
 export default async function loader() {

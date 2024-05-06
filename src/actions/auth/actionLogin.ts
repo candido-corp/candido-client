@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, json, redirect } from 'react-router-dom';
 import { RequestLoginData } from '../../models/requests/RequestLoginData';
 import AuthService from '../../services/auth/AuthService';
-import { authProvider } from '../../components/Auth';
+import { authProvider } from '../../utils/Auth';
 import { EnumRoutes } from '../../models/enums/EnumRoutes';
 
 export default async function action({ request }: LoaderFunctionArgs) {

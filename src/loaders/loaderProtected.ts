@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, redirect } from 'react-router-dom';
-import { authProvider } from '../components/Auth';
+import { authProvider } from '../utils/Auth';
 import { EnumRoutes } from '../models/enums/EnumRoutes';
 
 //TODO redirect is not working
