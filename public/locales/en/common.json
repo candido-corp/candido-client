@@ -1,0 +1,35 @@
+{
+  "homepage": {
+    "title": "Homepage"
+  },
+  "login": {
+    "title": "Login",
+    "register": "Create new user",
+    "sign_in": "Sign in"
+  },
+  "register": {
+    "title": "Register",
+    "sign_up": "Sign up"
+  },
+  "register_verify_email": {
+    "title": "Register Verify Email"
+  },
+  "my_account": {
+    "title": "My account"
+  },
+  "logout": {
+    "title": "Logout"
+  },
+  "form_fields": {
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password"
+  },
+  "form_validation": {
+    "required": "This field is required",
+    "email_invalid": "Please enter a valid email address",
+    "password_required": "The password is required",
+    "password_match": "Passwords must match"}
+}

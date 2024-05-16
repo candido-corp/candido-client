@@ -7,9 +7,9 @@ const password: keyof RequestLoginData = 'password';
 export const loginValidationSchema = z.object({
   [email]: z
     .string()
-    .min(1, 'Il campo è obbligatorio')
-    .email('Il formato non è valido'),
-  [password]: z.string().min(1, 'La password è obbligatoria'),
+    .min(1, 'form_validation.required')
+    .email('form_validation.email_invalid'),
+  [password]: z.string().min(1, 'form_validation.password_required'),
 });
 
 export type TLoginValidationFields = z.infer<typeof loginValidationSchema>;

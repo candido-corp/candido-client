@@ -9,21 +9,21 @@ const confirm_password: keyof RequestRegisterData = 'confirm_password';
 
 export const registerValidationSchema = z
   .object({
-    [first_name]: z.string().min(1, 'La password è obbligatoria'),
-    [last_name]: z.string().min(1, 'La password è obbligatoria'),
+    [first_name]: z.string().min(1, 'form_validation.required'),
+    [last_name]: z.string().min(1, 'form_validation.required'),
     [email]: z
       .string()
-      .min(1, 'Il campo è obbligatorio')
-      .email('Il formato non è valido'),
-    [password]: z.string().min(1, 'La password è obbligatoria'),
-    [confirm_password]: z.string().min(1, 'La password è obbligatoria'),
+      .min(1, 'form_validation.required')
+      .email('form_validation.email_invalid'),
+    [password]: z.string().min(1, 'form_validation.password_required'),
+    [confirm_password]: z.string().min(1, 'form_validation.password_required'),
   })
   .refine(
     (values) => {
       return values.password === values.confirm_password;
     },
     {
-      message: 'Passwords must match!',
+      message: 'form_validation.password_match',
       path: ['confirm_password'],
     }
   );

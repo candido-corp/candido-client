@@ -16,6 +16,7 @@ import RegisterVerifyByEmailPage from './pages/auth/RegisterVerifyByEmail';
 import Account from './pages/account/Account';
 import { authProvider } from './utils/Auth';
 import loginLoader from './loaders/auth/loaderLogin';
+import { Suspense } from 'react';
 
 function App() {
   const router = createBrowserRouter([
@@ -58,7 +59,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback="...is loading">
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 }
 
 export default App;

@@ -15,8 +15,10 @@ import { SubmitTarget } from 'react-router-dom/dist/dom';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { registerValidationSchema } from './validation/registration';
+import { useTranslation } from 'react-i18next';
 
 const RegisterForm = () => {
+  const { t } = useTranslation();
   const submit = useSubmit();
   const navigation = useNavigation();
 
@@ -61,9 +63,13 @@ const RegisterForm = () => {
               name="first_name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First Name</FormLabel>
+                  <FormLabel>{t('form_fields.first_name')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="First Name" id="firstName" {...field} />
+                    <Input
+                      placeholder={t('form_fields.first_name')}
+                      id="firstName"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -76,9 +82,13 @@ const RegisterForm = () => {
               name="last_name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Last Name</FormLabel>
+                  <FormLabel>{t('form_fields.last_name')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Last Name" id="lastName" {...field} />
+                    <Input
+                      placeholder={t('form_fields.last_name')}
+                      id="lastName"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -91,9 +101,13 @@ const RegisterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t('form_fields.email')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Email" id="email" {...field} />
+                    <Input
+                      placeholder={t('form_fields.email')}
+                      id="email"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -106,10 +120,10 @@ const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>{t('form_fields.password')}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Password"
+                      placeholder={t('form_fields.password')}
                       id="password"
                       type="password"
                       {...field}
@@ -126,10 +140,10 @@ const RegisterForm = () => {
               name="confirm_password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
+                  <FormLabel>{t('form_fields.confirm_password')}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Confirm Password"
+                      placeholder={t('form_fields.confirm_password')}
                       id="password"
                       type="password"
                       autoComplete="new-password"
@@ -143,7 +157,7 @@ const RegisterForm = () => {
           </p>
           <div className="pt-5">
             <Button disabled={isSubmitting} className="font-bold">
-              {isSubmitting ? 'Submitting...' : 'Sign up'}
+              {isSubmitting ? 'Submitting...' : t('register.sign_up')}
             </Button>
           </div>
         </form>

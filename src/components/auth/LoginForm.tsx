@@ -15,8 +15,10 @@ import {
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { SubmitTarget } from 'react-router-dom/dist/dom';
+import { useTranslation } from 'react-i18next';
 
 const LoginForm = () => {
+  const { t } = useTranslation();
   const submit = useSubmit();
   const navigation = useNavigation();
 
@@ -60,9 +62,13 @@ const LoginForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('form_fields.email')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Email" id="email" {...field} />
+                  <Input
+                    placeholder={t('form_fields.email')}
+                    id="email"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -74,10 +80,10 @@ const LoginForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{t('form_fields.password')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Password"
+                    placeholder={t('form_fields.password')}
                     id="password"
                     type="password"
                     {...field}
@@ -89,11 +95,11 @@ const LoginForm = () => {
           />
           <div className="pt-5">
             <Link to={EnumRoutes.REGISTER} className="font-bold">
-              Create new user
+              {t('login.register')}
             </Link>
             <span className="px-5">or</span>
             <Button type="submit" disabled={isSubmitting} className="font-bold">
-              {isSubmitting ? 'Submitting...' : 'Sign in'}
+              {isSubmitting ? 'Submitting...' : t('login.sign_in')}
             </Button>
           </div>
         </form>

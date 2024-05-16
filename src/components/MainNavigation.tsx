@@ -1,28 +1,30 @@
 import { Form, NavLink } from 'react-router-dom';
 import { EnumRoutes } from '../models/enums/EnumRoutes';
+import { useTranslation } from 'react-i18next';
 
 const MainNavigation = () => {
+  const { t } = useTranslation();
   return (
     <header>
       <nav>
         <ul className="flex gap-6">
           <li>
             <NavLink to={EnumRoutes.HOME} end>
-              Home
+              {t('homepage.title')}
             </NavLink>
           </li>
           <li>
-            <NavLink to={EnumRoutes.ACCOUNT}>Account</NavLink>
+            <NavLink to={EnumRoutes.ACCOUNT}>{t('my_account.title')}</NavLink>
           </li>
           <li>
-            <NavLink to={EnumRoutes.LOGIN}>Login</NavLink>
+            <NavLink to={EnumRoutes.LOGIN}>{t('login.title')}</NavLink>
           </li>
           <li>
-            <NavLink to={EnumRoutes.REGISTER}>Register</NavLink>
+            <NavLink to={EnumRoutes.REGISTER}>{t('register.title')}</NavLink>
           </li>
           <li>
             <Form action={EnumRoutes.LOGOUT} method="post">
-              <button>Logout</button>
+              <button>{t('logout.title')}</button>
             </Form>
           </li>
         </ul>
