@@ -1,6 +1,6 @@
 import { Form, NavLink } from 'react-router-dom';
-import { EnumRoutes } from '../models/enums/EnumRoutes';
 import { useTranslation } from 'react-i18next';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
 
 const MainNavigation = () => {
   const { t } = useTranslation();

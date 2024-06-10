@@ -1,13 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import LoginForm from '../../components/auth/LoginForm';
-import PageContent from '../../components/PageContent';
+import LoginContainer from '@/components/auth/Login/LoginContainer';
 
 const LoginPage = () => {
   const { t } = useTranslation();
   return (
-    <PageContent title={t('login.title')}>
-      <LoginForm />
-    </PageContent>
+    // <PageContent title={t('login.title')}>
+    // </PageContent>
+    <LoginContainer />
   );
 };
 

@@ -1,6 +1,6 @@
+import Account from '@/components/Account';
+import PageContent from '@/components/Common/PageContent';
 import { useTranslation } from 'react-i18next';
-import Account from '../../components/Account';
-import PageContent from '../../components/PageContent';
 
 const AccountPage = () => {
   const { t } = useTranslation();

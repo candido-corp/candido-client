@@ -1,21 +1,20 @@
-import { Link, useNavigation, useSubmit } from 'react-router-dom';
-import { EnumRoutes } from '../../models/enums/EnumRoutes';
+import { Form, Link, useNavigation, useSubmit } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginValidationSchema } from './validation/login';
-import { RequestLoginData } from '../../models/requests/RequestLoginData';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitTarget } from 'react-router-dom/dist/dom';
+import { useTranslation } from 'react-i18next';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
+import { loginValidationSchema } from '../../validation/login';
+import { RequestLoginData } from '@/models/requests/RequestLoginData';
 import {
-  Form,
   FormField,
   FormItem,
   FormLabel,
   FormControl,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { SubmitTarget } from 'react-router-dom/dist/dom';
-import { useTranslation } from 'react-i18next';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const LoginForm = () => {
   const { t } = useTranslation();
@@ -47,7 +46,7 @@ const LoginForm = () => {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
           <input type="hidden" name="redirectTo" value={from} />
           {/* {data && data.errors && (
             <ul>
@@ -61,7 +60,7 @@ const LoginForm = () => {
             control={control}
             name="email"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="grid gap-2">
                 <FormLabel>{t('form_fields.email')}</FormLabel>
                 <FormControl>
                   <Input
@@ -79,8 +78,16 @@ const LoginForm = () => {
             control={control}
             name="password"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t('form_fields.password')}</FormLabel>
+              <FormItem className="grid gap-2">
+                <div className="flex items-center">
+                  <FormLabel>{t('form_fields.password')}</FormLabel>
+                  <Link
+                    to="#" //TODO change url
+                    className="ml-auto inline-block text-sm underline"
+                  >
+                    Forgot your password?
+                  </Link>
+                </div>
                 <FormControl>
                   <Input
                     placeholder={t('form_fields.password')}
@@ -93,15 +100,9 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
-          <div className="pt-5">
-            <Link to={EnumRoutes.REGISTER} className="font-bold">
-              {t('login.register')}
-            </Link>
-            <span className="px-5">or</span>
-            <Button type="submit" disabled={isSubmitting} className="font-bold">
-              {isSubmitting ? 'Submitting...' : t('login.sign_in')}
-            </Button>
-          </div>
+          <Button type="submit" disabled={isSubmitting} className="w-full">
+            {isSubmitting ? 'Submitting...' : t('login.sign_in')}
+          </Button>
         </form>
       </Form>
     </>

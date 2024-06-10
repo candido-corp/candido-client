@@ -10,12 +10,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
+} from '@/components/ui/form';
 import { SubmitTarget } from 'react-router-dom/dist/dom';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { registerValidationSchema } from './validation/registration';
+import { Input } from '@/components/ui/input';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
+import { registerValidationSchema } from '../../validation/registration';
 
 const RegisterForm = () => {
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ const RegisterForm = () => {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
           <input type="hidden" name="redirectTo" value={from} />
           {/* {data && data.errors && (
           <ul>
@@ -57,12 +57,12 @@ const RegisterForm = () => {
           </ul>
         )}
         {data && data.message && <p>{data.message}</p>} */}
-          <p>
+          <div className="grid grid-cols-2 gap-4">
             <FormField
               control={control}
               name="first_name"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="grid gap-2">
                   <FormLabel>{t('form_fields.first_name')}</FormLabel>
                   <FormControl>
                     <Input
@@ -75,13 +75,11 @@ const RegisterForm = () => {
                 </FormItem>
               )}
             />
-          </p>
-          <p>
             <FormField
               control={control}
               name="last_name"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="grid gap-2">
                   <FormLabel>{t('form_fields.last_name')}</FormLabel>
                   <FormControl>
                     <Input
@@ -94,72 +92,65 @@ const RegisterForm = () => {
                 </FormItem>
               )}
             />
-          </p>
-          <p>
-            <FormField
-              control={control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('form_fields.email')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t('form_fields.email')}
-                      id="email"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </p>
-          <p>
-            <FormField
-              control={control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('form_fields.password')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t('form_fields.password')}
-                      id="password"
-                      type="password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </p>
-          <p>
-            <FormField
-              control={control}
-              name="confirm_password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('form_fields.confirm_password')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t('form_fields.confirm_password')}
-                      id="password"
-                      type="password"
-                      autoComplete="new-password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </p>
-          <div className="pt-5">
-            <Button disabled={isSubmitting} className="font-bold">
-              {isSubmitting ? 'Submitting...' : t('register.sign_up')}
-            </Button>
           </div>
+
+          <FormField
+            control={control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="grid gap-2">
+                <FormLabel>{t('form_fields.email')}</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={t('form_fields.email')}
+                    id="email"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name="password"
+            render={({ field }) => (
+              <FormItem className="grid gap-2">
+                <FormLabel>{t('form_fields.password')}</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={t('form_fields.password')}
+                    id="password"
+                    type="password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name="confirm_password"
+            render={({ field }) => (
+              <FormItem className="grid gap-2">
+                <FormLabel>{t('form_fields.confirm_password')}</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={t('form_fields.confirm_password')}
+                    id="password"
+                    type="password"
+                    autoComplete="new-password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button disabled={isSubmitting} className="w-full">
+            {isSubmitting ? 'Submitting...' : t('register.sign_up')}
+          </Button>
         </form>
       </Form>
     </>

@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
-import PageContent from '../../components/PageContent';
 import { useTranslation } from 'react-i18next';
+import PageContent from '@/components/Common/PageContent';
 
 const RegisterVerifyByEmailPage = () => {
   const { t } = useTranslation();
