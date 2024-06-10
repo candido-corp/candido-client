@@ -2,7 +2,9 @@ import { LoaderFunctionArgs, json } from 'react-router-dom';
 import AuthService from '../../services/auth/AuthService';
 import { RequestRegisterVerifyByEmailData } from '../../models/requests/RequestRegisterVerifyByEmailData';
 
-export default async function loader({ params }: LoaderFunctionArgs) {
+export default async function loaderRegisterVerifyByEmail({
+  params,
+}: LoaderFunctionArgs) {
   const { token }: RequestRegisterVerifyByEmailData = params;
 
   if (!token) {

@@ -4,7 +4,7 @@ import AuthService from '../../services/auth/AuthService';
 import { authProvider } from '../../utils/Auth';
 import { EnumRoutes } from '../../models/enums/EnumRoutes';
 
-export default async function action({ request }: LoaderFunctionArgs) {
+export default async function actionLogin({ request }: LoaderFunctionArgs) {
   const data = await request.formData();
   const loginData: RequestLoginData = {
     email: data.get('email') as string,

@@ -3,7 +3,7 @@ import AuthService from '../../services/auth/AuthService';
 import { EnumRoutes } from '../../models/enums/EnumRoutes';
 import { authProvider } from '../../utils/Auth';
 
-export default async function action() {
+export default async function actionLogout() {
   try {
     const response = await new AuthService().logout();
 

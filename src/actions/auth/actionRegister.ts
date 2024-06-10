@@ -3,7 +3,7 @@ import { RequestRegisterData } from '../../models/requests/RequestRegisterData';
 import AuthService from '../../services/auth/AuthService';
 import { EnumRoutes } from '../../models/enums/EnumRoutes';
 
-export default async function action({
+export default async function actionRegister({
   request,
 }: LoaderFunctionArgs): Promise<Response> {
   const data = await request.formData();
