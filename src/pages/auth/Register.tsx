@@ -1,14 +1,10 @@
-import { useTranslation } from 'react-i18next';
-import PageContent from '../../components/PageContent';
-import RegisterForm from '../../components/auth/RegisterForm';
+import RegisterContainer from '@/components/auth/Register/RegisterContainer';
 
 const RegisterPage = () => {
-  const { t } = useTranslation();
-
   return (
-    <PageContent title={t('register.title')}>
-      <RegisterForm />
-    </PageContent>
+    // <PageContent title={t('register.title')}>
+    <RegisterContainer />
+    // </PageContent>
   );
 };
 
