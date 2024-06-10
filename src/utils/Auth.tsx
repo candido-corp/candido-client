@@ -14,7 +14,7 @@ interface AuthProvider {
   signout: () => void;
 }
 
-const getAccessToken = () => {
+const getAccessToken = (): User | null => {
   const accessToken: string | undefined = Cookies.get('access_token');
   if (!accessToken) {
     return null;
@@ -29,11 +29,9 @@ export const authProvider: AuthProvider = {
   signin() {
     authProvider.isAuthenticated = true;
     authProvider.user = getAccessToken();
-    console.log('signin', authProvider.user, authProvider.isAuthenticated);
   },
   signout() {
     authProvider.isAuthenticated = false;
     authProvider.user = null;
-    console.log('signout', authProvider.user, authProvider.isAuthenticated);
   },
 };
