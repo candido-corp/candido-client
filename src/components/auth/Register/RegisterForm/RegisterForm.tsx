@@ -31,6 +31,9 @@ const RegisterForm = () => {
   const defaultValues: RequestRegisterData = {
     email: '',
     password: '',
+    confirm_password: '',
+    first_name: '',
+    last_name: '',
   };
 
   const form = useForm<RequestRegisterData>({
@@ -67,7 +70,7 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input
                       placeholder={t('form_fields.first_name')}
-                      id="firstName"
+                      id="first_name"
                       {...field}
                     />
                   </FormControl>
@@ -84,7 +87,7 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input
                       placeholder={t('form_fields.last_name')}
-                      id="lastName"
+                      id="last_name"
                       {...field}
                     />
                   </FormControl>
@@ -138,7 +141,7 @@ const RegisterForm = () => {
                 <FormControl>
                   <Input
                     placeholder={t('form_fields.confirm_password')}
-                    id="password"
+                    id="confirm_password"
                     type="password"
                     autoComplete="new-password"
                     {...field}
