@@ -1,4 +1,4 @@
-import { Form, Link, useNavigation, useSubmit } from 'react-router-dom';
+import { Link, useNavigation, useSubmit } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { SubmitTarget } from 'react-router-dom/dist/dom';
@@ -12,6 +12,7 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
+  Form,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
