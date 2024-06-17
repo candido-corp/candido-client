@@ -1,10 +1,12 @@
 // import { createContext, useMemo, useState } from 'react';
+import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
 interface User {
-  email?: string | null;
-  userType?: string | null;
+  email: string | null;
+  roles: EnumUserRoles | null;
+  permissions: EnumUserPermissions | null;
 }
 
 interface AuthProvider {
@@ -20,7 +22,11 @@ const getAccessToken = (): User | null => {
     return null;
   }
   const decoded = jwtDecode<any>(accessToken);
-  return { email: decoded.sub, userType: decoded.roles[0].authority };
+  return {
+    email: decoded.sub,
+    roles: decoded.roles,
+    permissions: decoded.permissions,
+  };
 };
 
 export const authProvider: AuthProvider = {
