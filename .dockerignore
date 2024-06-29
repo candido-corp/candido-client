@@ -1,0 +1,10 @@
+.env
+.env.local
+.gitignore
+.nvmrc
+README.md
+.vscode
+.git
+.idea
+.prettierrc
+.prettierignore
