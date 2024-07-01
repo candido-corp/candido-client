@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 
 const RegisterContainer: React.FC<BaseFC> = () => {
   return (
-    <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+    <div className="container relative flex h-screen flex-col justify-center sm:items-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
         to={EnumRoutes.LOGIN}
         className={cn(
@@ -37,8 +37,22 @@ const RegisterContainer: React.FC<BaseFC> = () => {
         </div>
       </div>
       <div className="lg:p-8">
-        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 md:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
+            <div className="mb-16 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-14 w-14"
+              >
+                <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
+              </svg>
+            </div>
             <h1 className="text-3xl font-bold">Sign up</h1>
             <p className="text-balance text-muted-foreground">
               Enter your information to create an account

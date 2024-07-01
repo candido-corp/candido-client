@@ -70,10 +70,12 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Link } from 'react-router-dom';
+import LoginBlurCard from '@/components/auth/Login/LoginBlurCard';
+import LoginContainerBlur from '@/components/auth/Login/LoginContainerBlur';
 
 const LoginBlur = () => {
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40">
+    <div className="flex h-screen w-full flex-col items-center justify-center bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
           <Link
@@ -493,66 +495,6 @@ const LoginBlur = () => {
                           </TableCell>
                           <TableCell className="text-right">$250.00</TableCell>
                         </TableRow>
-                        <TableRow>
-                          <TableCell>
-                            <div className="font-medium">Liam Johnson</div>
-                            <div className="hidden text-sm text-muted-foreground md:inline">
-                              liam@example.com
-                            </div>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            Sale
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            <Badge className="text-xs" variant="secondary">
-                              Fulfilled
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            2023-06-23
-                          </TableCell>
-                          <TableCell className="text-right">$250.00</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>
-                            <div className="font-medium">Olivia Smith</div>
-                            <div className="hidden text-sm text-muted-foreground md:inline">
-                              olivia@example.com
-                            </div>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            Refund
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            <Badge className="text-xs" variant="outline">
-                              Declined
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            2023-06-24
-                          </TableCell>
-                          <TableCell className="text-right">$150.00</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>
-                            <div className="font-medium">Emma Brown</div>
-                            <div className="hidden text-sm text-muted-foreground md:inline">
-                              emma@example.com
-                            </div>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            Sale
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            <Badge className="text-xs" variant="secondary">
-                              Fulfilled
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            2023-06-26
-                          </TableCell>
-                          <TableCell className="text-right">$450.00</TableCell>
-                        </TableRow>
                       </TableBody>
                     </Table>
                   </CardContent>
@@ -714,6 +656,11 @@ const LoginBlur = () => {
             </Card>
           </div>
         </main>
+      </div>
+      <div className="absolute z-50 h-full w-full backdrop-blur-sm">
+        <LoginBlurCard className="m-10 h-[calc(100%-5rem)] lg:m-20 lg:h-[calc(100%-10rem)]">
+          <LoginContainerBlur />
+        </LoginBlurCard>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import LoginForm from '../LoginForm';
 
-const LoginContainer: React.FC<BaseFC> = () => {
+const LoginContainerBlur: React.FC<BaseFC> = () => {
   return (
     <div className="container relative flex h-full flex-col justify-center sm:items-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
@@ -65,4 +65,4 @@ const LoginContainer: React.FC<BaseFC> = () => {
   );
 };
 
-export default LoginContainer;
+export default LoginContainerBlur;
