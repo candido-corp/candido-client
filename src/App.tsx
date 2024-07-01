@@ -1,12 +1,13 @@
-import './App.css'
-import { Button } from './components/ui/button'
+import './index.css';
+import { RouterProvider } from 'react-router-dom';
+import { Suspense } from 'react';
+import { router } from '@/router/router';
 
 function App() {
-
   return (
-    <>
-      <Button onClick={() => console.log('Ciao')}>Click me</Button>
-    </>
+    <Suspense fallback="...is loading">
+      <RouterProvider router={router} />
+    </Suspense>
   );
 }
 
