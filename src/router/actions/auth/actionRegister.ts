@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, json, redirect } from 'react-router-dom';
-import { RequestRegisterData } from '../../models/requests/RequestRegisterData';
-import AuthService from '../../services/auth/AuthService';
-import { EnumRoutes } from '../../models/enums/EnumRoutes';
+import { RequestRegisterData } from '@/models/requests/RequestRegisterData';
+import AuthService from '@/services/auth/AuthService';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
 
 export default async function actionRegister({
   request,

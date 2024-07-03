@@ -1,7 +1,7 @@
 import { json, redirect } from 'react-router-dom';
-import AuthService from '../../services/auth/AuthService';
-import { EnumRoutes } from '../../models/enums/EnumRoutes';
-import { authProvider } from '../../utils/Auth';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
+import { authProvider } from '@/utils/Auth';
+import AuthService from '@/services/auth/AuthService.ts';
 
 export default async function actionLogout() {
   try {

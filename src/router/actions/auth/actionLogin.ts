@@ -1,8 +1,8 @@
 import { LoaderFunctionArgs, json, redirect } from 'react-router-dom';
-import { RequestLoginData } from '../../models/requests/RequestLoginData';
-import AuthService from '../../services/auth/AuthService';
-import { authProvider } from '../../utils/Auth';
-import { EnumRoutes } from '../../models/enums/EnumRoutes';
+import { RequestLoginData } from '@/models/requests/RequestLoginData';
+import AuthService from '@/services/auth/AuthService';
+import { authProvider } from '@/utils/Auth';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
 
 export default async function actionLogin({ request }: LoaderFunctionArgs) {
   const data = await request.formData();

@@ -5,7 +5,7 @@ type MainProps = {
   showNavigation?: boolean;
 };
 
-const Main: React.FC<MainProps> = ({ showNavigation = true }) => {
+const MainLayout: React.FC<MainProps> = ({ showNavigation = true }) => {
   return (
     <>
       {showNavigation && <MainNavigation />}
@@ -16,4 +16,4 @@ const Main: React.FC<MainProps> = ({ showNavigation = true }) => {
   );
 };
 
-export default Main;
+export default MainLayout;

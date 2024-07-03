@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs, json, redirect } from 'react-router-dom';
-import AuthService from '../services/auth/AuthService';
-import { protectedLoaderRedirect } from '../utils/routesHelper';
+import AuthService from '@/services/auth/AuthService';
+import { protectedLoaderRedirect } from '@/utils/routesHelper';
 
 export default async function loaderAccount(args: LoaderFunctionArgs) {
   const redirectRoute = protectedLoaderRedirect(args.request.url);
@@ -15,7 +15,7 @@ export default async function loaderAccount(args: LoaderFunctionArgs) {
       return json({ message: 'Could not load account data.' });
     }
 
-    return json({ message: 'Email Verified..' });
+    return json({ message: 'Email Verified@' });
   } catch (error) {
     console.error('error: ', error);
     return json({ message: 'Could not load account data.' });
