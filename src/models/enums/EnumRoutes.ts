@@ -1,8 +1,12 @@
 export enum EnumRoutes {
   HOME = '/',
-  LOGIN = '/account/login',
-  REGISTER = '/account/register',
-  REGISTER_VERIFY_BY_EMAIL = '/account/register/verify-by-email/:token',
-  LOGOUT = '/account/logout',
+
+  LOGIN = '/login',
+  LOGIN_BLUR = '/login/blur',
+  LOGOUT = '/logout',
+
+  REGISTER = '/register',
+  REGISTER_VERIFY_BY_EMAIL = '/register/email/verify/:token',
+
   ACCOUNT = '/account',
 }
