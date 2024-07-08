@@ -1,32 +1,25 @@
 import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
-import { authProvider } from '@/utils/Auth';
+import { useAuth } from '@/hooks/useAuth.ts';
 
-const WithAuthorization =
-  (allowedRoles: EnumUserRoles[], allowedPermissions: EnumUserPermissions[]) =>
-  (WrappedComponent: React.FC) => {
-    return (props: any) => {
-      const { user } = authProvider;
+const withAuthorization = (
+  allowedRoles: EnumUserRoles[],
+  allowedPermissions: EnumUserPermissions[]
+) => (WrappedComponent: React.FC) => {
+  const AuthorizedComponent: React.FC = (props) => {
+    const { user } = useAuth();
 
-      if (!user) {
-        return <div>Access Denied</div>;
-      }
+    // Aggiungi la tua logica di autorizzazione qui
+    const hasRequiredRole = allowedRoles.some(role => user?.roles.includes(role));
+    const hasRequiredPermission = allowedPermissions.every(permission => user?.permissions.includes(permission));
 
-      const hasRole = allowedRoles
-        ? allowedRoles.some((role) => user.roles?.includes(role))
-        : true;
+    if (!hasRequiredRole || !hasRequiredPermission) {
+      return <div>Unauthorized</div>;
+    }
 
-      const hasPermission = allowedPermissions
-        ? allowedPermissions.some((permission) =>
-            user.permissions?.includes(permission)
-          )
-        : true;
-
-      if (hasRole && hasPermission) {
-        return <WrappedComponent {...props} />;
-      }
-
-      return <div>Access Denied</div>;
-    };
+    return <WrappedComponent {...props} />;
   };
 
-export default WithAuthorization;
+  return AuthorizedComponent;
+};
+
+export default withAuthorization;

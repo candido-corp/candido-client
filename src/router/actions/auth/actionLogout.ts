@@ -1,26 +1,19 @@
 import { json, redirect } from 'react-router-dom';
-import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { authProvider } from '@/utils/Auth';
-import AuthService from '@/services/auth/AuthService.ts';
+import NetworkClient from '@/api/v1/NetworkClient.ts';
+import { AuthContextType } from '@/providers/AuthProvider.tsx';
+import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
 
-export default async function actionLogout() {
+const actionLogout =
+  ({ logout }: AuthContextType) =>
+    async () => {
   try {
-    const response = await new AuthService().logout();
-
-    if (response.status === 422 || response.status === 401) {
-      return response;
-    }
-
-    if (!response.ok) {
-      throw json({ message: 'Could not authenticate user.' }, { status: 500 });
-    }
-
-    authProvider.signout();
-    // const resData = await response.json();
-
+    await NetworkClient.logout();
+    logout();
     return redirect(EnumRoutes.HOME);
   } catch (error) {
     console.error('error: ', error);
     throw json({ message: 'error while logging out user' }, { status: 500 });
   }
 }
+
+export default actionLogout;

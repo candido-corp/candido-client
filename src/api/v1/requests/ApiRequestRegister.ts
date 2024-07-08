@@ -1,4 +1,4 @@
-export type RequestRegister = {
+export type ApiRequestRegister = {
 	email?: string;
 	password?: string;
 	confirm_password?: string;

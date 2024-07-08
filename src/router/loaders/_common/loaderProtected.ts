@@ -1,10 +1,17 @@
-import { LoaderFunction, redirect } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
-import { isAuthenticated } from '@/providers/AuthProvider.tsx';
+import { AuthContextType, isAuthenticated } from '@/providers/AuthProvider.tsx';
+import NetworkClient from '@/api/v1/NetworkClient.ts';
 
-export const loaderProtected: LoaderFunction = async ({ request }) => {
+const loaderProtected =
+  ({ logout }: AuthContextType) =>
+    async ({ request }: { request: Request }) => {
+
+  NetworkClient.setLogoutFunction(logout);
+
   const url = new URL(request.url);
-  const redirectTo = `${EnumRoutes.LOGIN}?redirect=${encodeURIComponent(url.pathname + url.search)}`;
+  const paramsRedirect = url.pathname === '/' ? '' : `?redirect=${encodeURIComponent(url.pathname + url.search)}`;
+  const redirectTo = `${EnumRoutes.LOGIN}${paramsRedirect}`;
 
   if (!isAuthenticated()) {
     return redirect(redirectTo);

@@ -14,6 +14,11 @@ const HomePage = () => {
       >
         <span>admin read permission</span>
       </ConditionalComponent>
+      <ConditionalComponent
+        allowedPermissions={[EnumUserPermissions.USER_READ]}
+      >
+        <span>User read permission</span>
+      </ConditionalComponent>
     </PageContent>
   );
 };

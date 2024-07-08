@@ -1,4 +1,4 @@
-export type RequestResetPasswordChangePassword = {
+export type ApiRequestResetPasswordChangePassword = {
 	t?: string;
 	e?: string;
 	password?: string;

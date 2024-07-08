@@ -14,7 +14,14 @@ export const getAccessToken = (): User | null => {
   if (!accessToken) {
     return null;
   }
-  const decoded = jwtDecode<JwtPayload>(accessToken);
+
+  let decoded: JwtPayload;
+  try {
+    decoded = jwtDecode<JwtPayload>(accessToken);
+  } catch (error) {
+    return null;
+  }
+
   return {
     email: decoded.sub,
     roles: decoded.roles,
@@ -42,19 +49,15 @@ export interface AuthContextType {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  console.log(getAccessToken());
-
   const [user, setUser] = useState<User | null>(getAccessToken());
   const isAuthenticated = !!user;
 
   const login = () => {
     setUser(getAccessToken());
-    console.log(isAuthenticated);
   };
 
   const logout = () => {
     setUser(null);
-    console.log(isAuthenticated);
   };
 
   return (

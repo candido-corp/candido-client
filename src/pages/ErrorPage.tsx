@@ -31,6 +31,7 @@ function ErrorPage() {
           {' '}
           //TODO fix this
           <p>{message}</p>
+          <p>{error.message}</p>
         </PageContent>
       </>
     );

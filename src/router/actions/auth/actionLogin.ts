@@ -1,4 +1,4 @@
-import { json, redirect } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 import { RequestLoginData } from '@/models/requests/RequestLoginData';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { AuthContextType } from '@/providers/AuthProvider.tsx';
@@ -17,15 +17,10 @@ const actionLogin =
 
   console.log('loginData: ', loginData);
 
-  try {
-    const response: AxiosResponse = await NetworkClient.login({ data: loginData });
-    login(response.data);
-    const redirectTo = data.get('redirectTo') as string | null;
-    return redirect(redirectTo || EnumRoutes.HOME);
-  } catch (error) {
-    console.error('error: ', error);
-    throw json({ message: 'Could not authenticate user.' }, { status: 500 });
-  }
+  const response: AxiosResponse = await NetworkClient.login({ data: loginData });
+  login(response.data);
+  const redirectTo = data.get('redirectTo') as string | null;
+  return redirect(redirectTo || EnumRoutes.HOME);
 }
 
 export default actionLogin;

@@ -73,7 +73,7 @@ import { Link } from 'react-router-dom';
 import LoginBlurCard from '@/components/auth/Login/LoginBlurCard';
 import LoginContainerBlur from '@/components/auth/Login/LoginContainerBlur';
 
-const LoginBlur = () => {
+const LoginBlurPage = () => {
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -666,4 +666,4 @@ const LoginBlur = () => {
   );
 };
 
-export default LoginBlur;
+export default LoginBlurPage;
