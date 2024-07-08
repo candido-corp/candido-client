@@ -1,16 +1,16 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { ResponseLoginData } from '@/data/responses/ResponseLoginData.ts';
-import { POST, GET, PUT } from '@/data/NetworkDecorator.ts';
-import { RequestLogin } from '@/data/requests/RequestLogin.ts';
-import { RequestRegister } from '@/data/requests/RequestRegister.ts';
-import { RequestRegisterEmailVerify } from '@/data/requests/RequestRegisterEmailVerify.ts';
-import { ResponseRegisterCode } from '@/data/responses/ResponseRegisterCode.ts';
-import { RequestRegisterCodeResend } from '@/data/requests/RequestRegisterCodeResend.ts';
-import { RequestRegisterCodeVerify } from '@/data/requests/RequestRegisterCodeVerify.ts';
-import { RequestResetPasswordSend } from '@/data/requests/RequestResetPasswordSend.ts';
-import { RequestResetPasswordCheckValidity } from '@/data/requests/RequestResetPasswordCheckValidity.ts';
-import { RequestResetPasswordChangePassword } from '@/data/requests/RequestResetPasswordChangePassword.ts';
-import { RequestAccountChangePassword } from '@/data/requests/RequestAccountChangePassword.ts';
+import { ResponseLoginData } from '@/api/v1/responses/ResponseLoginData.ts';
+import { POST, GET, PUT } from '@/api/v1/NetworkDecorator.ts';
+import { RequestLogin } from '@/api/v1/requests/RequestLogin.ts';
+import { RequestRegister } from '@/api/v1/requests/RequestRegister.ts';
+import { RequestRegisterEmailVerify } from '@/api/v1/requests/RequestRegisterEmailVerify.ts';
+import { ResponseRegisterCode } from '@/api/v1/responses/ResponseRegisterCode.ts';
+import { RequestRegisterCodeResend } from '@/api/v1/requests/RequestRegisterCodeResend.ts';
+import { RequestRegisterCodeVerify } from '@/api/v1/requests/RequestRegisterCodeVerify.ts';
+import { RequestResetPasswordSend } from '@/api/v1/requests/RequestResetPasswordSend.ts';
+import { RequestResetPasswordCheckValidity } from '@/api/v1/requests/RequestResetPasswordCheckValidity.ts';
+import { RequestResetPasswordChangePassword } from '@/api/v1/requests/RequestResetPasswordChangePassword.ts';
+import { RequestAccountChangePassword } from '@/api/v1/requests/RequestAccountChangePassword.ts';
 
 export enum EnumServerRoutes {
   API_V1 = "/api/v1",

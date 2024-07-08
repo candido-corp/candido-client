@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
-import NetworkClient from '@/data/NetworkClient.ts';
+import NetworkClient from '@/api/v1/NetworkClient.ts';
 
 type Method = 'get' | 'post' | 'put' | 'delete';
 

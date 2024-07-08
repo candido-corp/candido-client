@@ -2,7 +2,7 @@ import { json, redirect } from 'react-router-dom';
 import { RequestLoginData } from '@/models/requests/RequestLoginData';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { AuthContextType } from '@/providers/AuthProvider.tsx';
-import NetworkClient from '@/data/NetworkClient.ts';
+import NetworkClient from '@/api/v1/NetworkClient.ts';
 import { AxiosResponse } from 'axios';
 
 const actionLogin =
