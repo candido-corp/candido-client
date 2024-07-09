@@ -39,7 +39,7 @@ export enum EnumServerRoutes {
 class NetworkClient {
   // TODO: Get the base URL from the environment
   client = axios.create({
-    baseURL: 'http://localhost:3002',
+    baseURL: 'http://candido-middleware.localhost',
     withCredentials: true,
   });
 
