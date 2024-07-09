@@ -66,7 +66,10 @@ class NetworkClient {
         return response;
       },
       (error: AxiosError) => {
-        if (error.response?.status === 401) {
+        const isUnauthorized = error.response?.status === 401;
+        const isRefreshTokenPath = error.response?.config.url === EnumServerRoutes.REFRESH_TOKEN;
+
+        if (isUnauthorized && !isRefreshTokenPath) {
           this.logout().then(() => {
             if(typeof this.hooksLogout === 'function') {
               this.hooksLogout!();

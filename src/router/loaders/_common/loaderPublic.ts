@@ -5,7 +5,8 @@ import { isAuthenticated } from '@/providers/AuthProvider.tsx';
 export const loaderPublic: LoaderFunction = async () => {
   const redirectTo = `${EnumRoutes.HOME}`;
 
-  if (isAuthenticated()) {
+  const authStatus = await isAuthenticated();
+  if (authStatus) {
     return redirect(redirectTo);
   }
 

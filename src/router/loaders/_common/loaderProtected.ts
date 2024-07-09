@@ -13,7 +13,8 @@ const loaderProtected =
   const paramsRedirect = url.pathname === '/' ? '' : `?redirect=${encodeURIComponent(url.pathname + url.search)}`;
   const redirectTo = `${EnumRoutes.LOGIN}${paramsRedirect}`;
 
-  if (!isAuthenticated()) {
+  const authStatus = await isAuthenticated();
+  if (!authStatus) {
     return redirect(redirectTo);
   }
 
