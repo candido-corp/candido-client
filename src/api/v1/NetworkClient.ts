@@ -38,7 +38,6 @@ export enum EnumServerRoutes {
 }
 
 class NetworkClient {
-  // TODO: Get the base URL from the environment
   client = axios.create({
     baseURL: ConfigApp.external_api_host,
     withCredentials: true,
