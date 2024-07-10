@@ -10,6 +10,7 @@ import { ApiRequestResetPasswordSend } from '@/api/v1/requests/ApiRequestResetPa
 import { ApiRequestResetPasswordCheckValidity } from '@/api/v1/requests/ApiRequestResetPasswordCheckValidity.ts';
 import { ApiRequestResetPasswordChangePassword } from '@/api/v1/requests/ApiRequestResetPasswordChangePassword.ts';
 import { ApiRequestAccountChangePassword } from '@/api/v1/requests/ApiRequestAccountChangePassword.ts';
+import ConfigApp from '@/config/ConfigApp.ts';
 
 export enum EnumServerRoutes {
   API_V1 = "/api/v1",
@@ -39,7 +40,7 @@ export enum EnumServerRoutes {
 class NetworkClient {
   // TODO: Get the base URL from the environment
   client = axios.create({
-    baseURL: 'http://candido-middleware.localhost',
+    baseURL: ConfigApp.external_api_host,
     withCredentials: true,
   });
 
