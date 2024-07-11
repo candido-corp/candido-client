@@ -1,6 +1,6 @@
 import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
-import { authProvider } from '@/utils/Auth';
 import React from 'react';
+import { useAuth } from '@/hooks/useAuth.ts';
 
 interface Props {
   allowedRoles?: EnumUserRoles[];
@@ -13,7 +13,7 @@ const ConditionalComponent: React.FC<Props> = ({
   allowedPermissions,
   children,
 }) => {
-  const { user } = authProvider;
+  const { user } = useAuth();
 
   if (!user) {
     return null;

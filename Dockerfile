@@ -1,6 +1,10 @@
 FROM node:20.15-alpine AS build
 WORKDIR /app
 COPY . .
+
+ARG VITE_MIDDLEWARE_BASE_URL
+ENV VITE_MIDDLEWARE_BASE_URL=$VITE_MIDDLEWARE_BASE_URL
+
 RUN npm install
 RUN npm run build
 
