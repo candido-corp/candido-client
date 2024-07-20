@@ -1,5 +1,5 @@
+import { RequestLoginData } from '@/models/requests/RequestLoginData';
 import { z } from 'zod';
-import { RequestLoginData } from '../../../models/requests/RequestLoginData';
 
 const email: keyof RequestLoginData = 'email';
 const password: keyof RequestLoginData = 'password';

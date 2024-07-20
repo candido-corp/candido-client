@@ -15,9 +15,9 @@ import { SubmitTarget } from 'react-router-dom/dist/dom';
 import { Input } from '@/components/ui/input';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { registerValidationSchema } from '../../validation/registration';
+import { registerValidationSchema } from './registerValidation';
 
-const RegisterForm = () => {
+export const RegisterForm = () => {
   const { t } = useTranslation();
   const submit = useSubmit();
   const navigation = useNavigation();
@@ -159,5 +159,3 @@ const RegisterForm = () => {
     </>
   );
 };
-
-export default RegisterForm;

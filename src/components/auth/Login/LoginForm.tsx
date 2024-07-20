@@ -4,7 +4,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { SubmitTarget } from 'react-router-dom/dist/dom';
 import { useTranslation } from 'react-i18next';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { loginValidationSchema } from '../../validation/login';
 import { RequestLoginData } from '@/models/requests/RequestLoginData';
 import {
   FormField,
@@ -16,8 +15,9 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { loginValidationSchema } from '.';
 
-const LoginForm = () => {
+export const LoginForm = () => {
   const { t } = useTranslation();
   const submit = useSubmit();
   const navigation = useNavigation();
@@ -109,5 +109,3 @@ const LoginForm = () => {
     </>
   );
 };
-
-export default LoginForm;

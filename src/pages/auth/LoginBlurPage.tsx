@@ -70,8 +70,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Link } from 'react-router-dom';
-import LoginBlurCard from '@/components/auth/Login/LoginBlurCard';
-import LoginContainerBlur from '@/components/auth/Login/LoginContainerBlur';
+import { LoginBlurCard, LoginContainerBlur } from '@/components/auth/Login';
 
 const LoginBlurPage = () => {
   return (
