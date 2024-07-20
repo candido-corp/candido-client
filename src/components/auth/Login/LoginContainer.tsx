@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { t } from 'i18next';
 import { BaseFC } from '@/models/interfaces/BaseFC';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/shadcn';
 import { buttonVariants } from '@/components/ui/button';
-import LoginForm from '../LoginForm';
+import { LoginForm } from '.';
 
-const LoginContainer: React.FC<BaseFC> = () => {
+export const LoginContainer: React.FC<BaseFC> = () => {
   return (
     <div className="container relative flex h-full flex-col justify-center sm:items-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
@@ -64,5 +64,3 @@ const LoginContainer: React.FC<BaseFC> = () => {
     </div>
   );
 };
-
-export default LoginContainer;

@@ -10,7 +10,7 @@ import {
   useFormContext,
 } from "react-hook-form"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils/shadcn"
 import { Label } from "@/components/ui/label"
 import { useTranslation } from "react-i18next"
 
