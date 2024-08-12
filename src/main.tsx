@@ -5,11 +5,14 @@ import './index.css';
 
 import './utils/i18n.ts';
 import { AuthProvider } from '@/providers/AuthProvider.tsx';
+import { NotificationProvider } from './providers/NotificationProvider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <NotificationProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </NotificationProvider>
   </React.StrictMode>
 );

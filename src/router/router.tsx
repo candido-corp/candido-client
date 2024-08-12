@@ -1,4 +1,8 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom';
 
 import HomePage from '@/pages/HomePage.tsx';
 import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage.tsx';
@@ -19,25 +23,60 @@ import loaderPublic from '@/router/loaders/_common/loaderPublic.ts';
 import AccountPage from '@/pages/account/AccountPage.tsx';
 import ErrorPage from '@/pages/ErrorPage.tsx';
 import RegisterPage from '@/pages/auth/RegisterPage.tsx';
+import { NotificationContextType } from '@/providers/NotificationProvider';
 
-export const router = (authContext: AuthContextType) => createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path={EnumRoutes.HOME} loader={loaderProtected(authContext)} element={<ProtectedLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path={EnumRoutes.ACCOUNT} loader={loaderAccount} element={<AccountPage />} errorElement={<ErrorPage />}/>
-      </Route>
-
-      <Route path={EnumRoutes.HOME} loader={loaderPublic} element={<PublicLayout />}>
-        <Route path={EnumRoutes.LOGIN} loader={loaderLogin} action={actionLogin(authContext)} element={<LoginPage />} errorElement={<ErrorPage />}></Route>
-        <Route path={EnumRoutes.LOGIN_BLUR} element={<LoginBlurPage />} />
-
-        <Route path={EnumRoutes.LOGOUT} action={actionLogout(authContext)} />
-
-        <Route path={EnumRoutes.REGISTER} action={actionRegister} element={<RegisterPage />} errorElement={<ErrorPage />}>
-          <Route path={EnumRoutes.REGISTER_VERIFY_BY_EMAIL} loader={loaderRegisterVerifyByEmail} element={<RegisterVerifyByEmailPage />} />
+export const router = (
+  authContext: AuthContextType,
+  notificationContext: NotificationContextType
+) =>
+  createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route
+          path={EnumRoutes.HOME}
+          loader={loaderProtected(authContext)}
+          element={<ProtectedLayout />}
+          errorElement={<ErrorPage />}
+        >
+          <Route index element={<HomePage />} />
+          <Route
+            path={EnumRoutes.ACCOUNT}
+            loader={loaderAccount}
+            element={<AccountPage />}
+          />
         </Route>
-      </Route>
-    </>
-  )
-);
+
+        <Route
+          path={EnumRoutes.HOME}
+          loader={loaderPublic}
+          element={<PublicLayout />}
+          errorElement={<ErrorPage />}
+        >
+          <Route
+            path={EnumRoutes.LOGIN}
+            loader={loaderLogin}
+            action={actionLogin(authContext, notificationContext)}
+            element={<LoginPage />}
+          ></Route>
+          <Route path={EnumRoutes.LOGIN_BLUR} element={<LoginBlurPage />} />
+
+          <Route
+            path={EnumRoutes.LOGOUT}
+            action={actionLogout(authContext, notificationContext)}
+          />
+
+          <Route
+            path={EnumRoutes.REGISTER}
+            action={actionRegister(notificationContext)}
+            element={<RegisterPage />}
+          >
+            <Route
+              path={EnumRoutes.REGISTER_VERIFY_BY_EMAIL}
+              loader={loaderRegisterVerifyByEmail}
+              element={<RegisterVerifyByEmailPage />}
+            />
+          </Route>
+        </Route>
+      </>
+    )
+  );
