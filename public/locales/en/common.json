@@ -31,5 +31,11 @@
     "required": "This field is required",
     "email_invalid": "Please enter a valid email address",
     "password_required": "The password is required",
-    "password_match": "Passwords must match"}
+    "password_match": "Passwords must match"
+  },
+  "notifications": {
+    "error_dialog": {
+      "ok": "ok"
+    }
+  }
 }

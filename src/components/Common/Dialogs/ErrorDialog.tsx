@@ -1,0 +1,44 @@
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { NotificationDialogProps } from '@/models/interfaces/Notification';
+import { useTranslation } from 'react-i18next';
+
+export const ErrorDialog: React.FC<NotificationDialogProps> = ({
+  title,
+  message,
+  open,
+  toggle,
+}) => {
+  const { t } = useTranslation();
+
+  const dismiss = () => {
+    toggle();
+  };
+
+  return (
+    <AlertDialog open={open}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          {message && (
+            <AlertDialogDescription>{message}</AlertDialogDescription>
+          )}
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction asChild>
+            <button onClick={dismiss}>
+              {t('notifications.error_dialog.ok')}
+            </button>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
