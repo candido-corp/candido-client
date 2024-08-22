@@ -65,7 +65,7 @@ export const RegisterForm = () => {
               control={control}
               name="first_name"
               render={({ field }) => (
-                <FormItem className="grid gap-2">
+                <FormItem className="grid gap-2 self-start">
                   <FormLabel>{t('form_fields.first_name')}</FormLabel>
                   <FormControl>
                     <Input
@@ -82,7 +82,7 @@ export const RegisterForm = () => {
               control={control}
               name="last_name"
               render={({ field }) => (
-                <FormItem className="grid gap-2">
+                <FormItem className="grid gap-2 self-start">
                   <FormLabel>{t('form_fields.last_name')}</FormLabel>
                   <FormControl>
                     <Input
