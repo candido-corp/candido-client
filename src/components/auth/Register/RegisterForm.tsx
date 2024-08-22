@@ -107,6 +107,7 @@ export const RegisterForm = () => {
                   <Input
                     placeholder={t('form_fields.email')}
                     id="email"
+                    autoComplete="email"
                     {...field}
                   />
                 </FormControl>
@@ -125,6 +126,7 @@ export const RegisterForm = () => {
                     placeholder={t('form_fields.password')}
                     id="password"
                     type="password"
+                    autoComplete="new-password"
                     {...field}
                   />
                 </FormControl>
