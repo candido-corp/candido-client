@@ -9,7 +9,7 @@ export const loginValidationSchema = z.object({
     .string()
     .min(1, 'form_validation.required')
     .email('form_validation.email_invalid'),
-  [password]: z.string().min(1, 'form_validation.password_required'),
+  [password]: z.string().min(1, 'form_validation.password.required'),
 });
 
 export type TLoginValidationFields = z.infer<typeof loginValidationSchema>;

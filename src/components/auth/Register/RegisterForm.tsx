@@ -127,6 +127,7 @@ export const RegisterForm = () => {
                     id="password"
                     type="password"
                     autoComplete="new-password"
+                    maxLength={16}
                     {...field}
                   />
                 </FormControl>
@@ -146,6 +147,7 @@ export const RegisterForm = () => {
                     id="confirm_password"
                     type="password"
                     autoComplete="new-password"
+                    maxLength={16}
                     {...field}
                   />
                 </FormControl>
