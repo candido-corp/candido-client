@@ -11,9 +11,7 @@ import { NotificationDialogProps } from '@/models/interfaces/Notification';
 import { useTranslation } from 'react-i18next';
 
 export const ErrorDialog: React.FC<NotificationDialogProps> = ({
-  title,
-  message,
-  open,
+  dialogProps: { title, message },
   toggle,
 }) => {
   const { t } = useTranslation();
@@ -23,7 +21,7 @@ export const ErrorDialog: React.FC<NotificationDialogProps> = ({
   };
 
   return (
-    <AlertDialog open={open}>
+    <AlertDialog open={true}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>

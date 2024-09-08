@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { EnumNotificationType } from '../enums/EnumNotification';
 
 export type NotificationType =
@@ -7,21 +8,17 @@ export type NotificationType =
   | EnumNotificationType.FORM;
 
 export interface Notification {
-  active?: boolean;
+  dialogProps: DialogProps;
   type?: NotificationType;
-  message?: string;
-  title?: string;
+  active?: boolean;
 }
 
 export interface ConfirmationNotification extends Notification {
-  type: EnumNotificationType.CONFIRM;
   cancelText?: string;
-  confirmText?: string;
-  callback?: () => void;
+  actionButtons?: ActionButtons[];
 }
 
 export interface FormNotification extends Notification {
-  type: EnumNotificationType.FORM;
   formData: {
     form: React.ForwardRefExoticComponent<any>;
     data: Record<string, any> | null;
@@ -31,8 +28,16 @@ export interface FormNotification extends Notification {
 }
 
 export interface NotificationDialogProps {
-  title: string;
-  message?: string;
-  open: boolean;
+  dialogProps: DialogProps;
   toggle: () => void;
+}
+
+interface DialogProps {
+  title: string;
+  message?: string | ReactElement;
+}
+
+interface ActionButtons {
+  name: string;
+  action: () => void;
 }

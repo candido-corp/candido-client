@@ -43,6 +43,8 @@
     }
   },
   "notifications": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
     "error_dialog": {
       "ok": "ok"
     }

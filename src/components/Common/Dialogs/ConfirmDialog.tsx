@@ -8,36 +8,32 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { NotificationDialogProps } from '@/models/interfaces/Notification';
+import {
+  ConfirmationNotification,
+  NotificationDialogProps,
+} from '@/models/interfaces/Notification';
 import { useTranslation } from 'react-i18next';
 
-type ConfirmDialogProps = NotificationDialogProps & {
-  cancelText?: string;
-  confirmText?: string;
-  callback?: () => void;
-};
+type ConfirmDialogProps = ConfirmationNotification & NotificationDialogProps;
 
 export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
-  title,
-  message,
-  open,
+  dialogProps: { title, message },
   cancelText,
-  confirmText,
   toggle,
-  callback,
+  actionButtons,
 }) => {
   const { t } = useTranslation();
 
   const dismiss = () => {
     toggle();
   };
-  const accept = () => {
+  const executeAction = (action: () => void) => {
     toggle();
-    callback && callback();
+    action();
   };
 
   return (
-    <AlertDialog open={open}>
+    <AlertDialog open={true}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
@@ -47,11 +43,22 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel asChild className="flex-1">
-            <span onClick={dismiss}>{cancelText || t('general.cancel')}</span>
+            <span onClick={dismiss}>
+              {cancelText || t('notifications.cancel')}
+            </span>
           </AlertDialogCancel>
-          <AlertDialogAction asChild className="flex-1">
-            <span onClick={accept}>{confirmText || t('general.confirm')}</span>
-          </AlertDialogAction>
+
+          {actionButtons ? (
+            actionButtons.map(({ name, action }) => (
+              <AlertDialogAction asChild key={name} className="flex-1">
+                <span onClick={() => executeAction(action)}>{name}</span>
+              </AlertDialogAction>
+            ))
+          ) : (
+            <AlertDialogAction asChild className="flex-1">
+              <span onClick={toggle}>{t('notifications.confirm')}</span>
+            </AlertDialogAction>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

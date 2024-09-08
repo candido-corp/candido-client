@@ -17,7 +17,11 @@ import { createContext, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export interface NotificationContextType {
-  notification: Notification | ConfirmationNotification;
+  notification:
+    | Notification
+    | ConfirmationNotification
+    | FormNotification
+    | null;
   addNotification: (notification: Notification) => void;
   addFormNotification: (notification: FormNotification) => void;
   askConfirmation: (notification: ConfirmationNotification) => void;
@@ -33,30 +37,24 @@ export const NotificationContext = createContext<
 export const NotificationProvider = ({ children }: { children: ReactNode }) => {
   const { t } = useTranslation();
   const [notification, setNotification] = useState<
-    Notification | ConfirmationNotification | FormNotification
-  >({
-    active: false,
-  });
+    Notification | ConfirmationNotification | FormNotification | null
+  >(null);
   const { toast } = useToast();
 
   const addNotification = (notification: Notification) => {
-    const { type, message, title } = notification;
+    const { type, dialogProps } = notification;
     setNotification({
       type,
-      title,
-      message,
-      active: true,
+      dialogProps,
     });
   };
 
   const addFormNotification = (notification: FormNotification) => {
-    const { type, message, title, formData, onSuccess, onFailure } =
-      notification;
+    const { dialogProps, formData, onSuccess, onFailure } = notification;
+    const type = EnumNotificationType.FORM;
     setNotification({
       type,
-      title,
-      message,
-      active: true,
+      dialogProps,
       formData,
       onSuccess,
       onFailure,
@@ -64,21 +62,18 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const askConfirmation = (notification: ConfirmationNotification) => {
-    const { type, message, callback, title, cancelText, confirmText } =
-      notification;
+    const { dialogProps, cancelText, actionButtons } = notification;
+    const type = EnumNotificationType.CONFIRM;
     setNotification({
       type,
-      title,
-      message,
+      dialogProps,
       cancelText,
-      confirmText,
-      active: true,
-      callback,
+      actionButtons,
     });
   };
 
   const removeNotification = () => {
-    setNotification({ active: false });
+    setNotification(null);
   };
 
   return (
@@ -94,7 +89,7 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
           translation: t,
         }}
       >
-        {notification.active && <NotificationModal />}
+        {notification && <NotificationModal />}
         <Toaster />
         {children}
       </NotificationContext.Provider>
@@ -105,24 +100,20 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
 const NotificationModal = () => {
   const { notification, removeNotification } = useNotification();
 
-  if (!notification.active) return null;
+  if (!notification) return null;
 
   switch (notification.type) {
     case EnumNotificationType.ERROR:
       return (
         <ErrorDialog
-          title={notification.title || 'Error'}
-          message={notification.message}
-          open={notification.active}
+          dialogProps={notification.dialogProps}
           toggle={removeNotification}
         />
       );
     case EnumNotificationType.INFO:
       return (
         <InfoDialog
-          title={notification.title || 'Info'}
-          message={notification.message}
-          open={notification.active}
+          dialogProps={notification.dialogProps}
           toggle={removeNotification}
         />
       );
@@ -130,22 +121,16 @@ const NotificationModal = () => {
       const confirmationNotification = notification as ConfirmationNotification;
       return (
         <ConfirmDialog
-          title={confirmationNotification.title || 'Question'}
-          message={confirmationNotification.message || ''}
-          cancelText={confirmationNotification.cancelText}
-          confirmText={confirmationNotification.confirmText}
-          open={confirmationNotification.active || false}
+          dialogProps={confirmationNotification.dialogProps}
+          actionButtons={confirmationNotification.actionButtons}
           toggle={removeNotification}
-          callback={confirmationNotification.callback}
         />
       );
     case EnumNotificationType.FORM:
       const formNotification = notification as FormNotification;
       return (
         <FormDialog
-          title={formNotification.title || 'Form'}
-          message={formNotification.message}
-          open={formNotification.active || false}
+          dialogProps={formNotification.dialogProps}
           DialogForm={formNotification.formData?.form}
           data={formNotification.formData?.data}
           toggle={removeNotification}

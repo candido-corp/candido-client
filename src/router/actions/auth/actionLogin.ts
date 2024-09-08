@@ -28,14 +28,27 @@ const actionLogin =
     } catch (error) {
       // addNotification({
       //   type: EnumNotificationType.ERROR,
-      //   title: 'Ops, something went wrong',
-      //   message: 'We could not log you in. Please try again.',
+      //   dialogProps: {
+      //     title: 'Ops, something went wrong',
+      //     message: '<Input placeholder={'aa'} id="email" autoComplete="email" />',
+      //   },
       // });
       // askConfirmation({
       //   type: EnumNotificationType.CONFIRM,
-      //   title: 'aa',
-      //   message: 'jhj',
-      //   callback: () => alert('aa'),
+      //   dialogProps: {
+      //     title: 'Ops, something went wrong',
+      //     message: 'We could not log you in. Please try again.',
+      //   },
+      //   actionButtons: [
+      //     {
+      //       name: 'Try again',
+      //       action: () => alert('Try again'),
+      //     },
+      //     {
+      //       name: 'Cancel',
+      //       action: () => alert('Cancel'),
+      //     },
+      //   ],
       // });
 
       toast({

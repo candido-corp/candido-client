@@ -24,11 +24,9 @@ type FormDialogProps = NotificationDialogProps & {
 };
 
 export const FormDialog: React.FC<FormDialogProps> = ({
-  title,
-  message,
+  dialogProps: { title, message },
   DialogForm,
   data,
-  open,
   toggle,
   onSuccess,
   onFailure,
@@ -50,7 +48,7 @@ export const FormDialog: React.FC<FormDialogProps> = ({
   };
 
   return (
-    <AlertDialog open={open}>
+    <AlertDialog open={true}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
