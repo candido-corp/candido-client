@@ -9,7 +9,7 @@ const actionLogout =
     try {
       await NetworkClient.logout();
       logout();
-      return redirect(EnumRoutes.DASHBOARD);
+      return redirect(EnumRoutes.HOME);
     } catch (error) {
       console.error('error: ', error);
       throw json({ message: 'error while logging out user' }, { status: 500 });

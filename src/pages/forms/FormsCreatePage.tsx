@@ -3,16 +3,18 @@ import { Button } from '@/components/ui/button';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { Link } from 'react-router-dom';
 
-const SettingsGeneralPage = () => {
+const FormsCreatePage = () => {
   return (
-    <PageContent title={'Settings general page'}>
+    <PageContent title={'Forms create page'}>
       <div className="flex gap-4 py-10">
         <Button asChild>
-          <Link to={EnumRoutes.SETTINGS}>settings</Link>
+          <Link to={EnumRoutes.FORMS_FORM.replace(':formId', '21345')}>
+            Form 21345
+          </Link>
         </Button>
       </div>
     </PageContent>
   );
 };
 
-export default SettingsGeneralPage;
+export default FormsCreatePage;

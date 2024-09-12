@@ -22,8 +22,6 @@ export const RegisterForm = () => {
   const submit = useSubmit();
   const navigation = useNavigation();
 
-  const params = new URLSearchParams(location.search);
-  const from = params.get('from') || '/';
   const isSubmitting = navigation.state === 'submitting';
   // const data = useActionData();
 
@@ -51,7 +49,6 @@ export const RegisterForm = () => {
     <>
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-          <input type="hidden" name="redirectTo" value={from} />
           {/* {data && data.errors && (
           <ul>
             {Object.values(data.errors).map((err) => (

@@ -1,7 +1,18 @@
 import PageContent from '@/components/Common/PageContent';
+import { Button } from '@/components/ui/button';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
+import { Link } from 'react-router-dom';
 
 const UserOpportunitiesPage = () => {
-  return <PageContent title={'User opportunities page'}>test</PageContent>;
+  return (
+    <PageContent title={'User opportunities page'}>
+      <div className="flex gap-4 py-10">
+        <Button asChild>
+          <Link to={EnumRoutes.USER}>User</Link>
+        </Button>
+      </div>
+    </PageContent>
+  );
 };
 
 export default UserOpportunitiesPage;

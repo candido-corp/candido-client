@@ -9,12 +9,18 @@ const MainNavigation = () => {
       <nav>
         <ul className="flex gap-6">
           <li>
-            <NavLink to={EnumRoutes.DASHBOARD} end>
+            <NavLink to={EnumRoutes.HOME} end>
               {t('homepage.title')}
             </NavLink>
           </li>
           <li>
-            <NavLink to={EnumRoutes.USER}>{t('my_account.title')}</NavLink>
+            <NavLink to={EnumRoutes.DASHBOARD}>{t('dashboard.title')}</NavLink>
+          </li>
+          <li>
+            <NavLink to={EnumRoutes.USER}>{t('user.title')}</NavLink>
+          </li>
+          <li>
+            <NavLink to={EnumRoutes.SETTINGS}>{'Settings'}</NavLink>
           </li>
           <li>
             <NavLink to={EnumRoutes.LOGIN}>{t('login.title')}</NavLink>

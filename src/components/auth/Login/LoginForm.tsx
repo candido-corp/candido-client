@@ -22,8 +22,6 @@ export const LoginForm = () => {
   const submit = useSubmit();
   const navigation = useNavigation();
 
-  const params = new URLSearchParams(location.search);
-  const from = params.get('from') || EnumRoutes.DASHBOARD;
   const isSubmitting = navigation.state === 'submitting';
   // const actionData = useActionData() as { error: string } | undefined;
 
@@ -48,7 +46,6 @@ export const LoginForm = () => {
     <>
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-          <input type="hidden" name="redirectTo" value={from} />
           {/* {data && data.errors && (
             <ul>
               {Object.values(data.errors).map((err) => (

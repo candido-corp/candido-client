@@ -20,7 +20,9 @@ const actionLogin =
       data: loginData,
     });
     login(response.data);
-    const redirectTo = data.get('redirectTo') as string | null;
+
+    const url = new URL(request.url);
+    const redirectTo: string | null = url.searchParams.get('redirect');
     return redirect(redirectTo || EnumRoutes.DASHBOARD);
   };
 
