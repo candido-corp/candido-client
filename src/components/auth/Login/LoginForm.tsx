@@ -23,7 +23,7 @@ export const LoginForm = () => {
   const navigation = useNavigation();
 
   const params = new URLSearchParams(location.search);
-  const from = params.get('from') || EnumRoutes.HOME;
+  const from = params.get('from') || EnumRoutes.DASHBOARD;
   const isSubmitting = navigation.state === 'submitting';
   // const actionData = useActionData() as { error: string } | undefined;
 
@@ -83,7 +83,7 @@ export const LoginForm = () => {
                 <div className="flex items-center">
                   <FormLabel>{t('form_fields.password')}</FormLabel>
                   <Link
-                    to="#" //TODO change url
+                    to={EnumRoutes.RESET_PASSWORD}
                     className="ml-auto inline-block text-sm underline"
                   >
                     Forgot your password?

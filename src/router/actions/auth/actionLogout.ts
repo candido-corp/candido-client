@@ -5,15 +5,15 @@ import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
 
 const actionLogout =
   ({ logout }: AuthContextType) =>
-    async () => {
-  try {
-    await NetworkClient.logout();
-    logout();
-    return redirect(EnumRoutes.HOME);
-  } catch (error) {
-    console.error('error: ', error);
-    throw json({ message: 'error while logging out user' }, { status: 500 });
-  }
-}
+  async () => {
+    try {
+      await NetworkClient.logout();
+      logout();
+      return redirect(EnumRoutes.DASHBOARD);
+    } catch (error) {
+      console.error('error: ', error);
+      throw json({ message: 'error while logging out user' }, { status: 500 });
+    }
+  };
 
 export default actionLogout;

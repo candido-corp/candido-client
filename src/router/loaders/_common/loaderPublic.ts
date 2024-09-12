@@ -3,7 +3,7 @@ import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
 import { isAuthenticated } from '@/providers/AuthProvider.tsx';
 
 export const loaderPublic: LoaderFunction = async () => {
-  const redirectTo = `${EnumRoutes.HOME}`;
+  const redirectTo = `${EnumRoutes.DASHBOARD}`;
 
   const authStatus = await isAuthenticated();
   if (authStatus) {
@@ -11,6 +11,6 @@ export const loaderPublic: LoaderFunction = async () => {
   }
 
   return null;
-}
+};
 
 export default loaderPublic;
