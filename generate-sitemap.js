@@ -29,7 +29,26 @@ const staticPages = [
 ];
 
 // Dynamic routes to be created once we have the data
-const dynamicPages = [];
+const dynamicPages = [
+  { url: '/opportunities/:opportunityId', changefreq: 'weekly', priority: 0.8 },
+  {
+    url: '/opportunities/:opportunityId/apply',
+    changefreq: 'weekly',
+    priority: 0.8,
+  },
+  {
+    url: '/register/email/verify/:token',
+    changefreq: 'monthly',
+    priority: 0.5,
+  },
+  { url: '/forms/:formId', changefreq: 'weekly', priority: 0.5 },
+  { url: '/forms/:formId/builder', changefreq: 'weekly', priority: 0.5 },
+  {
+    url: '/forms/:formId/builder/preview',
+    changefreq: 'weekly',
+    priority: 0.5,
+  },
+];
 
 const pages = [...staticPages, ...dynamicPages];
 
