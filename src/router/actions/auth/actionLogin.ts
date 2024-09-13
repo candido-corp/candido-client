@@ -8,19 +8,22 @@ import { AxiosResponse } from 'axios';
 const actionLogin =
   ({ login }: AuthContextType) =>
   async ({ request }: { request: Request }) => {
+    const data = await request.formData();
+    const loginData: RequestLoginData = {
+      email: data.get('email') as string,
+      password: data.get('password') as string,
+    };
 
-  const data = await request.formData();
-  const loginData: RequestLoginData = {
-    email: data.get('email') as string,
-    password: data.get('password') as string,
+    console.log('loginData: ', loginData);
+
+    const response: AxiosResponse = await NetworkClient.login({
+      data: loginData,
+    });
+    login(response.data);
+
+    const url = new URL(request.url);
+    const redirectTo: string | null = url.searchParams.get('redirect');
+    return redirect(redirectTo || EnumRoutes.DASHBOARD);
   };
-
-  console.log('loginData: ', loginData);
-
-  const response: AxiosResponse = await NetworkClient.login({ data: loginData });
-  login(response.data);
-  const redirectTo = data.get('redirectTo') as string | null;
-  return redirect(redirectTo || EnumRoutes.HOME);
-}
 
 export default actionLogin;

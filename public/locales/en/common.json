@@ -2,6 +2,9 @@
   "homepage": {
     "title": "Homepage"
   },
+  "dashboard": {
+    "title": "Dashboard"
+  },
   "login": {
     "title": "Login",
     "register": "Create new user",
@@ -14,8 +17,8 @@
   "register_verify_email": {
     "title": "Register Verify Email"
   },
-  "my_account": {
-    "title": "My account"
+  "user": {
+    "title": "User"
   },
   "logout": {
     "title": "Logout"
@@ -31,5 +34,6 @@
     "required": "This field is required",
     "email_invalid": "Please enter a valid email address",
     "password_required": "The password is required",
-    "password_match": "Passwords must match"}
+    "password_match": "Passwords must match"
+  }
 }

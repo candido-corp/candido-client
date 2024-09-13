@@ -14,7 +14,13 @@ const MainNavigation = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={EnumRoutes.ACCOUNT}>{t('my_account.title')}</NavLink>
+            <NavLink to={EnumRoutes.DASHBOARD}>{t('dashboard.title')}</NavLink>
+          </li>
+          <li>
+            <NavLink to={EnumRoutes.USER}>{t('user.title')}</NavLink>
+          </li>
+          <li>
+            <NavLink to={EnumRoutes.SETTINGS}>{'Settings'}</NavLink>
           </li>
           <li>
             <NavLink to={EnumRoutes.LOGIN}>{t('login.title')}</NavLink>

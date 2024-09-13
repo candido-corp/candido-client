@@ -1,8 +1,11 @@
 import ConditionalComponent from '@/components/Common/ConditionalComponent';
 import PageContent from '@/components/Common/PageContent';
+import { Button } from '@/components/ui/button';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
+import { Link } from 'react-router-dom';
 
-const HomePage = () => {
+const DashboardPage = () => {
   return (
     <PageContent title="Welcome!">
       <p>Candido</p>
@@ -19,8 +22,14 @@ const HomePage = () => {
       >
         <span>User read permission</span>
       </ConditionalComponent>
+
+      <div className="py-10">
+        <Button asChild>
+          <Link to={EnumRoutes.FORMS}>Forms</Link>
+        </Button>
+      </div>
     </PageContent>
   );
 };
 
-export default HomePage;
+export default DashboardPage;
