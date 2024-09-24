@@ -24,6 +24,7 @@ const actionLogin =
       const redirectTo: string | null = url.searchParams.get('redirect');
       return redirect(redirectTo || EnumRoutes.DASHBOARD);
     } catch (error) {
+      console.error('error: ', error);
       toast({
         variant: 'destructive',
         title: 'Ops, something went wrong',
@@ -31,7 +32,7 @@ const actionLogin =
         duration: 2000,
       });
 
-      return console.log(error);
+      return null;
     }
   };
 

@@ -18,7 +18,7 @@ const actionRegister =
     try {
       await NetworkClient.registerEmail({ data: registerData });
     } catch (error) {
-      console.log(error);
+      console.error('error: ', error);
       toast({
         variant: 'destructive',
         title: 'Ops, something went wrong',
