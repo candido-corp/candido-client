@@ -19,8 +19,10 @@ const actionLogin =
         data: loginData,
       });
       login(response.data);
-      const redirectTo = data.get('redirectTo') as string | null;
-      return redirect(redirectTo || EnumRoutes.HOME);
+
+      const url = new URL(request.url);
+      const redirectTo: string | null = url.searchParams.get('redirect');
+      return redirect(redirectTo || EnumRoutes.DASHBOARD);
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -28,7 +30,8 @@ const actionLogin =
         description: 'We could not log you in. Please try again.',
         duration: 2000,
       });
-      return null;
+
+      return console.log(error);
     }
   };
 

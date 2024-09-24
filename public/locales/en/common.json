@@ -2,6 +2,9 @@
   "homepage": {
     "title": "Homepage"
   },
+  "dashboard": {
+    "title": "Dashboard"
+  },
   "login": {
     "title": "Login",
     "register": "Create new user",
@@ -15,8 +18,8 @@
   "register_verify_email": {
     "title": "Register Verify Email"
   },
-  "my_account": {
-    "title": "My account"
+  "user": {
+    "title": "User"
   },
   "logout": {
     "title": "Logout"
@@ -41,6 +44,7 @@
       "special": "The password must contain at least one special character(@)",
       "no_whitespace": "The password must not contain whitespaces",
       "match": "Passwords must match"
+  
     }
   },
   "notifications": {
