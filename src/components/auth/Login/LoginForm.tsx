@@ -87,7 +87,7 @@ export const LoginForm = () => {
                     to="#" //TODO change url
                     className="ml-auto inline-block text-sm underline"
                   >
-                    Forgot your password?
+                    {t('login.forgot_password')}
                   </Link>
                 </div>
                 <FormControl>

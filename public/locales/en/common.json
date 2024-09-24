@@ -5,7 +5,8 @@
   "login": {
     "title": "Login",
     "register": "Create new user",
-    "sign_in": "Sign in"
+    "sign_in": "Sign in",
+    "forgot_password": "Forgot your password?"
   },
   "register": {
     "title": "Register",
