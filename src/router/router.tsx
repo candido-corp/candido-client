@@ -38,25 +38,32 @@ import SettingsFormsPage from '@/pages/settings/SettingsFormsPage';
 import loaderAuth from './loaders/auth/loaderAuth';
 import DashboardPage from '@/pages/DashboardPage';
 import FormsCreatePage from '@/pages/forms/FormsCreatePage';
+import { NotificationContextType } from '@/providers/NotificationProvider';
 
-export const router = (authContext: AuthContextType) =>
+export const router = (
+  authContext: AuthContextType,
+  notificationContext: NotificationContextType
+) =>
   createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route loader={loaderAuth} errorElement={<ErrorPage />}>
           <Route
             path={EnumRoutes.LOGIN}
-            action={actionLogin(authContext)}
+            action={actionLogin(authContext, notificationContext)}
             element={<LoginPage />}
           />
 
           <Route path={EnumRoutes.LOGIN_BLUR} element={<LoginBlurPage />} />
 
-          <Route path={EnumRoutes.LOGOUT} action={actionLogout(authContext)} />
+          <Route
+            path={EnumRoutes.LOGOUT}
+            action={actionLogout(authContext, notificationContext)}
+          />
 
           <Route
             path={EnumRoutes.REGISTER}
-            action={actionRegister}
+            action={actionRegister(notificationContext)}
             element={<RegisterPage />}
           >
             <Route

@@ -16,12 +16,24 @@ interface RequestOptions {
 }
 
 function createDecorator({ url, method, headers }: DecoratorConfig) {
-  return function (_target: any, _propertyKey: string | symbol, descriptor: PropertyDescriptor) {
-
-    descriptor.value = async function (options: RequestOptions = {}): Promise<any> {
+  return function (
+    _target: any,
+    _propertyKey: string | symbol,
+    descriptor: PropertyDescriptor
+  ) {
+    descriptor.value = async function (
+      options: RequestOptions = {}
+    ): Promise<any> {
       const { data, params, axiosConfig = {} } = options;
 
-      console.info('CALL -> Data:', data, '| Params:', params, '| AxiosConfig:', axiosConfig);
+      console.info(
+        'CALL -> Data:',
+        data,
+        '| Params:',
+        params,
+        '| AxiosConfig:',
+        axiosConfig
+      );
 
       const customHeader = {
         'Content-Type': 'application/json',
@@ -45,7 +57,7 @@ function createDecorator({ url, method, headers }: DecoratorConfig) {
         response = await client(config);
       } catch (error: any) {
         console.log(error);
-        throw new Error(error || 'Unknown error');
+        throw error;
       }
 
       return response;

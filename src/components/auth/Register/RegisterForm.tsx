@@ -62,7 +62,7 @@ export const RegisterForm = () => {
               control={control}
               name="first_name"
               render={({ field }) => (
-                <FormItem className="grid gap-2">
+                <FormItem className="grid gap-2 self-start">
                   <FormLabel>{t('form_fields.first_name')}</FormLabel>
                   <FormControl>
                     <Input
@@ -79,7 +79,7 @@ export const RegisterForm = () => {
               control={control}
               name="last_name"
               render={({ field }) => (
-                <FormItem className="grid gap-2">
+                <FormItem className="grid gap-2 self-start">
                   <FormLabel>{t('form_fields.last_name')}</FormLabel>
                   <FormControl>
                     <Input
@@ -104,6 +104,7 @@ export const RegisterForm = () => {
                   <Input
                     placeholder={t('form_fields.email')}
                     id="email"
+                    autoComplete="email"
                     {...field}
                   />
                 </FormControl>
@@ -122,6 +123,8 @@ export const RegisterForm = () => {
                     placeholder={t('form_fields.password')}
                     id="password"
                     type="password"
+                    autoComplete="new-password"
+                    maxLength={16}
                     {...field}
                   />
                 </FormControl>
@@ -141,6 +144,7 @@ export const RegisterForm = () => {
                     id="confirm_password"
                     type="password"
                     autoComplete="new-password"
+                    maxLength={16}
                     {...field}
                   />
                 </FormControl>

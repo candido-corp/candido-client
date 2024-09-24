@@ -64,6 +64,7 @@ export const LoginForm = () => {
                   <Input
                     placeholder={t('form_fields.email')}
                     id="email"
+                    autoComplete="email"
                     {...field}
                   />
                 </FormControl>
@@ -83,7 +84,7 @@ export const LoginForm = () => {
                     to={EnumRoutes.RESET_PASSWORD}
                     className="ml-auto inline-block text-sm underline"
                   >
-                    Forgot your password?
+                    {t('login.forgot_password')}
                   </Link>
                 </div>
                 <FormControl>
@@ -91,6 +92,7 @@ export const LoginForm = () => {
                     placeholder={t('form_fields.password')}
                     id="password"
                     type="password"
+                    autoComplete="current-password"
                     {...field}
                   />
                 </FormControl>

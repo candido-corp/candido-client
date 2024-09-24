@@ -4,11 +4,14 @@ import { router } from '@/router/router';
 import { AuthContextType } from '@/providers/AuthProvider.tsx';
 import { useAuth } from '@/hooks/useAuth.ts';
 import ConfigApp from '@/config/ConfigApp.ts';
+import { useNotification } from './hooks/useNotification';
+import { NotificationContextType } from './providers/NotificationProvider';
 
 function App() {
-  console.log(ConfigApp)
+  console.log(ConfigApp);
   const authContext: AuthContextType = useAuth();
-  const appRouter = router(authContext);
+  const notificationContext: NotificationContextType = useNotification();
+  const appRouter = router(authContext, notificationContext);
 
   return (
     <Suspense fallback="...is loading">
