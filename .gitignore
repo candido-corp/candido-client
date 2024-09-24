@@ -23,7 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-.env.local
 .env
+.env.local
+.env.example
 
 /public/sitemap.xml
