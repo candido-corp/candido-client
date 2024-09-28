@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { registerValidationSchema } from './registerValidation';
+import { Loader2 } from 'lucide-react';
 
 export const RegisterForm = () => {
   const { t } = useTranslation();
@@ -153,7 +154,8 @@ export const RegisterForm = () => {
             )}
           />
           <Button disabled={isSubmitting} className="w-full">
-            {isSubmitting ? 'Submitting...' : t('register.sign_up')}
+            {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {t('register.sign_up')}
           </Button>
         </form>
       </Form>

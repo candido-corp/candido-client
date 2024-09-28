@@ -16,6 +16,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { loginValidationSchema } from '.';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
+import { Loader2 } from 'lucide-react';
 
 export const LoginForm = () => {
   const { t } = useTranslation();
@@ -101,7 +103,8 @@ export const LoginForm = () => {
             )}
           />
           <Button type="submit" disabled={isSubmitting} className="w-full">
-            {isSubmitting ? 'Submitting...' : t('login.sign_in')}
+            {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {t('login.sign_in')}
           </Button>
         </form>
       </Form>
