@@ -83,7 +83,7 @@ export const LoginForm = () => {
                 <div className="flex items-center">
                   <FormLabel>{t('form_fields.password')}</FormLabel>
                   <Link
-                    to={EnumRoutes.RESET_PASSWORD}
+                    to={EnumRoutes.FORGOT_PASSWORD}
                     className="ml-auto inline-block text-sm underline"
                   >
                     {t('login.forgot_password')}

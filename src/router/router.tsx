@@ -39,6 +39,8 @@ import loaderAuth from './loaders/auth/loaderAuth';
 import DashboardPage from '@/pages/DashboardPage';
 import FormsCreatePage from '@/pages/forms/FormsCreatePage';
 import { NotificationContextType } from '@/providers/NotificationProvider';
+import actionForgotPassword from './actions/auth/actionForgotPassword';
+import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
 
 export const router = (
   authContext: AuthContextType,
@@ -73,6 +75,11 @@ export const router = (
             />
           </Route>
 
+          <Route
+            path={EnumRoutes.FORGOT_PASSWORD}
+            action={actionForgotPassword(notificationContext)}
+            element={<ForgotPasswordPage />}
+          />
           <Route
             path={EnumRoutes.RESET_PASSWORD}
             element={<ResetPasswordPage />}

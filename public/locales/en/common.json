@@ -20,9 +20,9 @@
   "register_verify_email": {
     "title": "Register Verify Email"
   },
-  "reset_password": {
+  "forgot_password": {
     "title": "Reset Password",
-    "description": "Enter your email below to reset your password",
+    "description": "Enter your email below and you will receive an email to reset your password",
     "back_to_login": "Back to Login"
   },
   "user": {
