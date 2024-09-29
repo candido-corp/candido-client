@@ -18,7 +18,6 @@ import { AuthContextType } from '@/providers/AuthProvider.tsx';
 import actionLogin from '@/router/actions/auth/actionLogin.ts';
 import ErrorPage from '@/pages/ErrorPage.tsx';
 import RegisterPage from '@/pages/auth/RegisterPage.tsx';
-import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
 import UserPage from '@/pages/user/UserPage';
 import UserOpportunitiesStatsPage from '@/pages/user/opportunities/UserOpportunitiesStatsPage';
 import UserOpportunitiesPage from '@/pages/user/opportunities/UserOpportunitiesPage';
@@ -41,6 +40,9 @@ import FormsCreatePage from '@/pages/forms/FormsCreatePage';
 import { NotificationContextType } from '@/providers/NotificationProvider';
 import actionForgotPassword from './actions/auth/actionForgotPassword';
 import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
+import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
+import loaderResetPassword from './loaders/auth/loaderResetPassword';
+import actionResetPassword from './actions/auth/actionResetPassword';
 
 export const router = (
   authContext: AuthContextType,
@@ -82,6 +84,8 @@ export const router = (
           />
           <Route
             path={EnumRoutes.RESET_PASSWORD}
+            action={actionResetPassword(notificationContext)}
+            loader={loaderResetPassword}
             element={<ResetPasswordPage />}
           />
         </Route>
