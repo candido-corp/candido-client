@@ -1,8 +1,8 @@
-import { RequestLoginData } from '@/models/requests/RequestLoginData';
+import { ApiRequestLogin } from '@/api/v1/requests/ApiRequestLogin';
 import { z } from 'zod';
 
-const email: keyof RequestLoginData = 'email';
-const password: keyof RequestLoginData = 'password';
+const email: keyof ApiRequestLogin = 'email';
+const password: keyof ApiRequestLogin = 'password';
 
 export const loginValidationSchema = z.object({
   [email]: z
@@ -12,4 +12,4 @@ export const loginValidationSchema = z.object({
   [password]: z.string().min(1, 'form_validation.password.required'),
 });
 
-export type TLoginValidationFields = z.infer<typeof loginValidationSchema>;
+export type TLoginFields = z.infer<typeof loginValidationSchema>;

@@ -1,11 +1,11 @@
-import { RequestRegisterData } from '@/models/requests/RequestRegisterData';
+import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister';
 import { z } from 'zod';
 
-const first_name: keyof RequestRegisterData = 'first_name';
-const last_name: keyof RequestRegisterData = 'last_name';
-const email: keyof RequestRegisterData = 'email';
-const password: keyof RequestRegisterData = 'password';
-const confirm_password: keyof RequestRegisterData = 'confirm_password';
+const first_name: keyof ApiRequestRegister = 'first_name';
+const last_name: keyof ApiRequestRegister = 'last_name';
+const email: keyof ApiRequestRegister = 'email';
+const password: keyof ApiRequestRegister = 'password';
+const confirm_password: keyof ApiRequestRegister = 'confirm_password';
 
 export const registerValidationSchema = z
   .object({
@@ -36,4 +36,4 @@ export const registerValidationSchema = z
     }
   );
 
-export type TLoginValidationFields = z.infer<typeof registerValidationSchema>;
+export type TRegisterFields = z.infer<typeof registerValidationSchema>;

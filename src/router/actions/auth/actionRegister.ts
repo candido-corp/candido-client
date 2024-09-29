@@ -7,7 +7,7 @@ const actionRegister =
   ({ toast }: NotificationContextType) =>
   async ({ request }: LoaderFunctionArgs) => {
     const data = await request.formData();
-    const registerData: ApiRequestRegister = {
+    const registerData: Required<ApiRequestRegister> = {
       first_name: data.get('first_name') as string,
       last_name: data.get('last_name') as string,
       email: data.get('email') as string,

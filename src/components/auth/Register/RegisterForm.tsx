@@ -1,5 +1,3 @@
-// import { useState } from 'react';
-import { RequestRegisterData } from '@/models/requests/RequestRegisterData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigation, useSubmit } from 'react-router-dom';
@@ -15,8 +13,12 @@ import { SubmitTarget } from 'react-router-dom/dist/dom';
 import { Input } from '@/components/ui/input';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { registerValidationSchema } from './registerValidation';
+import {
+  registerValidationSchema,
+  TRegisterFields,
+} from './registerValidation';
 import { Loader2 } from 'lucide-react';
+import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister';
 
 export const RegisterForm = () => {
   const { t } = useTranslation();
@@ -27,7 +29,7 @@ export const RegisterForm = () => {
   // const data = useActionData();
 
   const resolver = zodResolver(registerValidationSchema);
-  const defaultValues: RequestRegisterData = {
+  const defaultValues: TRegisterFields = {
     email: '',
     password: '',
     confirm_password: '',
@@ -35,14 +37,14 @@ export const RegisterForm = () => {
     last_name: '',
   };
 
-  const form = useForm<RequestRegisterData>({
+  const form = useForm<TRegisterFields>({
     resolver,
     defaultValues,
   });
 
   const { handleSubmit, control } = form;
 
-  const onSubmit: SubmitHandler<RequestRegisterData> = (data) => {
+  const onSubmit: SubmitHandler<ApiRequestRegister> = (data) => {
     submit(data as SubmitTarget, { method: 'post' });
   };
 

@@ -3,8 +3,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { SubmitTarget } from 'react-router-dom/dist/dom';
 import { useTranslation } from 'react-i18next';
-import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { RequestLoginData } from '@/models/requests/RequestLoginData';
 import {
   FormField,
   FormItem,
@@ -15,9 +13,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { loginValidationSchema } from '.';
+import { loginValidationSchema, TLoginFields } from '.';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { Loader2 } from 'lucide-react';
+import { ApiRequestLogin } from '@/api/v1/requests/ApiRequestLogin';
 
 export const LoginForm = () => {
   const { t } = useTranslation();
@@ -28,19 +27,19 @@ export const LoginForm = () => {
   // const actionData = useActionData() as { error: string } | undefined;
 
   const resolver = zodResolver(loginValidationSchema);
-  const defaultValues: RequestLoginData = {
+  const defaultValues: TLoginFields = {
     email: '',
     password: '',
   };
 
-  const form = useForm<RequestLoginData>({
+  const form = useForm<TLoginFields>({
     resolver,
     defaultValues,
   });
 
   const { handleSubmit, control } = form;
 
-  const onSubmit: SubmitHandler<RequestLoginData> = (data) => {
+  const onSubmit: SubmitHandler<ApiRequestLogin> = (data) => {
     submit(data as SubmitTarget, { method: 'post' });
   };
 
