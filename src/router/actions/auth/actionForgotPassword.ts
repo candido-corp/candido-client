@@ -15,6 +15,14 @@ const actionForgotPassword =
         data: forgotPasswordData,
       });
 
+      toast({
+        variant: 'default',
+        title: 'Success!!',
+        description:
+          'We have sent you an email with instructions to reset your password.',
+        duration: 2000,
+      });
+
       return response;
     } catch (error) {
       console.error('error: ', error);
