@@ -7,7 +7,7 @@ import {
 import WithAuthorization from '@/components/Common/WithAuthorization';
 import { ResetPasswordButton } from './ResetPasswordButton';
 
-const Account = () => {
+const User = () => {
   const data = useLoaderData() as ApiResponseAccount;
 
   return (
@@ -23,8 +23,8 @@ const Account = () => {
 
 const allowedRoles = [EnumUserRoles.USER_VERIFIED];
 const allowedPermissions = [EnumUserPermissions.USER_READ];
-const AccountComponentWithAuthorization = WithAuthorization(
+const UserComponentWithAuthorization = WithAuthorization(
   allowedRoles,
   allowedPermissions
-)(Account);
-export default AccountComponentWithAuthorization;
+)(User);
+export default UserComponentWithAuthorization;

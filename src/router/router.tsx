@@ -8,7 +8,6 @@ import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage.ts
 import loaderRegisterVerifyByEmail from '@/router/loaders/auth/loaderRegisterVerifyByEmail.ts';
 import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
 import actionLogout from '@/router/actions/auth/actionLogout.ts';
-import loaderAccount from '@/router/loaders/loaderAccount.ts';
 import LoginPage from '@/pages/auth/LoginPage.tsx';
 import actionRegister from '@/router/actions/auth/actionRegister.ts';
 import LoginBlurPage from '@/pages/auth/LoginBlurPage.tsx';
@@ -43,6 +42,7 @@ import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
 import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
 import loaderResetPassword from './loaders/auth/loaderResetPassword';
 import actionResetPassword from './actions/auth/actionResetPassword';
+import loaderUser from './loaders/loaderUser';
 
 export const router = (
   authContext: AuthContextType,
@@ -116,7 +116,7 @@ export const router = (
             <Route path={EnumRoutes.USER}>
               <Route
                 index
-                loader={loaderAccount}
+                loader={loaderUser}
                 action={actionForgotPassword(notificationContext)} //as for now we have only forgot password action so we keep this here
                 element={<UserPage />}
               />
