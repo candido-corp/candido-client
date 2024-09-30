@@ -114,7 +114,12 @@ export const router = (
             <Route path={EnumRoutes.DASHBOARD} element={<DashboardPage />} />
 
             <Route path={EnumRoutes.USER}>
-              <Route index loader={loaderAccount} element={<UserPage />} />
+              <Route
+                index
+                loader={loaderAccount}
+                action={actionForgotPassword(notificationContext)} //as for now we have only forgot password action so we keep this here
+                element={<UserPage />}
+              />
 
               <Route path={EnumRoutes.USER_OPPORTUNITIES}>
                 <Route index element={<UserOpportunitiesPage />} />

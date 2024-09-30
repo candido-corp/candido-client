@@ -26,7 +26,11 @@
     "back_to_login": "Back to Login"
   },
   "user": {
-    "title": "User"
+    "title": "User",
+    "change_password": {
+      "title": "Change Password",
+      "message": "Are you sure? you will receive an email to reset your password"
+    }
   },
   "logout": {
     "title": "Logout"
