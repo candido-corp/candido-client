@@ -8,6 +8,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
 import {
   ConfirmationNotification,
   NotificationDialogProps,
@@ -43,20 +44,20 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel asChild className="flex-1">
-            <span onClick={dismiss}>
+            <Button variant="secondary" onClick={dismiss}>
               {cancelText || t('notifications.cancel')}
-            </span>
+            </Button>
           </AlertDialogCancel>
 
           {actionButtons ? (
             actionButtons.map(({ name, action }) => (
               <AlertDialogAction asChild key={name} className="flex-1">
-                <span onClick={() => executeAction(action)}>{name}</span>
+                <Button onClick={() => executeAction(action)}>{name}</Button>
               </AlertDialogAction>
             ))
           ) : (
             <AlertDialogAction asChild className="flex-1">
-              <span onClick={toggle}>{t('notifications.confirm')}</span>
+              <Button onClick={toggle}>{t('notifications.confirm')}</Button>
             </AlertDialogAction>
           )}
         </AlertDialogFooter>

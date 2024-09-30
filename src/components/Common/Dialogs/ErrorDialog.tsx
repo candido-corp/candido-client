@@ -7,6 +7,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
 import { NotificationDialogProps } from '@/models/interfaces/Notification';
 import { useTranslation } from 'react-i18next';
 
@@ -31,9 +32,9 @@ export const ErrorDialog: React.FC<NotificationDialogProps> = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogAction asChild>
-            <button onClick={dismiss}>
+            <Button onClick={dismiss}>
               {t('notifications.error_dialog.ok')}
-            </button>
+            </Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

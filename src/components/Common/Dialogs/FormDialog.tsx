@@ -8,6 +8,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
 import { NotificationDialogProps } from '@/models/interfaces/Notification';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -64,10 +65,12 @@ export const FormDialog: React.FC<FormDialogProps> = ({
         />
         <AlertDialogFooter className="mt-7">
           <AlertDialogCancel asChild className="flex-1">
-            <span onClick={handleDismiss}>{t('general.cancel')}</span>
+            <Button variant="secondary" onClick={handleDismiss}>
+              {t('general.cancel')}
+            </Button>
           </AlertDialogCancel>
           <AlertDialogAction asChild className="flex-1">
-            <span onClick={handleAccept}>{t('general.confirm')}</span>
+            <Button onClick={handleAccept}>{t('general.confirm')}</Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
