@@ -1,6 +1,6 @@
 import { useNotification } from '@/hooks/useNotification';
 import { Button } from './ui/button';
-import { useSubmit } from 'react-router-dom';
+import { useFetcher } from 'react-router-dom';
 import { SubmitTarget } from 'react-router-dom/dist/dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 export const ResetPasswordButton = () => {
   const { t } = useTranslation();
   const { askConfirmation } = useNotification();
-  const submit = useSubmit();
+  const fetcher = useFetcher();
   const { user } = useAuth();
 
   const handleResetPassword = () => {
@@ -21,7 +21,9 @@ export const ResetPasswordButton = () => {
         {
           name: t('notifications.confirm'),
           action: () =>
-            submit({ email: user?.email } as SubmitTarget, { method: 'post' }),
+            fetcher.submit({ email: user?.email } as SubmitTarget, {
+              method: 'post',
+            }),
         },
       ],
     });
