@@ -1,4 +1,5 @@
 import NetworkClient from '@/api/v1/NetworkClient';
+import { handleLoaderError } from '@/utils/errors';
 import { LoaderFunction, json } from 'react-router-dom';
 
 export const loaderResetPassword: LoaderFunction = async ({ request }) => {
@@ -7,7 +8,7 @@ export const loaderResetPassword: LoaderFunction = async ({ request }) => {
   const e = url.searchParams.get('e');
 
   if (!t || !e) {
-    throw new Response('Invalid token', { status: 400 }); // TODO fix this
+    throw new Response('Missing token', { status: 400 });
   }
 
   try {
@@ -16,8 +17,7 @@ export const loaderResetPassword: LoaderFunction = async ({ request }) => {
     });
     return json({ t, e });
   } catch (error) {
-    console.error('error: ', error);
-    throw new Response('Invalid token', { status: 400 }); // TODO fix this
+    handleLoaderError(error);
   }
 };
 

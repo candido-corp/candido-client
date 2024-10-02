@@ -17,6 +17,7 @@ const actionRegister =
 
     try {
       await NetworkClient.registerEmail({ data: registerData });
+      return null;
     } catch (error) {
       console.error('error: ', error);
       toast({
