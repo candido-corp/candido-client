@@ -11,7 +11,7 @@ export enum EnumRoutes {
   LOGOUT = '/logout',
 
   REGISTER = '/register',
-  REGISTER_VERIFY_BY_EMAIL = '/register/email/verify/:token',
+  REGISTER_VERIFY_BY_EMAIL = '/register/email/verify',
 
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD = '/reset-password',
