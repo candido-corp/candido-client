@@ -2,7 +2,7 @@ import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { isAuthenticated } from '@/providers/AuthProvider';
 import { LoaderFunction, redirect } from 'react-router-dom';
 
-export const loaderAuth: LoaderFunction = async () => {
+const loaderAuth: LoaderFunction = async () => {
   const redirectTo = `${EnumRoutes.HOME}`;
 
   const authStatus = await isAuthenticated();
