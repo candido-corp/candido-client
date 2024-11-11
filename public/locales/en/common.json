@@ -25,6 +25,10 @@
     "description": "Enter your email below and you will receive an email to reset your password",
     "back_to_login": "Back to Login"
   },
+  "reset_password": {
+    "title": "Reset Password",
+    "description": "Insert your new password below"
+  },
   "user": {
     "title": "User",
     "change_password": {

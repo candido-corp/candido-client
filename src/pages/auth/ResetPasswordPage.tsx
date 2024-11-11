@@ -1,4 +1,5 @@
 import { ResetPasswordForm } from '@/components/auth/ResetPassword/ResetPasswordForm';
+import { t } from 'i18next';
 
 const ResetPasswordPage = () => {
   return (
@@ -20,8 +21,8 @@ const ResetPasswordPage = () => {
                 <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold">ss</h1>
-            <p className="text-balance text-muted-foreground">sss</p>
+            <h1 className="text-3xl font-bold">{t('reset_password.title')}</h1>
+            <p className="text-balance text-muted-foreground">{t('reset_password.description')}</p>
           </div>
           <ResetPasswordForm />
         </div>
