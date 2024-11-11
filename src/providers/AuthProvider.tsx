@@ -1,5 +1,8 @@
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
-import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers.ts';
+import {
+  EnumUserPermissions,
+  EnumUserRoles,
+} from '@/models/enums/EnumUsers.ts';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
@@ -11,7 +14,7 @@ export interface JwtPayload {
 }
 
 export const dataFromToken = (token: string | undefined): User | null => {
-  if(!token) return null;
+  if (!token) return null;
 
   let decoded: JwtPayload;
   try {
@@ -25,7 +28,7 @@ export const dataFromToken = (token: string | undefined): User | null => {
     roles: decoded.roles,
     permissions: decoded.permissions,
   };
-}
+};
 
 export const getAccessToken = async (): Promise<User | null> => {
   let accessToken: string | undefined = Cookies.get('access_token');
@@ -48,7 +51,6 @@ export const isAuthenticated = async (): Promise<boolean> => {
   return !!(await getAccessToken());
 };
 
-
 export interface User {
   email: string;
   roles: EnumUserRoles;
@@ -58,20 +60,24 @@ export interface User {
 export interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
-  login: (userData: User) => void;
+  login: () => Promise<void>;
   logout: () => void;
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await getAccessToken();
-      setUser(user);
+      const userData = await getAccessToken();
+      setUser(userData);
       setLoading(false);
     };
 
@@ -79,8 +85,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   const login = async () => {
-    const user = await getAccessToken();
-    setUser(user);
+    const userData = await getAccessToken();
+    setUser(userData);
   };
 
   const logout = () => {
@@ -92,7 +98,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated: !!user, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
