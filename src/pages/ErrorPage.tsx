@@ -1,6 +1,10 @@
 import PageContent from '@/components/Common/PageContent';
+import { buttonVariants } from '@/components/ui/button';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { AxiosApiErrorResponse } from '@/utils/errors';
-import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
+import { cn } from '@/utils/shadcn';
+import { t } from 'i18next';
+import { isRouteErrorResponse, Link, useRouteError } from 'react-router-dom';
 
 function ErrorPage() {
   const error = useRouteError();
@@ -9,11 +13,9 @@ function ErrorPage() {
   let message = 'Something went wrong!';
 
   if (isRouteErrorResponse(error)) {
-    if (error.data && error.data.axiosError) {
+    if (error.data && error.data.axiosError && error.data.error.errors) {
       const errorResponse: AxiosApiErrorResponse = error.data.error;
-      message = errorResponse.errors.map((error) => error.message).join(', ');
-    } else {
-      message = error.data;
+      message = errorResponse.errors?.map((error) => error.message).join(', ');
     }
 
     if (error.status === 404) {
@@ -26,6 +28,12 @@ function ErrorPage() {
     <>
       <PageContent title={title}>
         <p>{message}</p>
+        <Link
+          to={EnumRoutes.HOME}
+          className={cn(buttonVariants({ variant: 'default' }), 'mt-4')}
+        >
+          {t('homepage.title')}
+        </Link>
       </PageContent>
     </>
   );
