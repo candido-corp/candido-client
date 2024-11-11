@@ -2,7 +2,6 @@ import { redirect } from 'react-router-dom';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { AuthContextType } from '@/providers/AuthProvider.tsx';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
-import { AxiosResponse } from 'axios';
 import { NotificationContextType } from '@/providers/NotificationProvider';
 import { ApiRequestLogin } from '@/api/v1/requests/ApiRequestLogin';
 
@@ -15,10 +14,10 @@ const actionLogin =
       password: data.get('password') as string,
     };
     try {
-      const response: AxiosResponse = await NetworkClient.login({
+      await NetworkClient.login({
         data: loginData,
       });
-      login(response.data);
+      await login();
 
       const url = new URL(request.url);
       const redirectTo: string | null = url.searchParams.get('redirect');
@@ -29,7 +28,7 @@ const actionLogin =
         variant: 'destructive',
         title: 'Ops, something went wrong',
         description: 'We could not log you in. Please try again.',
-        duration: 2000,
+        duration: 3000,
       });
 
       return null;

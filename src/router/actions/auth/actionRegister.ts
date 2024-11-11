@@ -2,9 +2,10 @@ import { LoaderFunctionArgs } from 'react-router-dom';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
 import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister.ts';
 import { NotificationContextType } from '@/providers/NotificationProvider';
+import { AuthContextType } from '@/providers/AuthProvider';
 
 const actionRegister =
-  ({ toast }: NotificationContextType) =>
+  ({ login }: AuthContextType, { toast }: NotificationContextType) =>
   async ({ request }: LoaderFunctionArgs) => {
     const data = await request.formData();
     const registerData: Required<ApiRequestRegister> = {
@@ -16,7 +17,19 @@ const actionRegister =
     };
 
     try {
-      await NetworkClient.registerEmail({ data: registerData });
+      await NetworkClient.registerEmail({
+        data: registerData,
+      });
+      await login();
+
+      toast({
+        variant: 'default',
+        title: 'Yeay!',
+        description:
+          'You have successfully registered, you will receive an email to verify your account.',
+        duration: 3000,
+      });
+
       return null;
     } catch (error) {
       console.error('error: ', error);
@@ -24,7 +37,7 @@ const actionRegister =
         variant: 'destructive',
         title: 'Ops, something went wrong',
         description: 'We could not register your account. Please try again.',
-        duration: 2000,
+        duration: 3000,
       });
       return null;
     }

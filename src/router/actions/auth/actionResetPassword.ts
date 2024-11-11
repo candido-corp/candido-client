@@ -1,10 +1,12 @@
 import NetworkClient from '@/api/v1/NetworkClient.ts';
-import { AxiosResponse } from 'axios';
 import { NotificationContextType } from '@/providers/NotificationProvider';
 import { ApiRequestResetPasswordChangePassword } from '@/api/v1/requests/ApiRequestResetPasswordChangePassword';
+import { redirect } from 'react-router-dom';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
+import { AuthContextType } from '@/providers/AuthProvider';
 
 const actionResetPassword =
-  ({ toast }: NotificationContextType) =>
+  ({ login }: AuthContextType, { toast }: NotificationContextType) =>
   async ({ request }: { request: Request }) => {
     const data = await request.formData();
     const resetPasswordData: Required<ApiRequestResetPasswordChangePassword> = {
@@ -14,19 +16,26 @@ const actionResetPassword =
       confirm_password: data.get('confirm_password') as string,
     };
     try {
-      const response: AxiosResponse =
-        await NetworkClient.resetPasswordChangePassword({
-          data: resetPasswordData,
-        });
+      await NetworkClient.resetPasswordChangePassword({
+        data: resetPasswordData,
+      });
+      await login();
 
-      return response;
+      toast({
+        variant: 'default',
+        title: 'Yeay!',
+        description: 'Your password has been reset successfully.',
+        duration: 3000,
+      });
+
+      return redirect(EnumRoutes.LOGIN);
     } catch (error) {
       console.error('error: ', error);
       toast({
         variant: 'destructive',
         title: 'Ops, something went wrong',
         description: 'We could not reset your password. Please try again.',
-        duration: 2000,
+        duration: 3000,
       });
 
       return null;

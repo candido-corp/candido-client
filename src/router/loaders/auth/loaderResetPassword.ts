@@ -1,21 +1,24 @@
 import NetworkClient from '@/api/v1/NetworkClient';
+import { ApiRequestResetPasswordCheckValidity } from '@/api/v1/requests/ApiRequestResetPasswordCheckValidity';
 import { handleLoaderError } from '@/utils/errors';
 import { LoaderFunction, json } from 'react-router-dom';
 
-export const loaderResetPassword: LoaderFunction = async ({ request }) => {
+const loaderResetPassword: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
-  const t = url.searchParams.get('t');
+  const resetPasswordCheckValidityData: ApiRequestResetPasswordCheckValidity = {
+    t: url.searchParams.get('t') ?? undefined,
+  };
   const e = url.searchParams.get('e');
 
-  if (!t || !e) {
+  if (!resetPasswordCheckValidityData.t || !e) {
     throw new Response('Missing token', { status: 400 });
   }
 
   try {
     await NetworkClient.resetPasswordCheckValidity({
-      params: { t },
+      params: resetPasswordCheckValidityData,
     });
-    return json({ t, e });
+    return json({ t: resetPasswordCheckValidityData.t, e });
   } catch (error) {
     handleLoaderError(error);
   }
