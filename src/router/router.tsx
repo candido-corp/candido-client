@@ -4,7 +4,6 @@ import {
   Route,
 } from 'react-router-dom';
 
-import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage.tsx';
 import loaderRegisterVerifyByEmail from '@/router/loaders/auth/loaderRegisterVerifyByEmail.ts';
 import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
 import actionLogout from '@/router/actions/auth/actionLogout.ts';
@@ -43,6 +42,7 @@ import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
 import loaderResetPassword from './loaders/auth/loaderResetPassword';
 import actionResetPassword from './actions/auth/actionResetPassword';
 import loaderUser from './loaders/loaderUser';
+import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage';
 
 export const router = (
   authContext: AuthContextType,
@@ -67,16 +67,20 @@ export const router = (
 
           <Route
             path={EnumRoutes.REGISTER}
-            action={actionRegister(notificationContext)}
+            action={actionRegister(authContext, notificationContext)}
             element={<RegisterPage />}
-          >
-            <Route
-              path={EnumRoutes.REGISTER_VERIFY_BY_EMAIL}
-              loader={loaderRegisterVerifyByEmail}
-              element={<RegisterVerifyByEmailPage />}
-            />
-          </Route>
+          />
+          <Route
+            path={EnumRoutes.REGISTER_VERIFY_BY_EMAIL}
+            loader={loaderRegisterVerifyByEmail(
+              authContext,
+              notificationContext
+            )}
+            element={<RegisterVerifyByEmailPage />}
+          />
+        </Route>
 
+        <Route errorElement={<ErrorPage />}>
           <Route
             path={EnumRoutes.FORGOT_PASSWORD}
             action={actionForgotPassword(notificationContext)}
@@ -84,7 +88,7 @@ export const router = (
           />
           <Route
             path={EnumRoutes.RESET_PASSWORD}
-            action={actionResetPassword(notificationContext)}
+            action={actionResetPassword(authContext, notificationContext)}
             loader={loaderResetPassword}
             element={<ResetPasswordPage />}
           />
