@@ -17,8 +17,9 @@ import { loginValidationSchema, TLoginFields } from '.';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { Loader2 } from 'lucide-react';
 import { ApiRequestLogin } from '@/api/v1/requests/ApiRequestLogin';
+import { BaseFC } from '@/models/interfaces/BaseFC';
 
-export const LoginForm = () => {
+export const LoginForm: React.FC<BaseFC> = () => {
   const { t } = useTranslation();
   const submit = useSubmit();
   const navigation = useNavigation();
