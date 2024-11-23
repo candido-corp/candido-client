@@ -7,19 +7,34 @@
   },
   "login": {
     "title": "Login",
+    "description": "Enter your email below to login to your account",
     "register": "Create new user",
     "sign_in": "Sign in",
     "forgot_password": "Forgot your password?"
   },
   "register": {
     "title": "Register",
+    "description": "Enter your information to create an account",
     "sign_up": "Sign up"
   },
   "register_verify_email": {
     "title": "Register Verify Email"
   },
+  "forgot_password": {
+    "title": "Reset Password",
+    "description": "Enter your email below and you will receive an email to reset your password",
+    "back_to_login": "Back to Login"
+  },
+  "reset_password": {
+    "title": "Reset Password",
+    "description": "Insert your new password below"
+  },
   "user": {
-    "title": "User"
+    "title": "User",
+    "change_password": {
+      "title": "Change Password",
+      "message": "Are you sure? you will receive an email to reset your password"
+    }
   },
   "logout": {
     "title": "Logout"
@@ -29,7 +44,8 @@
     "last_name": "Last Name",
     "email": "Email",
     "password": "Password",
-    "confirm_password": "Confirm Password"
+    "confirm_password": "Confirm Password",
+    "submit": "Submit"
   },
   "form_validation": {
     "required": "This field is required",
@@ -44,7 +60,6 @@
       "special": "The password must contain at least one special character(@)",
       "no_whitespace": "The password must not contain whitespaces",
       "match": "Passwords must match"
-  
     }
   },
   "notifications": {

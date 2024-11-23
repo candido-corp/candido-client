@@ -1,6 +1,6 @@
-import Account from '@/components/Account';
 import PageContent from '@/components/Common/PageContent';
 import { Button } from '@/components/ui/button';
+import User from '@/components/User';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ const UserPage = () => {
 
   return (
     <PageContent title={t('user.title')}>
-      <Account />
+      <User />
       <div className="flex gap-4 py-10">
         <Button asChild>
           <Link to={EnumRoutes.USER_OPPORTUNITIES}>User opportunities</Link>

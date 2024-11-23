@@ -4,11 +4,9 @@ import {
   Route,
 } from 'react-router-dom';
 
-import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage.tsx';
 import loaderRegisterVerifyByEmail from '@/router/loaders/auth/loaderRegisterVerifyByEmail.ts';
 import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
 import actionLogout from '@/router/actions/auth/actionLogout.ts';
-import loaderAccount from '@/router/loaders/loaderAccount.ts';
 import LoginPage from '@/pages/auth/LoginPage.tsx';
 import actionRegister from '@/router/actions/auth/actionRegister.ts';
 import LoginBlurPage from '@/pages/auth/LoginBlurPage.tsx';
@@ -18,7 +16,6 @@ import { AuthContextType } from '@/providers/AuthProvider.tsx';
 import actionLogin from '@/router/actions/auth/actionLogin.ts';
 import ErrorPage from '@/pages/ErrorPage.tsx';
 import RegisterPage from '@/pages/auth/RegisterPage.tsx';
-import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
 import UserPage from '@/pages/user/UserPage';
 import UserOpportunitiesStatsPage from '@/pages/user/opportunities/UserOpportunitiesStatsPage';
 import UserOpportunitiesPage from '@/pages/user/opportunities/UserOpportunitiesPage';
@@ -39,6 +36,13 @@ import loaderAuth from './loaders/auth/loaderAuth';
 import DashboardPage from '@/pages/DashboardPage';
 import FormsCreatePage from '@/pages/forms/FormsCreatePage';
 import { NotificationContextType } from '@/providers/NotificationProvider';
+import actionForgotPassword from './actions/auth/actionForgotPassword';
+import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
+import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
+import loaderResetPassword from './loaders/auth/loaderResetPassword';
+import actionResetPassword from './actions/auth/actionResetPassword';
+import loaderUser from './loaders/loaderUser';
+import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage';
 
 export const router = (
   authContext: AuthContextType,
@@ -63,18 +67,29 @@ export const router = (
 
           <Route
             path={EnumRoutes.REGISTER}
-            action={actionRegister(notificationContext)}
+            action={actionRegister(authContext, notificationContext)}
             element={<RegisterPage />}
-          >
-            <Route
-              path={EnumRoutes.REGISTER_VERIFY_BY_EMAIL}
-              loader={loaderRegisterVerifyByEmail}
-              element={<RegisterVerifyByEmailPage />}
-            />
-          </Route>
+          />
+          <Route
+            path={EnumRoutes.REGISTER_VERIFY_BY_EMAIL}
+            loader={loaderRegisterVerifyByEmail(
+              authContext,
+              notificationContext
+            )}
+            element={<RegisterVerifyByEmailPage />}
+          />
+        </Route>
 
+        <Route errorElement={<ErrorPage />}>
+          <Route
+            path={EnumRoutes.FORGOT_PASSWORD}
+            action={actionForgotPassword(notificationContext)}
+            element={<ForgotPasswordPage />}
+          />
           <Route
             path={EnumRoutes.RESET_PASSWORD}
+            action={actionResetPassword(authContext, notificationContext)}
+            loader={loaderResetPassword}
             element={<ResetPasswordPage />}
           />
         </Route>
@@ -103,7 +118,12 @@ export const router = (
             <Route path={EnumRoutes.DASHBOARD} element={<DashboardPage />} />
 
             <Route path={EnumRoutes.USER}>
-              <Route index loader={loaderAccount} element={<UserPage />} />
+              <Route
+                index
+                loader={loaderUser}
+                action={actionForgotPassword(notificationContext)} //as for now we have only forgot password action so we keep this here
+                element={<UserPage />}
+              />
 
               <Route path={EnumRoutes.USER_OPPORTUNITIES}>
                 <Route index element={<UserOpportunitiesPage />} />

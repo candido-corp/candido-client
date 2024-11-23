@@ -1,22 +1,34 @@
 import { Link } from 'react-router-dom';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { t } from 'i18next';
 import { BaseFC } from '@/models/interfaces/BaseFC';
 import { cn } from '@/utils/shadcn';
 import { buttonVariants } from '@/components/ui/button';
-import { LoginForm } from '.';
 
-export const LoginContainer: React.FC<BaseFC> = () => {
+type AuthContainerProps = {
+  title: string;
+  description?: string;
+  formComponent: React.ReactNode;
+  linkText: string;
+  linkTo: string;
+} & BaseFC;
+
+export const AuthContainer: React.FC<AuthContainerProps> = ({
+  title,
+  description,
+  formComponent,
+  linkText,
+  linkTo,
+}) => {
   return (
     <div className="container relative flex h-full flex-col justify-center sm:items-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
-        to={EnumRoutes.REGISTER}
+        to={linkTo}
         className={cn(
           buttonVariants({ variant: 'ghost' }),
           'absolute right-4 top-4 md:right-8 md:top-8'
         )}
       >
-        {t('login.register')}
+        {linkText}
       </Link>
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
         <div className="absolute inset-0 bg-zinc-900" />
@@ -56,12 +68,14 @@ export const LoginContainer: React.FC<BaseFC> = () => {
                 <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
-            </p>
+            <h1 className="text-3xl font-bold">{title}</h1>
+            {description && (
+              <p className="text-balance text-muted-foreground">
+                {description}
+              </p>
+            )}
           </div>
-          <LoginForm />
+          {formComponent}
         </div>
       </div>
     </div>
