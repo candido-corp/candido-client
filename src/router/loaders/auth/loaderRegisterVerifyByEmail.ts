@@ -1,14 +1,14 @@
 import { LoaderFunctionArgs } from 'react-router-dom';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
 import { handleLoaderError } from '@/utils/errors';
-import { NotificationContextType } from '@/providers/NotificationProvider';
 import { AuthContextType } from '@/providers/AuthProvider';
 import { ApiRequestRegisterEmailVerify } from '@/api/v1/requests/ApiRequestRegisterEmailVerify';
+import { useToast } from '@/components/ui/use-toast';
 
 const loaderRegisterVerifyByEmail =
   (
     { login, isAuthenticated }: AuthContextType,
-    { toast }: NotificationContextType
+    toast: ReturnType<typeof useToast>['toast']
   ) =>
   async ({ request }: LoaderFunctionArgs) => {
     const url = new URL(request.url);

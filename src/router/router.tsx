@@ -35,7 +35,6 @@ import SettingsFormsPage from '@/pages/settings/SettingsFormsPage';
 import loaderAuth from './loaders/auth/loaderAuth';
 import DashboardPage from '@/pages/DashboardPage';
 import FormsCreatePage from '@/pages/forms/FormsCreatePage';
-import { NotificationContextType } from '@/providers/NotificationProvider';
 import actionForgotPassword from './actions/auth/actionForgotPassword';
 import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
 import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
@@ -43,18 +42,19 @@ import loaderResetPassword from './loaders/auth/loaderResetPassword';
 import actionResetPassword from './actions/auth/actionResetPassword';
 import loaderUser from './loaders/loaderUser';
 import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage';
+import { useToast } from '@/components/ui/use-toast';
 
 export const router = (
   authContext: AuthContextType,
-  notificationContext: NotificationContextType
+  toast: ReturnType<typeof useToast>['toast']
 ) =>
   createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route loader={loaderAuth} errorElement={<ErrorPage />}>
+        <Route errorElement={<ErrorPage />}>
           <Route
             path={EnumRoutes.LOGIN}
-            action={actionLogin(authContext, notificationContext)}
+            action={actionLogin(authContext, toast)}
             element={<LoginPage />}
           />
 
@@ -62,20 +62,17 @@ export const router = (
 
           <Route
             path={EnumRoutes.LOGOUT}
-            action={actionLogout(authContext, notificationContext)}
+            action={actionLogout(authContext, toast)}
           />
 
           <Route
             path={EnumRoutes.REGISTER}
-            action={actionRegister(authContext, notificationContext)}
+            action={actionRegister(authContext, toast)}
             element={<RegisterPage />}
           />
           <Route
             path={EnumRoutes.REGISTER_VERIFY_BY_EMAIL}
-            loader={loaderRegisterVerifyByEmail(
-              authContext,
-              notificationContext
-            )}
+            loader={loaderRegisterVerifyByEmail(authContext, toast)}
             element={<RegisterVerifyByEmailPage />}
           />
         </Route>
@@ -83,12 +80,12 @@ export const router = (
         <Route errorElement={<ErrorPage />}>
           <Route
             path={EnumRoutes.FORGOT_PASSWORD}
-            action={actionForgotPassword(notificationContext)}
+            action={actionForgotPassword(toast)}
             element={<ForgotPasswordPage />}
           />
           <Route
             path={EnumRoutes.RESET_PASSWORD}
-            action={actionResetPassword(authContext, notificationContext)}
+            action={actionResetPassword(authContext, toast)}
             loader={loaderResetPassword}
             element={<ResetPasswordPage />}
           />
@@ -121,7 +118,7 @@ export const router = (
               <Route
                 index
                 loader={loaderUser}
-                action={actionForgotPassword(notificationContext)} //as for now we have only forgot password action so we keep this here
+                action={actionForgotPassword(toast)} //as for now we have only forgot password action so we keep this here
                 element={<UserPage />}
               />
 

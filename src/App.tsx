@@ -3,15 +3,12 @@ import { Suspense } from 'react';
 import { router } from '@/router/router';
 import { AuthContextType } from '@/providers/AuthProvider.tsx';
 import { useAuth } from '@/hooks/useAuth.ts';
-import ConfigApp from '@/config/ConfigApp.ts';
-import { useNotification } from './hooks/useNotification';
-import { NotificationContextType } from './providers/NotificationProvider';
+import { useToast } from './components/ui/use-toast';
 
 function App() {
-  console.log(ConfigApp);
   const authContext: AuthContextType = useAuth();
-  const notificationContext: NotificationContextType = useNotification();
-  const appRouter = router(authContext, notificationContext);
+  const { toast } = useToast();
+  const appRouter = router(authContext, toast);
 
   return (
     <Suspense fallback="...is loading">

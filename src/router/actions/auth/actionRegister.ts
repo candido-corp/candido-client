@@ -1,11 +1,11 @@
 import { LoaderFunctionArgs } from 'react-router-dom';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
 import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister.ts';
-import { NotificationContextType } from '@/providers/NotificationProvider';
 import { AuthContextType } from '@/providers/AuthProvider';
+import { useToast } from '@/components/ui/use-toast';
 
 const actionRegister =
-  ({ login }: AuthContextType, { toast }: NotificationContextType) =>
+  ({ login }: AuthContextType, toast: ReturnType<typeof useToast>['toast']) =>
   async ({ request }: LoaderFunctionArgs) => {
     const data = await request.formData();
     const registerData: Required<ApiRequestRegister> = {

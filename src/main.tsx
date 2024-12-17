@@ -1,18 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import './index.css';
+import { Provider } from 'react-redux';
 
-import './utils/i18n.ts';
+import App from '@/App.tsx';
+import '@/index.css';
+import '@/utils/i18n.ts';
 import { AuthProvider } from '@/providers/AuthProvider.tsx';
-import { NotificationProvider } from './providers/NotificationProvider.tsx';
+import { store } from '@/store/index.ts';
+import { Toaster } from './components/ui/toaster';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <NotificationProvider>
+    <Provider store={store}>
+      <Toaster />
       <AuthProvider>
         <App />
       </AuthProvider>
-    </NotificationProvider>
+    </Provider>
   </React.StrictMode>
 );

@@ -2,11 +2,11 @@ import { redirect } from 'react-router-dom';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { AuthContextType } from '@/providers/AuthProvider.tsx';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
-import { NotificationContextType } from '@/providers/NotificationProvider';
 import { ApiRequestLogin } from '@/api/v1/requests/ApiRequestLogin';
+import { useToast } from '@/components/ui/use-toast';
 
 const actionLogin =
-  ({ login }: AuthContextType, { toast }: NotificationContextType) =>
+  ({ login }: AuthContextType, toast: ReturnType<typeof useToast>['toast']) =>
   async ({ request }: { request: Request }) => {
     const data = await request.formData();
     const loginData: Required<ApiRequestLogin> = {
