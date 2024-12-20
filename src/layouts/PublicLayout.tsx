@@ -1,10 +1,10 @@
-import MainNavigation from '@/components/Common/MainNavigation';
+import Header from '@/components/Common/Header/Header';
 import { Outlet } from 'react-router-dom';
 
 const PublicLayout = () => {
   return (
     <>
-      <MainNavigation />
+      <Header />
       <main className="h-full">
         <Outlet />
       </main>

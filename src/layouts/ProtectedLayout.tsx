@@ -1,5 +1,5 @@
 import { Outlet, useLoaderData } from 'react-router-dom';
-import MainNavigation from '@/components/Common/MainNavigation';
+import Header from '@/components/Common/Header/Header';
 
 const ProtectedLayout = () => {
   // Usa il loader per verificare l'autenticazione
@@ -7,7 +7,7 @@ const ProtectedLayout = () => {
 
   return (
     <>
-      <MainNavigation />
+      <Header />
       <main>
         <Outlet />
       </main>
