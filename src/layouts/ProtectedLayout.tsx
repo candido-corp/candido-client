@@ -1,5 +1,5 @@
 import { Outlet, useLoaderData } from 'react-router-dom';
-import MainNavigation from '@/components/Common/MainNavigation';
+import { AppSidebarProvider } from '@/components/Common/AppSidebar/AppSidebarProvider';
 
 const ProtectedLayout = () => {
   // Usa il loader per verificare l'autenticazione
@@ -7,10 +7,11 @@ const ProtectedLayout = () => {
 
   return (
     <>
-      <MainNavigation />
-      <main>
-        <Outlet />
-      </main>
+      <AppSidebarProvider>
+        <main>
+          <Outlet />
+        </main>
+      </AppSidebarProvider>
     </>
   );
 };
