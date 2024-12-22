@@ -8,6 +8,7 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Fragment } from 'react';
 
 function findStaticRoute(pathname: string): string | undefined {
   for (const staticPath of Object.values(EnumRoutes)) {
@@ -54,7 +55,7 @@ export const UtilComponentBreadcrumb: React.FC<BaseFC> = () => {
           </BreadcrumbItem>
           {(breadcrumbs?.length || 0) > 0 &&
             breadcrumbs?.map((item) => (
-              <>
+              <Fragment key={item.path}>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
@@ -63,7 +64,7 @@ export const UtilComponentBreadcrumb: React.FC<BaseFC> = () => {
                     </NavLink>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-              </>
+              </Fragment>
             ))}
         </BreadcrumbList>
       </Breadcrumb>
