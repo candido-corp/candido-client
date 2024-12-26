@@ -1,5 +1,5 @@
 import { Outlet, useLoaderData } from 'react-router-dom';
-import { AppSidebarProvider } from '@/components/Common/AppSidebar/AppSidebarProvider';
+import Header from '@/components/Common/Header/Header';
 
 const ProtectedLayout = () => {
   // Usa il loader per verificare l'autenticazione
@@ -7,11 +7,10 @@ const ProtectedLayout = () => {
 
   return (
     <>
-      <AppSidebarProvider>
-        <main>
-          <Outlet />
-        </main>
-      </AppSidebarProvider>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 };
