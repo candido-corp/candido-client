@@ -6,6 +6,7 @@ const NavRight: React.FC<BaseFC> = ({ className }) => {
   return (
     <nav className={cn('flex items-center gap-2', className)}>
       <UserAvatar />
+      <ModeToggle />
     </nav>
   );
 };
