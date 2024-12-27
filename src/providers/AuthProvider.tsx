@@ -36,10 +36,13 @@ export const getAccessToken = async (): Promise<User | null> => {
 
   if (!accessToken) {
     if (refreshToken) {
-      await NetworkClient.refreshToken();
-
-      accessToken = Cookies.get('access_token');
-      return dataFromToken(accessToken);
+      try {
+        await NetworkClient.refreshToken();
+        accessToken = Cookies.get('access_token');
+        return dataFromToken(accessToken);
+      } catch (error) {
+        console.error('Error refreshing token', error);
+      }
     }
     return null;
   }
