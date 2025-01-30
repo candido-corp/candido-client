@@ -1,8 +1,4 @@
-import { useTranslation } from 'react-i18next';
-import { BaseFC } from '@/models/interfaces/BaseFC';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Form, NavLink } from 'react-router-dom';
-import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -14,8 +10,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks/useAuth';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
+import { BadgeCheck, LogOut } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { Form, NavLink } from 'react-router-dom';
+import { ModeToggleGroup } from '../ModeToggleGroup';
 
-const UserAvatar: React.FC<BaseFC> = ({ className }) => {
+const UserAvatar: React.FC = () => {
   const { t } = useTranslation();
   const { user, isAuthenticated } = useAuth();
 
@@ -58,13 +59,12 @@ const UserAvatar: React.FC<BaseFC> = ({ className }) => {
           {isAuthenticated ? (
             <>
               <DropdownMenuItem>
-                <NavLink to={EnumRoutes.USER} className="w-full">
+                <NavLink
+                  to={EnumRoutes.USER}
+                  className="flex w-full items-center gap-2"
+                >
+                  <BadgeCheck />
                   {t('user.title')}
-                </NavLink>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <NavLink to={EnumRoutes.SETTINGS} className="w-full">
-                  {'Settings'}
                 </NavLink>
               </DropdownMenuItem>
             </>
@@ -83,12 +83,22 @@ const UserAvatar: React.FC<BaseFC> = ({ className }) => {
             </>
           )}
         </DropdownMenuGroup>
+        <DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="focus:bg-transparent">
+            <ModeToggleGroup className="w-full" />
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
         {isAuthenticated && (
           <>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Form action={EnumRoutes.LOGOUT} method="post" className="w-full">
-                <button type="submit" className="w-full text-left">
+                <button
+                  type="submit"
+                  className="flex w-full items-center gap-2"
+                >
+                  <LogOut />
                   {t('logout.title')}
                 </button>
               </Form>
