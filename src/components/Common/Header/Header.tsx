@@ -1,15 +1,29 @@
-import { NavLink } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { useSidebar } from '@/components/ui/sidebar';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
+import { SidebarIcon } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 import NavMain from './NavMain';
 import NavRight from './NavRight';
-import { Input } from '@/components/ui/input';
 
 const Header = () => {
+  const { toggleSidebar } = useSidebar();
+
   return (
     <header className="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="ml-auto mr-auto w-full">
+      <div className="ml-auto mr-auto h-[--header-height] w-full">
         <div className="container flex h-14 items-center">
-          <div className="flex md:mr-4">
+          <div className="flex h-[--header-height] w-full items-center gap-2">
+            <Button
+              className="h-8 w-8 md:hidden"
+              variant="ghost"
+              size="icon"
+              onClick={toggleSidebar}
+            >
+              <SidebarIcon />
+            </Button>
+            <Separator orientation="vertical" className="mr-2 h-4 md:hidden" />
             <NavLink
               to={EnumRoutes.HOME}
               className="mr-4 flex items-center gap-2 lg:mr-6"
@@ -28,6 +42,10 @@ const Header = () => {
                 <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
               </svg>
               <span className="hidden font-bold lg:inline-block">Candido</span>
+              <Separator
+                orientation="vertical"
+                className="ml-2 hidden h-4 md:flex"
+              />
             </NavLink>
             <NavMain className="hidden md:flex" />
           </div>
