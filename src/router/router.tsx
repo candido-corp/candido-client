@@ -43,6 +43,8 @@ import loaderResetPassword from './loaders/auth/loaderResetPassword';
 import actionResetPassword from './actions/auth/actionResetPassword';
 import loaderUser from './loaders/loaderUser';
 import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage';
+import UserLayout from '@/layouts/UserLayout';
+import ProtectedLayout from '@/layouts/ProtectedLayout';
 
 export const router = (
   authContext: AuthContextType,
@@ -113,35 +115,40 @@ export const router = (
               />
             </Route>
           </Route>
+        </Route>
 
-          <Route loader={loaderProtected(authContext)}>
-            <Route path={EnumRoutes.DASHBOARD} element={<DashboardPage />} />
+        <Route
+          loader={loaderProtected(authContext)}
+          errorElement={<ErrorPage />}
+        >
+          <Route path={EnumRoutes.USER} element={<UserLayout />}>
+            <Route
+              index
+              loader={loaderUser}
+              action={actionForgotPassword(notificationContext)} //as for now we have only forgot password action so we keep this here
+              element={<UserPage />}
+            />
 
-            <Route path={EnumRoutes.USER}>
+            <Route path={EnumRoutes.USER_OPPORTUNITIES}>
+              <Route index element={<UserOpportunitiesPage />} />
+
               <Route
-                index
-                loader={loaderUser}
-                action={actionForgotPassword(notificationContext)} //as for now we have only forgot password action so we keep this here
-                element={<UserPage />}
+                path={EnumRoutes.USER_OPPORTUNITIES_STATS}
+                element={<UserOpportunitiesStatsPage />}
               />
-
-              <Route path={EnumRoutes.USER_OPPORTUNITIES}>
-                <Route index element={<UserOpportunitiesPage />} />
-
-                <Route
-                  path={EnumRoutes.USER_OPPORTUNITIES_STATS}
-                  element={<UserOpportunitiesStatsPage />}
-                />
-                <Route
-                  path={EnumRoutes.USER_OPPORTUNITIES_HISTORY}
-                  element={<UserOpportunitiesHistoryPage />}
-                />
-                <Route
-                  path={EnumRoutes.USER_OPPORTUNITIES_SAVED}
-                  element={<UserOpportunitiesSavedPage />}
-                />
-              </Route>
+              <Route
+                path={EnumRoutes.USER_OPPORTUNITIES_HISTORY}
+                element={<UserOpportunitiesHistoryPage />}
+              />
+              <Route
+                path={EnumRoutes.USER_OPPORTUNITIES_SAVED}
+                element={<UserOpportunitiesSavedPage />}
+              />
             </Route>
+          </Route>
+
+          <Route element={<ProtectedLayout />}>
+            <Route path={EnumRoutes.DASHBOARD} element={<DashboardPage />} />
 
             <Route path={EnumRoutes.FORMS}>
               <Route index element={<FormsPage />} />
