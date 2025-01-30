@@ -9,8 +9,17 @@ const NavMain: React.FC<BaseFC> = ({ className }) => {
     <nav className={className}>
       <ul className="flex gap-6">
         <li>
+          <NavLink to={EnumRoutes.OPPORTUNITIES}>Opportunities</NavLink>
+        </li>
+        <li>
           <NavLink to={EnumRoutes.DASHBOARD}>{t('dashboard.title')}</NavLink>
         </li>
+        <li>
+          <NavLink to={EnumRoutes.BACKPACK}>Documents</NavLink>
+        </li>
+        {/* <li>
+          <NavLink to={EnumRoutes.SETTINGS}>Settings</NavLink>
+        </li> */}
       </ul>
     </nav>
   );
