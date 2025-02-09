@@ -1,5 +1,4 @@
 import { Outlet, useLoaderData } from 'react-router-dom';
-import Header from '@/components/Common/Header/Header';
 
 const ProtectedLayout = () => {
   // Usa il loader per verificare l'autenticazione
@@ -7,10 +6,7 @@ const ProtectedLayout = () => {
 
   return (
     <>
-      <Header />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
     </>
   );
 };
