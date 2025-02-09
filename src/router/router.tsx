@@ -4,47 +4,53 @@ import {
   Route,
 } from 'react-router-dom';
 
-import loaderRegisterVerifyByEmail from '@/router/loaders/auth/loaderRegisterVerifyByEmail.ts';
-import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
-import actionLogout from '@/router/actions/auth/actionLogout.ts';
-import LoginPage from '@/pages/auth/LoginPage.tsx';
-import actionRegister from '@/router/actions/auth/actionRegister.ts';
-import LoginBlurPage from '@/pages/auth/LoginBlurPage.tsx';
+import {
+  dashboardSidebarItems,
+  documentsSidebarItems,
+  userSidebarItems,
+} from '@/config/ConfigSidebars';
+import ProtectedLayout from '@/layouts/ProtectedLayout';
 import PublicLayout from '@/layouts/PublicLayout.tsx';
-import loaderProtected from '@/router/loaders/_common/loaderProtected.ts';
-import { AuthContextType } from '@/providers/AuthProvider.tsx';
-import actionLogin from '@/router/actions/auth/actionLogin.ts';
+import { default as SidebarLayout } from '@/layouts/SidebarLayout';
+import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
+import DashboardPage from '@/pages/DashboardPage';
+import DocumentsPage from '@/pages/DocumentsPage';
 import ErrorPage from '@/pages/ErrorPage.tsx';
+import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
+import LoginBlurPage from '@/pages/auth/LoginBlurPage.tsx';
+import LoginPage from '@/pages/auth/LoginPage.tsx';
 import RegisterPage from '@/pages/auth/RegisterPage.tsx';
-import UserPage from '@/pages/user/UserPage';
-import UserOpportunitiesStatsPage from '@/pages/user/opportunities/UserOpportunitiesStatsPage';
-import UserOpportunitiesPage from '@/pages/user/opportunities/UserOpportunitiesPage';
-import UserOpportunitiesHistoryPage from '@/pages/user/opportunities/UserOpportunitiesHistoryPage';
-import UserOpportunitiesSavedPage from '@/pages/user/opportunities/UserOpportunitiesSavedPage';
-import FormsPage from '@/pages/forms/FormsPage';
-import FormPage from '@/pages/forms/FormPage';
+import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage';
+import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
 import FormBuilderPage from '@/pages/forms/FormBuilderPage';
 import FormBuilderPreviewPage from '@/pages/forms/FormBuilderPreviewPage';
-import OpportunitiesPage from '@/pages/opportunities/OpportunitiesPage';
-import OpportunityPage from '@/pages/opportunities/OpportunityPage';
-import OpportunityApplyPage from '@/pages/opportunities/OpportunityApplyPage';
-import SettingsPage from '@/pages/settings/SettingsPage';
-import SettingsGeneralPage from '@/pages/settings/SettingsGeneralPage';
-import SettingsUserPage from '@/pages/settings/SettingsUserPage';
-import SettingsFormsPage from '@/pages/settings/SettingsFormsPage';
-import loaderAuth from './loaders/auth/loaderAuth';
-import DashboardPage from '@/pages/DashboardPage';
+import FormPage from '@/pages/forms/FormPage';
 import FormsCreatePage from '@/pages/forms/FormsCreatePage';
+import FormsPage from '@/pages/forms/FormsPage';
+import OpportunitiesPage from '@/pages/opportunities/OpportunitiesPage';
+import OpportunityApplyPage from '@/pages/opportunities/OpportunityApplyPage';
+import OpportunityPage from '@/pages/opportunities/OpportunityPage';
+import SettingsFormsPage from '@/pages/settings/SettingsFormsPage';
+import SettingsGeneralPage from '@/pages/settings/SettingsGeneralPage';
+import SettingsPage from '@/pages/settings/SettingsPage';
+import SettingsUserPage from '@/pages/settings/SettingsUserPage';
+import UserPage from '@/pages/user/UserPage';
+import UserOpportunitiesHistoryPage from '@/pages/user/opportunities/UserOpportunitiesHistoryPage';
+import UserOpportunitiesPage from '@/pages/user/opportunities/UserOpportunitiesPage';
+import UserOpportunitiesSavedPage from '@/pages/user/opportunities/UserOpportunitiesSavedPage';
+import UserOpportunitiesStatsPage from '@/pages/user/opportunities/UserOpportunitiesStatsPage';
+import { AuthContextType } from '@/providers/AuthProvider.tsx';
 import { NotificationContextType } from '@/providers/NotificationProvider';
+import actionLogin from '@/router/actions/auth/actionLogin.ts';
+import actionLogout from '@/router/actions/auth/actionLogout.ts';
+import actionRegister from '@/router/actions/auth/actionRegister.ts';
+import loaderProtected from '@/router/loaders/_common/loaderProtected.ts';
+import loaderRegisterVerifyByEmail from '@/router/loaders/auth/loaderRegisterVerifyByEmail.ts';
 import actionForgotPassword from './actions/auth/actionForgotPassword';
-import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
-import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
-import loaderResetPassword from './loaders/auth/loaderResetPassword';
 import actionResetPassword from './actions/auth/actionResetPassword';
+import loaderAuth from './loaders/auth/loaderAuth';
+import loaderResetPassword from './loaders/auth/loaderResetPassword';
 import loaderUser from './loaders/loaderUser';
-import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage';
-import UserLayout from '@/layouts/UserLayout';
-import ProtectedLayout from '@/layouts/ProtectedLayout';
 
 export const router = (
   authContext: AuthContextType,
@@ -121,7 +127,10 @@ export const router = (
           loader={loaderProtected(authContext)}
           errorElement={<ErrorPage />}
         >
-          <Route path={EnumRoutes.USER} element={<UserLayout />}>
+          <Route
+            path={EnumRoutes.USER}
+            element={<SidebarLayout sidebarNavItems={userSidebarItems} />}
+          >
             <Route
               index
               loader={loaderUser}
@@ -148,7 +157,13 @@ export const router = (
           </Route>
 
           <Route element={<ProtectedLayout />}>
-            <Route path={EnumRoutes.DASHBOARD} element={<DashboardPage />} />
+            <Route
+              element={
+                <SidebarLayout sidebarNavItems={dashboardSidebarItems} />
+              }
+            >
+              <Route path={EnumRoutes.DASHBOARD} element={<DashboardPage />} />
+            </Route>
 
             <Route path={EnumRoutes.FORMS}>
               <Route index element={<FormsPage />} />
@@ -188,6 +203,13 @@ export const router = (
                 element={<SettingsFormsPage />}
               />
             </Route>
+          </Route>
+
+          <Route
+            path={EnumRoutes.DOCUMENTS}
+            element={<SidebarLayout sidebarNavItems={documentsSidebarItems} />}
+          >
+            <Route index element={<DocumentsPage />} />
           </Route>
         </Route>
       </>

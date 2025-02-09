@@ -7,15 +7,20 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
+import { navigationData } from '@/config/ConfigNavigation';
+import { SidebarItem } from '@/config/ConfigSidebars';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { t } from 'i18next';
 import { LogOut } from 'lucide-react';
-import * as React from 'react';
 import { Form } from 'react-router-dom';
-import { NavMain } from './UserNavMain';
-import { userSidebarData } from './userSidebarData';
+import { SidebarNavMain } from './SidebarNavMain';
 
-export const UserSidebar: React.FC<React.ComponentProps<typeof Sidebar>> = ({
+type SidebarMainProps = React.ComponentProps<typeof Sidebar> & {
+  sidebarNavItems: SidebarItem[];
+};
+
+export const SidebarMain: React.FC<SidebarMainProps> = ({
+  sidebarNavItems,
   ...props
 }) => {
   return (
@@ -26,7 +31,13 @@ export const UserSidebar: React.FC<React.ComponentProps<typeof Sidebar>> = ({
       className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
     >
       <SidebarContent>
-        <NavMain navItems={userSidebarData.navMain} />
+        {/* Mobile */}
+        <SidebarNavMain className="md:hidden" navItems={navigationData} />
+        {/* Desktop */}
+        <SidebarNavMain
+          className="hidden md:block"
+          navItems={sidebarNavItems}
+        />
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>

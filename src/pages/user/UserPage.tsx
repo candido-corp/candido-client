@@ -1,5 +1,5 @@
 import PageContent from '@/components/Common/PageContent';
-import User from '@/components/User/User';
+import User from '@/components/User';
 import { useTranslation } from 'react-i18next';
 
 const UserPage = () => {
