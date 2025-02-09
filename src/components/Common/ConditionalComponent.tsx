@@ -1,6 +1,6 @@
+import { useAuth } from '@/hooks/useAuth';
 import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
 import React from 'react';
-import { useAuth } from '@/hooks/useAuth.ts';
 
 interface Props {
   allowedRoles?: EnumUserRoles[];
