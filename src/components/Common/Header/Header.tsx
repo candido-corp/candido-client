@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useSidebar } from '@/components/ui/sidebar';
+import { navigationData } from '@/config/ConfigNavigation';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { SidebarIcon } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
@@ -47,7 +48,7 @@ const Header = () => {
                 className="ml-2 hidden h-4 md:flex"
               />
             </NavLink>
-            <NavMain className="hidden md:flex" />
+            <NavMain navItems={navigationData} className="hidden md:flex" />
           </div>
           <div className="flex flex-1 items-center justify-end gap-4">
             {/* <div className="w-full flex-1 md:w-auto md:flex-none">

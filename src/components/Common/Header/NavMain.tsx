@@ -1,25 +1,25 @@
-import { NavLink } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { EnumRoutes } from '@/models/enums/EnumRoutes';
+import { NavigationItem } from '@/config/ConfigNavigation';
 import { BaseFC } from '@/models/interfaces/BaseFC';
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 
-const NavMain: React.FC<BaseFC> = ({ className }) => {
+type NavMainProps = BaseFC & {
+  navItems: Pick<NavigationItem, 'title' | 'url' | 'onlySidebar'>[];
+};
+
+const NavMain: React.FC<NavMainProps> = ({ navItems, className }) => {
   const { t } = useTranslation();
   return (
     <nav className={className}>
       <ul className="flex gap-6">
-        <li>
-          <NavLink to={EnumRoutes.OPPORTUNITIES}>Opportunities</NavLink>
-        </li>
-        <li>
-          <NavLink to={EnumRoutes.DASHBOARD}>{t('dashboard.title')}</NavLink>
-        </li>
-        <li>
-          <NavLink to={EnumRoutes.BACKPACK}>Documents</NavLink>
-        </li>
-        {/* <li>
-          <NavLink to={EnumRoutes.SETTINGS}>Settings</NavLink>
-        </li> */}
+        {navItems.map(
+          (item) =>
+            !item.onlySidebar && (
+              <li key={item.title}>
+                <NavLink to={item.url}>{item.title}</NavLink>
+              </li>
+            )
+        )}
       </ul>
     </nav>
   );
