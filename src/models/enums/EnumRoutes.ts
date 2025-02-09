@@ -26,7 +26,7 @@ export enum EnumRoutes {
   USER_OPPORTUNITIES_SAVED = '/user/opportunities/saved',
   USER_ADDRESSES = '/user/addresses',
 
-  BACKPACK = '/backpack',
+  DOCUMENTS = '/documents',
 
   FORMS = '/forms',
   FORMS_CREATE = '/forms/create',
