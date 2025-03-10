@@ -1,35 +1,24 @@
 import PageContent from '@/components/Common/PageContent';
-import { Button } from '@/components/ui/button';
 import User from '@/components/User';
-import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 const UserPage = () => {
   const { t } = useTranslation();
 
   return (
     <PageContent title={t('user.title')}>
-      <User />
-      <div className="flex gap-4 py-10">
-        <Button asChild>
-          <Link to={EnumRoutes.USER_OPPORTUNITIES}>User opportunities</Link>
-        </Button>
-        <Button asChild>
-          <Link to={EnumRoutes.USER_OPPORTUNITIES_STATS}>
-            User opportunities stats
-          </Link>
-        </Button>
-        <Button asChild>
-          <Link to={EnumRoutes.USER_OPPORTUNITIES_HISTORY}>
-            User opportunities history
-          </Link>
-        </Button>
-        <Button asChild>
-          <Link to={EnumRoutes.USER_OPPORTUNITIES_SAVED}>
-            User opportunities saved
-          </Link>
-        </Button>
+      <div className="flex flex-1 flex-col gap-4">
+        <div className="grid auto-rows-min gap-4 md:grid-cols-2">
+          <div className="aspect-video rounded-xl bg-muted/95 p-10">
+            <User />
+          </div>
+          <div className="aspect-video rounded-xl bg-muted/95" />
+        </div>
+        <div className="grid auto-rows-min gap-4 md:grid-cols-1">
+          <div className="flex-1 rounded-xl bg-muted/95">
+            <div className="flex flex-wrap items-center gap-4 p-10"></div>
+          </div>
+        </div>
       </div>
     </PageContent>
   );

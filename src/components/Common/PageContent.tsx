@@ -5,7 +5,7 @@ type PageContentProps = {
 
 const PageContent: React.FC<PageContentProps> = ({ title, children }) => {
   return (
-    <div className="m-10">
+    <div className="container">
       <h1 className="pb-5 text-2xl">{title}</h1>
       {children}
     </div>

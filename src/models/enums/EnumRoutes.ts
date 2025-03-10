@@ -18,11 +18,15 @@ export enum EnumRoutes {
 
   //APP
   DASHBOARD = '/dashboard',
+
   USER = '/user',
   USER_OPPORTUNITIES = '/user/opportunities',
   USER_OPPORTUNITIES_STATS = '/user/opportunities/stats',
   USER_OPPORTUNITIES_HISTORY = '/user/opportunities/history',
   USER_OPPORTUNITIES_SAVED = '/user/opportunities/saved',
+  USER_ADDRESSES = '/user/addresses',
+
+  DOCUMENTS = '/documents',
 
   FORMS = '/forms',
   FORMS_CREATE = '/forms/create',

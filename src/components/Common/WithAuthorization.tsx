@@ -1,5 +1,5 @@
+import { useAuth } from '@/hooks/useAuth';
 import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
-import { useAuth } from '@/hooks/useAuth.ts';
 
 const withAuthorization =
   (allowedRoles: EnumUserRoles[], allowedPermissions: EnumUserPermissions[]) =>

@@ -6,13 +6,16 @@ import './index.css';
 import './utils/i18n.ts';
 import { AuthProvider } from '@/providers/AuthProvider.tsx';
 import { NotificationProvider } from './providers/NotificationProvider.tsx';
+import { ThemeProvider } from './providers/ThemeProvider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <NotificationProvider>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </NotificationProvider>
+    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      <NotificationProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </NotificationProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
