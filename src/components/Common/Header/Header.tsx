@@ -1,30 +1,30 @@
-import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { useSidebar } from '@/components/ui/sidebar';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 import { navigationData } from '@/config/ConfigNavigation';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { SidebarIcon } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import NavMain from './NavMain';
 import NavRight from './NavRight';
 
-const Header = () => {
-  const { toggleSidebar } = useSidebar();
+type HeaderProps = {
+  hasSidebar?: boolean;
+};
 
+const Header: React.FC<HeaderProps> = ({ hasSidebar }) => {
   return (
     <header className="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="ml-auto mr-auto h-[--header-height] w-full">
         <div className="container flex h-14 items-center">
           <div className="flex h-[--header-height] w-full items-center gap-2">
-            <Button
-              className="h-8 w-8 md:hidden"
-              variant="ghost"
-              size="icon"
-              onClick={toggleSidebar}
-            >
-              <SidebarIcon />
-            </Button>
-            <Separator orientation="vertical" className="mr-2 h-4 md:hidden" />
+            {hasSidebar && (
+              <>
+                <SidebarTrigger className="h-8 w-8 md:hidden" />
+                <Separator
+                  orientation="vertical"
+                  className="mr-2 h-4 md:hidden"
+                />
+              </>
+            )}
             <NavLink
               to={EnumRoutes.HOME}
               className="mr-4 flex items-center gap-2 lg:mr-6"

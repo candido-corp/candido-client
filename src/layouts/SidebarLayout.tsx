@@ -16,7 +16,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   return (
     <div className="[--header-height:calc(theme(spacing.14))]">
       <SidebarProvider className="flex flex-col">
-        <Header />
+        <Header hasSidebar />
         <div className="flex flex-1">
           <SidebarMain sidebarNavItems={sidebarNavItems} />
           <SidebarInset>
