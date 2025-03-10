@@ -1,6 +1,5 @@
 import { NavigationItem } from '@/config/ConfigNavigation';
 import { BaseFC } from '@/models/interfaces/BaseFC';
-import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
 type NavMainProps = BaseFC & {
@@ -8,7 +7,6 @@ type NavMainProps = BaseFC & {
 };
 
 const NavMain: React.FC<NavMainProps> = ({ navItems, className }) => {
-  const { t } = useTranslation();
   return (
     <nav className={className}>
       <ul className="flex gap-6">
