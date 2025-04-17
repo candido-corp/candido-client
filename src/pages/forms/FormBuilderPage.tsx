@@ -13,10 +13,7 @@ const FormBuilderPage = () => {
           </Button>
           <Button asChild>
             <Link
-              to={EnumRoutes.FORMS_FORM_BUILDER_PREVIEW.replace(
-                ':formId',
-                '21345'
-              )}
+              to={EnumRoutes.FORMS_FORM_PREVIEW.replace(':formId', '21345')}
             >
               form 21345 builder preview
             </Link>

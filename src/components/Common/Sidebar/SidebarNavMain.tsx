@@ -26,11 +26,13 @@ export const SidebarNavMain: React.FC<NavProps> = ({ navItems, className }) => {
           ) : (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton
+                isActive={item.isActive}
+                size={'lg'}
                 className={cn(
                   item.className,
                   'data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
                 )}
-                tooltip={t('user.title')}
+                tooltip={t('user.user')}
                 asChild
               >
                 {item.url && (

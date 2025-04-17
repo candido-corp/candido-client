@@ -1,8 +1,8 @@
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import {
-  CreateYourOwnSidebarItems,
+  applicationsSidebarItems,
   dashboardSidebarItems,
-  documentsSidebarItems,
+  formsSidebarItems,
   SidebarItem,
   userSidebarItems,
 } from './ConfigSidebars';
@@ -33,23 +33,21 @@ export const navigationData: NavigationItem[] = [
     className: firstLevelSidebarItemClass,
   },
   {
-    title: 'Documents',
-    url: EnumRoutes.DOCUMENTS,
-    items: documentsSidebarItems,
+    title: 'Applications',
+    url: EnumRoutes.APPLICATIONS,
+    items: applicationsSidebarItems,
+    className: firstLevelSidebarItemClass,
+  },
+  {
+    title: 'Forms',
+    url: EnumRoutes.FORMS,
+    items: formsSidebarItems,
     className: firstLevelSidebarItemClass,
   },
   {
     title: 'User',
     url: EnumRoutes.USER,
-    onlySidebar: true,
     items: userSidebarItems,
-    className: firstLevelSidebarItemClass,
-  },
-  {
-    title: 'Create your own',
-    url: EnumRoutes.USER,
-    onlySidebar: true,
-    items: CreateYourOwnSidebarItems,
     className: firstLevelSidebarItemClass,
   },
 ];

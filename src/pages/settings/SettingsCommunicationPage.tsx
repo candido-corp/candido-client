@@ -3,9 +3,9 @@ import { Button } from '@/components/ui/button';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { Link } from 'react-router-dom';
 
-const SettingsFormsPage = () => {
+const SettingsCommunicationPage = () => {
   return (
-    <PageContent title={'Settings forms page'}>
+    <PageContent title={'Settings communication page'}>
       <div className="flex gap-4 py-10">
         <Button asChild>
           <Link to={EnumRoutes.SETTINGS}>settings</Link>
@@ -15,4 +15,4 @@ const SettingsFormsPage = () => {
   );
 };
 
-export default SettingsFormsPage;
+export default SettingsCommunicationPage;

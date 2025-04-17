@@ -11,3 +11,9 @@ export enum EnumUserPermissions {
   USER_UPDATE = 'user:update',
   USER_DELETE = 'user:delete',
 }
+
+export enum EnumUserGenders {
+  FEMALE = 1,
+  MALE = 2,
+  OTHER = 3,
+}
