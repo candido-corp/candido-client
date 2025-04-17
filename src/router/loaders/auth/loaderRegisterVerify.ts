@@ -1,11 +1,11 @@
-import { LoaderFunctionArgs } from 'react-router-dom';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
-import { handleLoaderError } from '@/utils/errors';
-import { NotificationContextType } from '@/providers/NotificationProvider';
-import { AuthContextType } from '@/providers/AuthProvider';
 import { ApiRequestRegisterEmailVerify } from '@/api/v1/requests/ApiRequestRegisterEmailVerify';
+import { AuthContextType } from '@/providers/AuthProvider';
+import { NotificationContextType } from '@/providers/NotificationProvider';
+import { handleLoaderError } from '@/utils/errors';
+import { LoaderFunctionArgs } from 'react-router-dom';
 
-const loaderRegisterVerifyByEmail =
+const loaderRegisterVerify =
   (
     { login, isAuthenticated }: AuthContextType,
     { toast }: NotificationContextType
@@ -40,4 +40,4 @@ const loaderRegisterVerifyByEmail =
     }
   };
 
-export default loaderRegisterVerifyByEmail;
+export default loaderRegisterVerify;

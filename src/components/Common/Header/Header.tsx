@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ hasSidebar }) => {
   return (
     <header className="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="ml-auto mr-auto h-[--header-height] w-full">
-        <div className="container flex h-14 items-center">
+        <div className="flex h-14 items-center px-8">
           <div className="flex h-[--header-height] w-full items-center gap-2">
             {hasSidebar && (
               <>

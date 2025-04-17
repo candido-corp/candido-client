@@ -1,25 +1,61 @@
 import PageContent from '@/components/Common/PageContent';
-import User from '@/components/User';
+import { ApplicationsBox } from '@/components/user/ApplicationsBox';
+import { UserInfoCard } from '@/components/user/UserInfoCard';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
+import { User } from '@/models/interfaces/User';
+import { LOADER_USER_ID } from '@/router/loaders/loaderUser';
+import { MapPin, User as UserIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useRouteLoaderData } from 'react-router-dom';
 
 const UserPage = () => {
   const { t } = useTranslation();
+  const userData = useRouteLoaderData(LOADER_USER_ID) as User;
 
   return (
-    <PageContent title={t('user.title')}>
-      <div className="flex flex-1 flex-col gap-4">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-2">
-          <div className="aspect-video rounded-xl bg-muted/95 p-10">
-            <User />
+    <PageContent title={t('user.title', { name: userData.first_name })}>
+      <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <UserInfoCard
+          title="User Information"
+          value={`${userData.first_name} ${userData.last_name}`}
+          label={userData.email}
+          icon={<UserIcon className="h-5 w-5" />}
+          linkTo={EnumRoutes.USER_DETAILS}
+        />
+
+        <UserInfoCard
+          title="Addresses"
+          value={'TODO'}
+          label="1 default address"
+          icon={<MapPin className="h-5 w-5" />}
+          linkTo="/user-addresses"
+        />
+        {/* <div className="flex rounded-xl bg-muted/95 p-10">
+          <div className="flex flex-col gap-3">
+            <p className="text-sm">
+              {userData.first_name}&nbsp;{userData.last_name}
+            </p>
+            <p className="text-sm">{userData.email}</p>
+            <p>
+              <ResetPasswordButton className="mt-1" />
+              </p>
+            <Button className="mt-1">
+              <Link to={EnumRoutes.USER_PERSONAL_DATA}>Modify your data</Link>
+              <ArrowDownRight />
+            </Button>
           </div>
-          <div className="aspect-video rounded-xl bg-muted/95" />
         </div>
-        <div className="grid auto-rows-min gap-4 md:grid-cols-1">
-          <div className="flex-1 rounded-xl bg-muted/95">
-            <div className="flex flex-wrap items-center gap-4 p-10"></div>
+        <div className="flex rounded-xl bg-muted/95 p-10">
+          <div className="flex flex-col gap-3">
+            {userData.address ? (
+              <p className="text-sm">addddress</p>
+            ) : (
+              <p className="text-sm">No address</p>
+            )}
           </div>
-        </div>
+        </div> */}
       </div>
+      <ApplicationsBox />
     </PageContent>
   );
 };

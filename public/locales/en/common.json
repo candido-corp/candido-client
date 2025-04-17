@@ -30,11 +30,20 @@
     "description": "Insert your new password below"
   },
   "user": {
-    "title": "User",
+    "title": "Welcome back, {{name}}",
+    "user": "User",
     "change_password": {
       "title": "Change Password",
       "message": "Are you sure? you will receive an email to reset your password"
+    },
+    "gender": {
+      "1": "Female",
+      "2": "Male",
+      "3": "Other"
     }
+  },
+  "user_addresses": {
+    "title": "Addresses"
   },
   "logout": {
     "title": "Logout"

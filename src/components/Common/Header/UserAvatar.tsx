@@ -64,7 +64,7 @@ const UserAvatar: React.FC = () => {
                   className="flex w-full items-center gap-2"
                 >
                   <BadgeCheck />
-                  {t('user.title')}
+                  {t('user.user')}
                 </NavLink>
               </DropdownMenuItem>
             </>
