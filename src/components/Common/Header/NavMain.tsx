@@ -9,7 +9,7 @@ type NavMainProps = BaseFC & {
 const NavMain: React.FC<NavMainProps> = ({ navItems, className }) => {
   return (
     <nav className={className}>
-      <ul className="flex gap-10">
+      <ul className="flex gap-8">
         {navItems.map(
           (item) =>
             !item.onlySidebar && (
