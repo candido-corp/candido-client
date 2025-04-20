@@ -7,11 +7,9 @@ import { User } from '@/models/interfaces/User';
 import { LOADER_USER_ID } from '@/router/loaders/loaderUser';
 import { Calendar, Edit, Mail, Phone, User as UserIcon } from 'lucide-react';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router-dom';
 
 const UserDetailsPage = () => {
-  const { t } = useTranslation();
   const userData = useRouteLoaderData(LOADER_USER_ID) as User;
   const [isEditing, setIsEditing] = useState(false);
 
