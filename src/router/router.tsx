@@ -5,9 +5,11 @@ import {
 } from 'react-router-dom';
 
 import {
+  analyticsSidebarItems,
   applicationsSidebarItems,
   dashboardSidebarItems,
   documentsSidebarItems,
+  formIdSidebarItems,
   formsSidebarItems,
   settingsSidebarItems,
   userSidebarItems,
@@ -208,25 +210,28 @@ export const router = (
                 path={EnumRoutes.FORMS_CREATE}
                 element={<FormsCreatePage />}
               />
+            </Route>
 
-              <Route path={EnumRoutes.FORMS_FORM}>
-                <Route index element={<FormPage />} />
+            <Route
+              path={EnumRoutes.FORMS_FORM}
+              element={<SidebarLayout sidebarNavItems={formIdSidebarItems} />}
+            >
+              <Route index element={<FormPage />} />
 
-                <Route
-                  path={EnumRoutes.FORMS_FORM_SETTINGS}
-                  element={<FormSettingsPage />}
-                />
+              <Route
+                path={EnumRoutes.FORMS_FORM_SETTINGS}
+                element={<FormSettingsPage />}
+              />
 
-                <Route
-                  path={EnumRoutes.FORMS_FORM_BUILDER}
-                  element={<FormBuilderPage />}
-                />
+              <Route
+                path={EnumRoutes.FORMS_FORM_BUILDER}
+                element={<FormBuilderPage />}
+              />
 
-                <Route
-                  path={EnumRoutes.FORMS_FORM_PREVIEW}
-                  element={<FormPreviewPage />}
-                />
-              </Route>
+              <Route
+                path={EnumRoutes.FORMS_FORM_PREVIEW}
+                element={<FormPreviewPage />}
+              />
             </Route>
           </Route>
 
@@ -244,7 +249,7 @@ export const router = (
 
           <Route
             path={EnumRoutes.ANALYTICS}
-            element={<SidebarLayout sidebarNavItems={documentsSidebarItems} />}
+            element={<SidebarLayout sidebarNavItems={analyticsSidebarItems} />}
           >
             <Route index element={<AnalyticsPage />} />
 
@@ -257,7 +262,7 @@ export const router = (
               element={<AnalyticsFormsPage />}
             />
             <Route
-              path={EnumRoutes.ANALYTICS_USERS}
+              path={EnumRoutes.ANALYTICS_USER}
               element={<AnalyticsUsersPage />}
             />
           </Route>
