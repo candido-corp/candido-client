@@ -1,19 +1,17 @@
-import { ApiResponseAccount } from '@/api/v1/responses/ApiResponseAccount.ts';
 import WithAuthorization from '@/components/Common/WithAuthorization';
 import {
   EnumUserPermissions,
   EnumUserRoles,
 } from '@/models/enums/EnumUsers.ts';
-import { useLoaderData } from 'react-router-dom';
 import { ResetPasswordButton } from './ResetPasswordButton';
 
 const User = () => {
-  const data = useLoaderData() as ApiResponseAccount;
-
   return (
     <div className="flex flex-col gap-3">
-      <p>Email: {data.email}</p>
-      <p>Status: {data.status}</p>
+      {/* <p className="text-sm">
+        {userData.first_name}&nbsp;{userData.last_name}
+      </p>
+      <p className="text-sm">{userData.email}</p> */}
       <p>
         <ResetPasswordButton />
       </p>

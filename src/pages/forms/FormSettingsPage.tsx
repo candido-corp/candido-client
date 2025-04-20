@@ -3,10 +3,13 @@ import { Button } from '@/components/ui/button';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { Link } from 'react-router-dom';
 
-const FormBuilderPreviewPage = () => {
+const FormSettingsPage = () => {
   return (
-    <PageContent title={'Form builder preview page'}>
+    <PageContent title={'Form settings page'}>
       <div className="flex gap-4 py-10">
+        <Button asChild>
+          <Link to={EnumRoutes.FORMS}>forms</Link>
+        </Button>
         <Button asChild>
           <Link to={EnumRoutes.FORMS_FORM_BUILDER.replace(':formId', '21345')}>
             form 21345 builder
@@ -17,4 +20,4 @@ const FormBuilderPreviewPage = () => {
   );
 };
 
-export default FormBuilderPreviewPage;
+export default FormSettingsPage;

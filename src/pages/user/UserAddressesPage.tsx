@@ -5,15 +5,13 @@ import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { User } from '@/models/interfaces/User';
 import { LOADER_USER_ID } from '@/router/loaders/loaderUser';
 import { MapPin, User as UserIcon } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { useRouteLoaderData } from 'react-router-dom';
 
-const UserPage = () => {
-  const { t } = useTranslation();
+const UserAddressesPage = () => {
   const userData = useRouteLoaderData(LOADER_USER_ID) as User;
 
   return (
-    <PageContent title={t('user.title', { name: userData.first_name })}>
+    <PageContent title={'User Addresses'}>
       <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         <UserInfoCard
           title="User Information"
@@ -60,4 +58,4 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default UserAddressesPage;

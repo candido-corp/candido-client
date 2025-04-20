@@ -3,16 +3,16 @@ import { Button } from '@/components/ui/button';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { Link } from 'react-router-dom';
 
-const UserOpportunitiesHistoryPage = () => {
+const SettingsAccountPage = () => {
   return (
-    <PageContent title={'User opportunities history page'}>
+    <PageContent title={'Settings account page'}>
       <div className="flex gap-4 py-10">
         <Button asChild>
-          <Link to={EnumRoutes.USER}>User</Link>
+          <Link to={EnumRoutes.SETTINGS}>settings</Link>
         </Button>
       </div>
     </PageContent>
   );
 };
 
-export default UserOpportunitiesHistoryPage;
+export default SettingsAccountPage;

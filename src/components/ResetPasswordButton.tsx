@@ -1,11 +1,12 @@
+import { useAuth } from '@/hooks/useAuth';
 import { useNotification } from '@/hooks/useNotification';
-import { Button } from './ui/button';
+import { BaseFC } from '@/models/interfaces/BaseFC';
+import { useTranslation } from 'react-i18next';
 import { useFetcher } from 'react-router-dom';
 import { SubmitTarget } from 'react-router-dom/dist/dom';
-import { useAuth } from '@/hooks/useAuth';
-import { useTranslation } from 'react-i18next';
+import { Button } from './ui/button';
 
-export const ResetPasswordButton = () => {
+export const ResetPasswordButton: React.FC<BaseFC> = ({ className }) => {
   const { t } = useTranslation();
   const { askConfirmation } = useNotification();
   const fetcher = useFetcher();
@@ -30,7 +31,7 @@ export const ResetPasswordButton = () => {
   };
 
   return (
-    <Button onClick={() => handleResetPassword()}>
+    <Button className={className} onClick={() => handleResetPassword()}>
       {t('user.change_password.title')}
     </Button>
   );

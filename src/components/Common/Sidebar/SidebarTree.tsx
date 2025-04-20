@@ -22,7 +22,11 @@ export const SidebarTree: React.FC<SidebarTreeProps> = ({
 }) => {
   if (_.isEmpty(collapsibleItem.items)) {
     return (
-      <SidebarMenuButton className="data-[active=true]:bg-transparent">
+      <SidebarMenuButton
+        isActive={collapsibleItem.isActive}
+        className="data-[active=true]:bg-transparent"
+        size={'lg'}
+      >
         {collapsibleItem.url ? (
           <NavLink
             to={collapsibleItem.url}
@@ -45,6 +49,8 @@ export const SidebarTree: React.FC<SidebarTreeProps> = ({
       >
         <CollapsibleTrigger asChild>
           <SidebarMenuButton
+            isActive={collapsibleItem.isActive}
+            size={'lg'}
             tooltip={collapsibleItem.title}
             className={collapsibleItem.className}
           >

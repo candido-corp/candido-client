@@ -9,12 +9,18 @@ type NavMainProps = BaseFC & {
 const NavMain: React.FC<NavMainProps> = ({ navItems, className }) => {
   return (
     <nav className={className}>
-      <ul className="flex gap-6">
+      <ul className="flex gap-8">
         {navItems.map(
           (item) =>
             !item.onlySidebar && (
               <li key={item.title}>
-                <NavLink to={item.url}>{item.title}</NavLink>
+                <NavLink
+                  to={item.url}
+                  end
+                  className={({ isActive }) => (isActive ? 'text-primary' : '')}
+                >
+                  {item.title}
+                </NavLink>
               </li>
             )
         )}

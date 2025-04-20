@@ -4,7 +4,7 @@ import { navigationData } from '@/config/ConfigNavigation';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { NavLink } from 'react-router-dom';
 import NavMain from './NavMain';
-import NavRight from './NavRight';
+import NavRight from './NavRight/NavRight';
 
 type HeaderProps = {
   hasSidebar?: boolean;
@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ hasSidebar }) => {
   return (
     <header className="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="ml-auto mr-auto h-[--header-height] w-full">
-        <div className="container flex h-14 items-center">
+        <div className="flex h-14 items-center px-8">
           <div className="flex h-[--header-height] w-full items-center gap-2">
             {hasSidebar && (
               <>
@@ -30,19 +30,7 @@ const Header: React.FC<HeaderProps> = ({ hasSidebar }) => {
               className="mr-4 flex items-center gap-2 lg:mr-6"
               end
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-6 w-6"
-              >
-                <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-              </svg>
-              <span className="hidden font-bold lg:inline-block">Candido</span>
+              <span className="font-bold text-primary">Candido</span>
               <Separator
                 orientation="vertical"
                 className="ml-2 hidden h-4 md:flex"

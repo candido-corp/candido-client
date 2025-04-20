@@ -1,12 +1,20 @@
-type PageContentProps = {
-  title: string;
-  children: React.ReactNode;
-};
+import { BaseFC } from '@/models/interfaces/BaseFC';
+import { cn } from '@/utils/shadcn';
 
-const PageContent: React.FC<PageContentProps> = ({ title, children }) => {
+type PageContentProps = {
+  title?: string;
+} & BaseFC;
+
+const PageContent: React.FC<PageContentProps> = ({
+  title,
+  children,
+  className,
+}) => {
   return (
-    <div className="container">
-      <h1 className="pb-5 text-2xl">{title}</h1>
+    <div className={cn(className, 'container')}>
+      {title && (
+        <h1 className="pb-5 text-2xl font-bold tracking-tight">{title}</h1>
+      )}
       {children}
     </div>
   );
