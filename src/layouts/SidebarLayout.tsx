@@ -31,7 +31,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ sidebarNavItems }) => {
         <Header hasSidebar />
         <div className="flex flex-1">
           <SidebarMain sidebarNavItems={updatedNavItems} />
-          <SidebarInset className="py-6">
+          <SidebarInset className="!min-h-full py-6">
             <Outlet />
           </SidebarInset>
         </div>
