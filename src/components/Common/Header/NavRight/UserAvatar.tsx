@@ -14,7 +14,7 @@ import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { BadgeCheck, LogOut } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Form, NavLink } from 'react-router-dom';
-import { ModeToggleGroup } from '../ModeToggleGroup';
+import { ModeToggleGroup } from '../../ModeToggleGroup';
 
 const UserAvatar: React.FC = () => {
   const { t } = useTranslation();

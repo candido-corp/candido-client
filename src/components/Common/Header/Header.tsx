@@ -4,7 +4,7 @@ import { navigationData } from '@/config/ConfigNavigation';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { NavLink } from 'react-router-dom';
 import NavMain from './NavMain';
-import NavRight from './NavRight';
+import NavRight from './NavRight/NavRight';
 
 type HeaderProps = {
   hasSidebar?: boolean;
