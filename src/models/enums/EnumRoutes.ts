@@ -42,7 +42,7 @@ export enum EnumRoutes {
   ANALYTICS = '/analytics',
   ANALYTICS_APPLICATIONS = ANALYTICS + '/applications',
   ANALYTICS_FORMS = ANALYTICS + '/forms',
-  ANALYTICS_USERS = ANALYTICS + '/user',
+  ANALYTICS_USER = ANALYTICS + '/user',
 
   SETTINGS = '/settings',
   SETTINGS_ACCOUNT = SETTINGS + '/account',
