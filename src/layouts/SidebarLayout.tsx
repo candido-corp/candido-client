@@ -2,8 +2,10 @@ import Header from '@/components/Common/Header/Header';
 import { SidebarMain } from '@/components/Common/Sidebar/SidebarMain';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { SidebarItem } from '@/config/ConfigSidebars';
+import { useAuth } from '@/hooks/useAuth';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { BaseFC } from '@/models/interfaces/BaseFC';
+import { cn } from '@/utils/shadcn';
 import { Outlet, useLocation } from 'react-router-dom';
 
 type SidebarLayoutProps = BaseFC & {
@@ -12,6 +14,7 @@ type SidebarLayoutProps = BaseFC & {
 
 const SidebarLayout: React.FC<SidebarLayoutProps> = ({ sidebarNavItems }) => {
   const location = useLocation();
+  const { isUserVerifyStripeActive } = useAuth();
 
   // Updates sidebar items with isActive based on the current path
   const updatedNavItems = sidebarNavItems.map((item) => ({
@@ -26,7 +29,13 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ sidebarNavItems }) => {
   }));
 
   return (
-    <div className="[--header-height:calc(theme(spacing.14))]">
+    <div
+      className={cn(
+        isUserVerifyStripeActive &&
+          '[--user-verified-stripe-height:theme(spacing.9)]',
+        '[--header-height:calc(theme(spacing.14))]'
+      )}
+    >
       <SidebarProvider className="flex flex-col">
         <Header hasSidebar />
         <div className="flex flex-1">

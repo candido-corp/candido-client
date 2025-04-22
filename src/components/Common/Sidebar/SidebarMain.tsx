@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/sidebar';
 import { navigationData } from '@/config/ConfigNavigation';
 import { SidebarItem } from '@/config/ConfigSidebars';
+import { useAuth } from '@/hooks/useAuth';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { t } from 'i18next';
 import { LogOut } from 'lucide-react';
@@ -23,12 +24,17 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({
   sidebarNavItems,
   ...props
 }) => {
+  const { isUserVerifyStripeActive } = useAuth();
   return (
     <Sidebar
       variant="inset"
       collapsible="icon"
       {...props}
-      className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
+      className={
+        isUserVerifyStripeActive
+          ? 'top-[calc(var(--header-height)+var(--user-verified-stripe-height))] !h-[calc(100svh-var(--header-height)-var(--user-verified-stripe-height))]'
+          : 'top-[--header-height] !h-[calc(100svh-var(--header-height))]'
+      }
     >
       <SidebarContent>
         {/* Mobile */}
