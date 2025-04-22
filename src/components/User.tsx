@@ -21,8 +21,8 @@ const User = () => {
 
 const allowedRoles = [EnumUserRoles.USER_VERIFIED];
 const allowedPermissions = [EnumUserPermissions.USER_READ];
-const UserComponentWithAuthorization = WithAuthorization(
+const UserComponentWithAuthorization = WithAuthorization({
   allowedRoles,
-  allowedPermissions
-)(User);
+  allowedPermissions,
+})(User);
 export default UserComponentWithAuthorization;

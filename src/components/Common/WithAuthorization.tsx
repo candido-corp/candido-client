@@ -1,10 +1,20 @@
 import { useAuth } from '@/hooks/useAuth';
 import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
+import React from 'react';
 
-const withAuthorization =
-  (allowedRoles: EnumUserRoles[], allowedPermissions: EnumUserPermissions[]) =>
-  (WrappedComponent: React.FC) => {
-    const AuthorizedComponent: React.FC = (props) => {
+type WithAuthorizationOptions = {
+  allowedRoles: EnumUserRoles[];
+  allowedPermissions: EnumUserPermissions[];
+  showUnauthorizedMessage?: boolean;
+};
+
+function withAuthorization<P extends object>({
+  allowedRoles,
+  allowedPermissions,
+  showUnauthorizedMessage = false,
+}: WithAuthorizationOptions) {
+  return (WrappedComponent: React.ComponentType<P>) => {
+    const AuthorizedComponent = (props: P) => {
       const { user } = useAuth();
 
       const hasRequiredRole = allowedRoles.some((role) =>
@@ -15,7 +25,7 @@ const withAuthorization =
       );
 
       if (!hasRequiredRole || !hasRequiredPermission) {
-        return <div>Unauthorized</div>;
+        return showUnauthorizedMessage ? <div>Unauthorized</div> : null;
       }
 
       return <WrappedComponent {...props} />;
@@ -23,5 +33,6 @@ const withAuthorization =
 
     return AuthorizedComponent;
   };
+}
 
 export default withAuthorization;
