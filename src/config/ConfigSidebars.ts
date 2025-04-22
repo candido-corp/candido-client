@@ -39,7 +39,7 @@ export const dashboardSidebarItems: SidebarItem[] = [
   },
   {
     title: 'Analytics',
-    url: EnumRoutes.USER_OPPORTUNITIES_SAVED,
+    url: EnumRoutes.ANALYTICS,
     icon: ChartColumn,
   },
 ];
