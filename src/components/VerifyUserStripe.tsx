@@ -1,3 +1,4 @@
+import { useAuth } from '@/hooks/useAuth';
 import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
 import { ArrowUpRight } from 'lucide-react';
 import WithAuthorization from './Common/WithAuthorization';
@@ -15,6 +16,7 @@ import {
 } from './ui/alert-dialog';
 
 const VerifyUserStripe: React.FC = () => {
+  const { user } = useAuth();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -39,8 +41,11 @@ const VerifyUserStripe: React.FC = () => {
         <AlertDialogHeader>
           <AlertDialogTitle>Verify Your Email</AlertDialogTitle>
           <AlertDialogDescription>
-            We'll send you a new verification email to confirm your account.
-            Please check your inbox and follow the instructions.
+            We have sent a verification email to&nbsp;<b>{user?.email}</b>
+            <p>
+              If you believe you didn't receive it or you have lost it, you can
+              resend the email.
+            </p>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
