@@ -3,7 +3,6 @@ import { SidebarMain } from '@/components/Common/Sidebar/SidebarMain';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { SidebarItem } from '@/config/ConfigSidebars';
 import { useAuth } from '@/hooks/useAuth';
-import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { BaseFC } from '@/models/interfaces/BaseFC';
 import { cn } from '@/utils/shadcn';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -16,16 +15,12 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ sidebarNavItems }) => {
   const location = useLocation();
   const { isUserVerifyStripeActive } = useAuth();
 
+  console.log('location', location.pathname);
+
   // Updates sidebar items with isActive based on the current path
   const updatedNavItems = sidebarNavItems.map((item) => ({
     ...item,
-    isActive:
-      item.url === location.pathname ||
-      (item.url !== (EnumRoutes.HOME as string) &&
-        item.url &&
-        location.pathname.startsWith(item.url))
-        ? true
-        : false,
+    isActive: item.url === location.pathname,
   }));
 
   return (
