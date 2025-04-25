@@ -1,12 +1,11 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarRail,
+  SidebarRail, useSidebar,
 } from '@/components/ui/sidebar';
 import {SidebarNavMain} from './SidebarNavMain';
 import {NavigationPlugin} from "@/config/navigation";
 import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
-import {cn} from "@/utils/shadcn.ts";
 
 type SidebarMainProps = React.ComponentProps<typeof Sidebar> & {
   fullNavigationPlugins: NavigationPlugin[];
@@ -22,15 +21,18 @@ export const SidebarMain: React.FC<SidebarMainProps> = (
     ...props
   }) => {
 
+  const {isMobile} = useSidebar()
+
+  if (!isMobile && !showDesktopSidebar) {
+    return null;
+  }
+
   return (
     <Sidebar
       variant="inset"
       collapsible="icon"
       {...props}
-      className={cn(
-        "top-[--header-height] !h-[calc(100svh-var(--header-height))]",
-        showDesktopSidebar ? "md:block" : "md:hidden"
-      )}
+      className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
     >
       <SidebarContent>
         {/* Mobile: navigation plugins */}
