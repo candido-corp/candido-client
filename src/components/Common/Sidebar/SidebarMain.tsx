@@ -7,22 +7,31 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
-import { navigationData } from '@/config/ConfigNavigation';
-import { SidebarItem } from '@/config/ConfigSidebars';
-import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { t } from 'i18next';
-import { LogOut } from 'lucide-react';
-import { Form } from 'react-router-dom';
-import { SidebarNavMain } from './SidebarNavMain';
+import {EnumRoutes} from '@/models/enums/EnumRoutes';
+import {t} from 'i18next';
+import {LogOut} from 'lucide-react';
+import {Form} from 'react-router-dom';
+import {SidebarNavMain} from './SidebarNavMain';
+import {FlatNavItem, NavigationPlugin} from "@/config/navigation";
 
 type SidebarMainProps = React.ComponentProps<typeof Sidebar> & {
-  sidebarNavItems: SidebarItem[];
+  fullNavigationPlugins: NavigationPlugin[];
+  sidebarNavItems: FlatNavItem[];
+  showDesktopSidebar: boolean;
 };
 
-export const SidebarMain: React.FC<SidebarMainProps> = ({
-  sidebarNavItems,
-  ...props
-}) => {
+export const SidebarMain: React.FC<SidebarMainProps> = (
+  {
+    fullNavigationPlugins,
+    sidebarNavItems,
+    showDesktopSidebar,
+    ...props
+  }) => {
+  const hasDesktop = showDesktopSidebar;
+  const hasMobile = true;
+
+  if (!hasDesktop && hasMobile) return null;
+
   return (
     <Sidebar
       variant="inset"
@@ -31,14 +40,13 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({
       className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
     >
       <SidebarContent>
-        {/* Mobile */}
-        <SidebarNavMain className="md:hidden" navItems={navigationData} />
-        {/* Desktop */}
-        <SidebarNavMain
-          className="hidden md:block"
-          navItems={sidebarNavItems}
-        />
+        {/* Mobile: navigation plugins */}
+        <SidebarNavMain className="md:hidden" navItems={fullNavigationPlugins} mode="mobile"/>
+
+        {/* Desktop: sidebar flat items */}
+        <SidebarNavMain className="hidden md:block" navItems={sidebarNavItems} mode="desktop"/>
       </SidebarContent>
+
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -47,14 +55,15 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 tooltip={t('logout.title')}
               >
-                <LogOut />
+                <LogOut/>
                 <span>{t('logout.title')}</span>
               </SidebarMenuButton>
             </Form>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
-      <SidebarRail />
+
+      <SidebarRail/>
     </Sidebar>
   );
 };
