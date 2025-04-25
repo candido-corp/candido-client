@@ -1,76 +1,14 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-} from 'react-router-dom';
+import {createBrowserRouter} from 'react-router-dom';
+import {authRoutes} from './routes/authRoutes';
+import {publicRoutes} from './routes/publicRoutes';
+import {protectedRoutes} from './routes/protectedRoutes';
+import ErrorPage from '@/pages/ErrorPage';
+import {AuthContextType} from '@/providers/AuthProvider';
+import {NotificationContextType} from '@/providers/NotificationProvider';
 
-import {
-  analyticsSidebarItems,
-  applicationsSidebarItems,
-  dashboardSidebarItems,
-  documentsSidebarItems,
-  formIdSidebarItems,
-  formsSidebarItems,
-  settingsSidebarItems,
-  userSidebarItems,
-} from '@/config/ConfigSidebars';
-import ProtectedLayout from '@/layouts/ProtectedLayout';
-import PublicLayout from '@/layouts/PublicLayout.tsx';
-import { default as SidebarLayout } from '@/layouts/SidebarLayout';
-import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
-import DashboardPage from '@/pages/DashboardPage';
-import ErrorPage from '@/pages/ErrorPage.tsx';
-import AnalyticsApplicationsPage from '@/pages/analytics/AnalyticsApplicationsPage';
-import AnalyticsFormsPage from '@/pages/analytics/AnalyticsFormsPage';
-import AnalyticsPage from '@/pages/analytics/AnalyticsPage';
-import AnalyticsUsersPage from '@/pages/analytics/AnalyticsUsersPage';
-import ApplicationsHistoryPage from '@/pages/applications/ApplicationsHistoryPage';
-import ApplicationsPage from '@/pages/applications/ApplicationsPage';
-import ApplicationsSubmittedPage from '@/pages/applications/ApplicationsSubmittedPage';
-import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
-import LoginBlurPage from '@/pages/auth/LoginBlurPage.tsx';
-import LoginPage from '@/pages/auth/LoginPage.tsx';
-import RegisterPage from '@/pages/auth/RegisterPage.tsx';
-import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage';
-import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
-import DocumentsPage from '@/pages/documents/DocumentsPage';
-import DocumentsUploadPage from '@/pages/documents/DocumentsUploadPage';
-import FormBuilderPage from '@/pages/forms/FormBuilderPage';
-import FormPage from '@/pages/forms/FormPage';
-import FormPreviewPage from '@/pages/forms/FormPreviewPage';
-import FormSettingsPage from '@/pages/forms/FormSettingsPage';
-import FormsCreatePage from '@/pages/forms/FormsCreatePage';
-import FormsPage from '@/pages/forms/FormsPage';
-import OpportunitiesPage from '@/pages/opportunities/OpportunitiesPage';
-import OpportunityApplyPage from '@/pages/opportunities/OpportunityApplyPage';
-import OpportunityPage from '@/pages/opportunities/OpportunityPage';
-import SettingsAccountPage from '@/pages/settings/SettingsAccountPage';
-import SettingsBillingPage from '@/pages/settings/SettingsBillingPage';
-import SettingsCommunicationPage from '@/pages/settings/SettingsCommunicationPage';
-import SettingsPage from '@/pages/settings/SettingsPage';
-import SettingsPreferencesPage from '@/pages/settings/SettingsPreferencesPage';
-import SettingsSecurityPage from '@/pages/settings/SettingsSecurityPage';
-import UserSettingsPage from '@/pages/user/UserAddressesPage';
-import UserDetailsPage from '@/pages/user/UserDetailsPage';
-import UserOpportunitiesSavedPage from '@/pages/user/UserOpportunitiesSavedPage';
-import UserPage from '@/pages/user/UserPage';
-import { AuthContextType } from '@/providers/AuthProvider.tsx';
-import { NotificationContextType } from '@/providers/NotificationProvider';
-import actionLogin from '@/router/actions/auth/actionLogin.ts';
-import actionLogout from '@/router/actions/auth/actionLogout.ts';
-import actionRegister from '@/router/actions/auth/actionRegister.ts';
-import loaderProtected from '@/router/loaders/_common/loaderProtected.ts';
-import loaderRegisterVerify from '@/router/loaders/auth/loaderRegisterVerify';
-import actionAccountChangeDetails from './actions/auth/actionAccountChangeDetails';
-import actionForgotPassword from './actions/auth/actionForgotPassword';
-import actionResetPassword from './actions/auth/actionResetPassword';
-import loaderAuth from './loaders/auth/loaderAuth';
-import loaderResetPassword from './loaders/auth/loaderResetPassword';
-import loaderUser, { LOADER_USER_ID } from './loaders/loaderUser';
-
-export const router = (
-  authContext: AuthContextType,
-  notificationContext: NotificationContextType
+export const createAppRouter = (
+    authContext: AuthContextType,
+    notificationContext: NotificationContextType
 ) =>
   createBrowserRouter(
     createRoutesFromElements(
@@ -298,3 +236,8 @@ export const router = (
       </>
     )
   );
+    createBrowserRouter([
+        ...authRoutes(authContext, notificationContext),
+        ...publicRoutes(),
+        {path: '*', element: <ErrorPage/>},
+    ]);
