@@ -6,10 +6,8 @@ export * from './builder';
 export * from './register';
 export * from './types';
 
-import { getNavbarItems, getSidebarItems, getAllSidebarFlat } from './register';
+import { getNavbarItems } from './register';
 
 export const Navigation = {
-    getNavbarItems,
-    getSidebarItems,
-    getAllSidebarFlat,
+    getNavbarItems
 };

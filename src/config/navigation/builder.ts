@@ -1,4 +1,19 @@
-import { FlatNavItem, NavItem } from './types';
+import {FlatNavItem, NavigationPlugin, NavItem} from './types';
+
+/**
+ * Builds a tree of NavItems from a flat list using parentId.
+ * @param plugin
+ */
+export function buildPluginNavTree(plugin: NavigationPlugin): NavItem | undefined {
+    if (!plugin.navbar) return undefined;
+
+    const sidebarTree = buildNavTree(plugin.sidebar ?? []);
+
+    return {
+        ...plugin.navbar,
+        children: sidebarTree,
+    };
+}
 
 /**
  * Builds a tree of NavItems from a flat list using parentId.

@@ -1,6 +1,6 @@
-import {FlatNavItem, NavigationPlugin, NavItem} from './types';
-import {buildNavTree} from "@/config/navigation/builder.ts";
-import {NAVBAR_PLUGIN_ORDER} from "@/config/navigation/navigationOrder.ts";
+import {FlatNavItem, NavigationPlugin} from './types';
+import {NAVIGATION_CONFIG} from "@/config/navigation/_navigation.config.ts";
+import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
 
 const plugins: NavigationPlugin[] = [];
 
@@ -16,41 +16,29 @@ export const registerNavigationPlugin = (plugin: NavigationPlugin) => {
 };
 
 /**
- * Returns all registered navbar entries.
+ * Returns all registered navbar entries in config order.
  */
 export const getNavbarItems = (): FlatNavItem[] =>
-  NAVBAR_PLUGIN_ORDER
-    .map((id) => plugins.find((p) => p.id === id)?.navbar)
-    .filter((item): item is FlatNavItem => item !== undefined);
+  NAVIGATION_CONFIG
+    .map(({ id }) =>
+      plugins.find((p) => p.id === id)?.navbar
+    )
+    .filter((item): item is FlatNavItem =>
+      item !== undefined &&
+      item.visibility !== undefined &&
+      item.visibility?.indexOf(EnumNavigationVisibility.DESKTOP) > -1
+    );
 
 /**
- * Returns sidebar items for a specific plugin id.
+ * Returns all plugins visible in config order (for mobile menu).
  */
-export const getSidebarItems = (pluginId: string) => {
-    const plugin = plugins.find((p) => p.id === pluginId);
-    return plugin?.sidebar ?? [];
-};
-
-/**
- * Flattens and returns all sidebar items from all plugins.
- */
-export const getAllSidebarFlat = (): FlatNavItem[] =>
-    plugins.flatMap((p) => p.sidebar ?? []);
-
-/**
- * Builds a tree of NavItems from a flat list using parentId.
- * @param pluginId
- */
-export const getSidebarTree = (pluginId: string): NavItem[] => {
-    return buildNavTree(getSidebarItems(pluginId));
-};
-
-/**
- * Builds the full sidebar tree for all plugins.
- * Each plugin becomes a parent node, its sidebar items are children.
- */
-export const getFullNavigationPlugins = (): NavigationPlugin[] => {
-    return NAVBAR_PLUGIN_ORDER
-      .map((id) => plugins.find((p) => p.id === id))
-      .filter((plugin): plugin is NavigationPlugin => plugin !== undefined);
-};
+export const getFullNavigationPlugins = (): NavigationPlugin[] =>
+  NAVIGATION_CONFIG
+    .map(({ id }) => plugins.find((p) => p.id === id))
+    .filter((p): p is NavigationPlugin =>
+      p !== undefined &&
+      p.navbar.visibility !== undefined &&
+      p.navbar.visibility?.indexOf(
+        EnumNavigationVisibility.MOBILE
+      ) > -1
+    );

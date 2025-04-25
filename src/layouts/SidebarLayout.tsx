@@ -1,12 +1,10 @@
-import { useLocation, useMatches, Outlet } from 'react-router-dom';
+import { useMatches, Outlet } from 'react-router-dom';
 import Header from '@/components/Common/Header/Header';
 import { SidebarMain } from '@/components/Common/Sidebar/SidebarMain';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import {
-  getSidebarItems,
   getFullNavigationPlugins,
-  RouteHandle,
-  FlatNavItem
+  RouteHandle
 } from '@/config/navigation';
 import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
 
@@ -20,23 +18,12 @@ function getCurrentPluginId(matches: ReturnType<typeof useMatches>): EnumNavigat
 
 const SidebarLayout: React.FC = () => {
   const matches = useMatches();
-  const location = useLocation();
   const currentPluginId = getCurrentPluginId(matches);
 
   const fullNavigationPlugins = getFullNavigationPlugins();
-  const sidebarItems: FlatNavItem[] = currentPluginId ? getSidebarItems(currentPluginId) : [];
+  const currentPlugin = fullNavigationPlugins.find(p => p.id === currentPluginId);
 
-  const sidebarNavItems = sidebarItems.map((item) => ({
-    ...item,
-    isActive:
-      location.pathname === item.url || // match esatto
-      (item.url &&
-        item.url !== '/' &&
-        location.pathname.startsWith(item.url) &&
-        location.pathname.split('/').length === item.url.split('/').length), // match preciso per struttura
-  }));
-
-  const hasSidebarContent = sidebarNavItems.length > 0;
+  const hasSidebarContent = currentPlugin?.sidebar && currentPlugin.sidebar.length > 0;
 
   return (
     <div className="[--header-height:calc(theme(spacing.14))]">
@@ -45,8 +32,8 @@ const SidebarLayout: React.FC = () => {
         <div className="flex flex-1">
           <SidebarMain
             fullNavigationPlugins={fullNavigationPlugins}
-            sidebarNavItems={sidebarNavItems}
-            showDesktopSidebar={hasSidebarContent}
+            currentPlugin={currentPlugin}
+            showDesktopSidebar={!!hasSidebarContent}
           />
           <SidebarInset className="!min-h-full py-6">
             <Outlet />

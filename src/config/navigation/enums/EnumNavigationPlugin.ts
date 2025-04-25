@@ -5,10 +5,8 @@ export enum EnumNavigationPlugin {
   DASHBOARD = 'dashboard',
   USERS = 'users',
   APPLICATIONS = 'applications',
-
   FORMS = 'forms',
   FORMS_FORM_ID = 'forms_form',
-
   DOCUMENTS = 'documents',
   ANALYTICS = 'analytics',
   SETTINGS = 'settings',

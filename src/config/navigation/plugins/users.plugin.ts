@@ -3,6 +3,7 @@ import { registerNavigationPlugin } from '../register';
 import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { User, UserPen, MapPinHouse, SaveAll, Files, ChartColumn, Settings } from 'lucide-react';
+import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
 
 registerNavigationPlugin({
   id: EnumNavigationPlugin.USERS,
@@ -11,6 +12,7 @@ registerNavigationPlugin({
     title: 'User',
     url: EnumRoutes.USER,
     icon: User,
+    visibility: [EnumNavigationVisibility.DESKTOP, EnumNavigationVisibility.MOBILE]
   },
   sidebar: [
     { id: 'profile', title: 'Profile', url: EnumRoutes.USER, icon: User },

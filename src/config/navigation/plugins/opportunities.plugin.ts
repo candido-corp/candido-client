@@ -3,6 +3,7 @@ import { registerNavigationPlugin } from '../register';
 import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import {Target} from "lucide-react";
+import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
 
 registerNavigationPlugin({
   id: EnumNavigationPlugin.OPPORTUNITIES,
@@ -10,6 +11,7 @@ registerNavigationPlugin({
     id: 'opportunities',
     title: 'Opportunities',
     url: EnumRoutes.OPPORTUNITIES,
-    icon: Target
+    icon: Target,
+    visibility: [EnumNavigationVisibility.DESKTOP, EnumNavigationVisibility.MOBILE]
   }
 });

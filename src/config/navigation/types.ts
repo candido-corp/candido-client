@@ -1,5 +1,15 @@
 import { LucideIcon } from 'lucide-react';
 import {EnumNavigationPlugin} from "@/config/navigation/enums/EnumNavigationPlugin.ts";
+import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
+
+/**
+ * A plugin represents a navigation module (e.g., dashboard, forms).
+ */
+export type NavigationPlugin = {
+    id: string;
+    navbar: FlatNavItem;
+    sidebar?: FlatNavItem[];
+};
 
 /**
  * Flat representation of a navigation item.
@@ -10,9 +20,10 @@ export type FlatNavItem = {
     parentId?: string;
     title: string;
     url: string;
+    visibility?: EnumNavigationVisibility[];
     icon?: LucideIcon;
-    visible?: boolean | (() => boolean);
     roles?: string[];
+    badgeCount?: number | (() => number);
 };
 
 /**
@@ -27,15 +38,6 @@ export type FlatNavItemWithActive = FlatNavItem & {
  */
 export type NavItem = FlatNavItem & {
     children?: NavItem[];
-};
-
-/**
- * A plugin represents a navigation module (e.g., dashboard, forms).
- */
-export type NavigationPlugin = {
-    id: string;
-    navbar?: FlatNavItem;
-    sidebar?: FlatNavItem[];
 };
 
 /**

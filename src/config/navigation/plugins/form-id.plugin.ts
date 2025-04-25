@@ -2,10 +2,17 @@
 import { registerNavigationPlugin } from '../register';
 import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { BookPlus, Settings, Wrench, ScanEye } from 'lucide-react';
+import {BookPlus, Settings, Wrench, ScanEye, AppWindow} from 'lucide-react';
 
 registerNavigationPlugin({
   id: EnumNavigationPlugin.FORMS_FORM_ID,
+  navbar: {
+    id: 'forms-form-id',
+    title: 'Form ID',
+    url: EnumRoutes.FORMS_FORM,
+    icon: AppWindow,
+    visibility: []
+  },
   sidebar: [
     { id: 'overview-form', title: 'Overview', url: EnumRoutes.FORMS_FORM, icon: BookPlus },
     { id: 'settings-form', title: 'Settings', url: EnumRoutes.FORMS_FORM_SETTINGS, icon: Settings },
