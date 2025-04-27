@@ -1,29 +1,32 @@
-import { NavigationItem } from '@/config/ConfigNavigation';
-import { BaseFC } from '@/models/interfaces/BaseFC';
 import { NavLink } from 'react-router-dom';
+import {FlatNavItem} from "@/config/navigation";
 
-type NavMainProps = BaseFC & {
-  navItems: Pick<NavigationItem, 'title' | 'url' | 'onlySidebar'>[];
-};
+interface NavMainProps {
+  navItems: FlatNavItem[];
+  className?: string;
+}
+
+// Function to determine the active class based on the NavLink's state
+const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
+  isActive ? 'text-primary' : '';
 
 const NavMain: React.FC<NavMainProps> = ({ navItems, className }) => {
   return (
     <nav className={className}>
       <ul className="flex gap-8">
-        {navItems.map(
-          (item) =>
-            !item.onlySidebar && (
-              <li key={item.title}>
-                <NavLink
-                  to={item.url}
-                  end
-                  className={({ isActive }) => (isActive ? 'text-primary' : '')}
-                >
-                  {item.title}
-                </NavLink>
-              </li>
-            )
-        )}
+        {navItems
+          .filter((item) => {
+            if (typeof item.visible === 'function') return item.visible();
+            if (typeof item.visible === 'boolean') return item.visible;
+            return true;
+          })
+          .map((item) => (
+            <li key={item.id}>
+              <NavLink to={item.url} className={getNavLinkClass} end>
+                {item.title}
+              </NavLink>
+            </li>
+          ))}
       </ul>
     </nav>
   );

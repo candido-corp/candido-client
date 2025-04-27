@@ -8,10 +8,10 @@ import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { BaseFC } from '@/models/interfaces/BaseFC';
 import { cn } from '@/utils/shadcn';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { ChartColumn, Settings } from 'lucide-react';
+import { ChartColumn } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import NavNotificationsDropdown from './NavNotificationsDropdown';
-import NavToggleThemeDropdown from './NavToggleThemeDropdown';
+import {UserAvatarExp} from "@/components/Common/Header/NavRight/UserAvatarExp.tsx";
 
 const NavRight: React.FC<BaseFC> = ({ className }) => {
   return (
@@ -34,22 +34,7 @@ const NavRight: React.FC<BaseFC> = ({ className }) => {
 
         <NavNotificationsDropdown />
 
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="ghost" size="icon" asChild>
-              <NavLink
-                to={EnumRoutes.SETTINGS}
-                end
-                className="[&.active]:text-primary"
-              >
-                <Settings />
-              </NavLink>
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="bottom">Settings</TooltipContent>
-        </Tooltip>
-
-        <NavToggleThemeDropdown />
+        <UserAvatarExp className="ml-2"/>
       </TooltipProvider>
     </nav>
   );

@@ -1,28 +1,32 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
+  SidebarRail, useSidebar,
 } from '@/components/ui/sidebar';
-import { navigationData } from '@/config/ConfigNavigation';
-import { SidebarItem } from '@/config/ConfigSidebars';
-import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { t } from 'i18next';
-import { LogOut } from 'lucide-react';
-import { Form } from 'react-router-dom';
-import { SidebarNavMain } from './SidebarNavMain';
+import {SidebarNavMain} from './SidebarNavMain';
+import {NavigationPlugin} from "@/config/navigation";
+import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
 
 type SidebarMainProps = React.ComponentProps<typeof Sidebar> & {
-  sidebarNavItems: SidebarItem[];
+  fullNavigationPlugins: NavigationPlugin[];
+  currentPlugin?: NavigationPlugin;
+  showDesktopSidebar: boolean;
 };
 
-export const SidebarMain: React.FC<SidebarMainProps> = ({
-  sidebarNavItems,
-  ...props
-}) => {
+export const SidebarMain: React.FC<SidebarMainProps> = (
+  {
+    fullNavigationPlugins,
+    currentPlugin,
+    showDesktopSidebar,
+    ...props
+  }) => {
+
+  const {isMobile} = useSidebar()
+
+  if (!isMobile && !showDesktopSidebar) {
+    return null;
+  }
+
   return (
     <Sidebar
       variant="inset"
@@ -31,30 +35,21 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({
       className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
     >
       <SidebarContent>
-        {/* Mobile */}
-        <SidebarNavMain className="md:hidden" navItems={navigationData} />
-        {/* Desktop */}
+        {/* Mobile: navigation plugins */}
+        <SidebarNavMain
+          className="md:hidden"
+          navItems={fullNavigationPlugins}
+          mode={EnumNavigationVisibility.MOBILE}/>
+
+        {/* Desktop: sidebar flat items */}
         <SidebarNavMain
           className="hidden md:block"
-          navItems={sidebarNavItems}
+          navItems={currentPlugin ? [currentPlugin] : []}
+          mode={EnumNavigationVisibility.DESKTOP}
         />
       </SidebarContent>
-      <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <Form action={EnumRoutes.LOGOUT} method="post" className="w-full">
-              <SidebarMenuButton
-                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                tooltip={t('logout.title')}
-              >
-                <LogOut />
-                <span>{t('logout.title')}</span>
-              </SidebarMenuButton>
-            </Form>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
-      <SidebarRail />
+
+      <SidebarRail/>
     </Sidebar>
   );
 };
