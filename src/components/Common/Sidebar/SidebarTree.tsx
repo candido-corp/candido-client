@@ -8,64 +8,67 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
 } from '@/components/ui/sidebar';
-import { SidebarItem } from '@/config/ConfigSidebars';
-import _ from 'lodash';
+import { NavItem } from '@/config/navigation';
 import { ChevronRight } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import { useSidebar } from '@/components/ui/sidebar';
 
 type SidebarTreeProps = {
-  collapsibleItem: SidebarItem;
+  collapsibleItem: NavItem;
 };
 
-export const SidebarTree: React.FC<SidebarTreeProps> = ({
-  collapsibleItem,
-}) => {
-  if (_.isEmpty(collapsibleItem.items)) {
+export const SidebarTree: React.FC<SidebarTreeProps> = ({ collapsibleItem }) => {
+  const { setOpenMobile } = useSidebar();
+
+  const handleClick = () => {
+    setOpenMobile(false);
+  };
+
+  // Base case: No children
+  if (!collapsibleItem.children || collapsibleItem.children.length === 0) {
     return (
-      <SidebarMenuButton
-        isActive={collapsibleItem.isActive}
-        className="data-[active=true]:bg-transparent"
-        size={'lg'}
-      >
-        {collapsibleItem.url ? (
+      <SidebarMenuItem>
+        <SidebarMenuButton size="lg" className="data-[active=true]:bg-transparent" asChild>
           <NavLink
-            to={collapsibleItem.url}
-            className={collapsibleItem.className}
+            to={collapsibleItem.url || '#'}
+            onClick={handleClick}
+            className="w-full flex items-center"
           >
+            {collapsibleItem.icon && <collapsibleItem.icon className="mr-2" />}
             <span>{collapsibleItem.title}</span>
           </NavLink>
-        ) : (
-          <span>{collapsibleItem.title}</span>
-        )}
-      </SidebarMenuButton>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
     );
   }
 
+  // Otherwise, render the collapsible item
   return (
     <SidebarMenuItem>
       <Collapsible
-        defaultOpen={collapsibleItem.isActive}
+        defaultOpen={false}
         className="group/collapsible [&[data-state=open]>button>svg:last-child]:rotate-90"
       >
         <CollapsibleTrigger asChild>
           <SidebarMenuButton
-            isActive={collapsibleItem.isActive}
-            size={'lg'}
+            size="lg"
             tooltip={collapsibleItem.title}
-            className={collapsibleItem.className}
+            className="w-full"
           >
-            {collapsibleItem.icon && <collapsibleItem.icon />}
+            {collapsibleItem.icon && <collapsibleItem.icon className="mr-2" />}
             <span>{collapsibleItem.title}</span>
             <ChevronRight className="ml-auto transition-transform duration-200" />
           </SidebarMenuButton>
         </CollapsibleTrigger>
+
         <CollapsibleContent>
           <SidebarMenuSub>
-            {collapsibleItem.items?.map((subItem, index) => (
-              <SidebarTree key={index} collapsibleItem={subItem} />
+            {collapsibleItem.children.map((subItem) => (
+              <SidebarTree key={subItem.id} collapsibleItem={subItem} />
             ))}
           </SidebarMenuSub>
         </CollapsibleContent>
+
       </Collapsible>
     </SidebarMenuItem>
   );

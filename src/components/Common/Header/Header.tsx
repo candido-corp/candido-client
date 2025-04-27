@@ -1,7 +1,7 @@
 import { Separator } from '@/components/ui/separator';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import VerifyUserStripeComponentWithAuthorization from '@/components/VerifyUserStripe';
-import { navigationData } from '@/config/ConfigNavigation';
+import { Navigation } from '@/config/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { NavLink } from 'react-router-dom';
@@ -32,6 +32,8 @@ const Header: React.FC<HeaderProps> = ({ hasSidebar }) => {
                   />
                 </>
               )}
+
+              {/* TODO: This could be a logo component */}
               <NavLink
                 to={EnumRoutes.HOME}
                 className="mr-4 flex items-center gap-2 lg:mr-6"
@@ -43,7 +45,12 @@ const Header: React.FC<HeaderProps> = ({ hasSidebar }) => {
                   className="ml-2 hidden h-4 md:flex"
                 />
               </NavLink>
-              <NavMain navItems={navigationData} className="hidden md:flex" />
+
+              {/* Main Navigation */}
+              <NavMain
+                navItems={Navigation.getNavbarItems()}
+                className="hidden md:flex"
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-4">
               {/* <div className="w-full flex-1 md:w-auto md:flex-none">

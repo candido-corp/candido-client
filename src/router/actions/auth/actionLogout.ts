@@ -10,7 +10,7 @@ const actionLogout =
     try {
       await NetworkClient.logout();
       logout();
-      return redirect(EnumRoutes.HOME);
+      return redirect(EnumRoutes.LOGIN);
     } catch (error) {
       console.error('error: ', error);
       toast({

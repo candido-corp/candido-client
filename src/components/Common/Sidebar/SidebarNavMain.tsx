@@ -1,50 +1,45 @@
 import {
   SidebarGroup,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { SidebarItem } from '@/config/ConfigSidebars';
-import { BaseFC } from '@/models/interfaces/BaseFC';
-import { cn } from '@/utils/shadcn';
-import { t } from 'i18next';
-import _ from 'lodash';
-import { NavLink } from 'react-router-dom';
-import { SidebarTree } from './SidebarTree';
+import {buildPluginNavTree, NavigationPlugin, NavItem} from '@/config/navigation';
+import {BaseFC} from '@/models/interfaces/BaseFC';
+import {SidebarTree} from './SidebarTree';
+import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
 
 type NavProps = BaseFC & {
-  navItems: SidebarItem[];
+  navItems: NavigationPlugin[];
+  mode: EnumNavigationVisibility.DESKTOP
+    | EnumNavigationVisibility.MOBILE;
 };
 
-export const SidebarNavMain: React.FC<NavProps> = ({ navItems, className }) => {
+const SidebarMenuMobile = ({items}: { items: NavItem[] }) => {
+  return items.map((item) => (
+    <SidebarTree key={item!.id} collapsibleItem={item!}/>
+  ))
+}
+
+const SidebarMenuDesktop = ({items}: { items: NavItem[] }) => {
+  return items.map((item) => (
+    item.children?.map((subItem) => (
+      <SidebarTree key={subItem!.id} collapsibleItem={subItem!}/>
+    ))
+  ))
+}
+
+export const SidebarNavMain: React.FC<NavProps> = ({navItems, className, mode}) => {
+  const navItemsFiltered = navItems
+    .map((plugin) => buildPluginNavTree(plugin))
+    .filter(Boolean)
+    .filter((item): item is NavItem => item !== undefined);
+
   return (
     <SidebarGroup className={className}>
       <SidebarMenu>
-        {navItems.map((item, index) =>
-          item.items && !_.isEmpty(item.items) ? (
-            <SidebarTree key={index} collapsibleItem={item} />
-          ) : (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton
-                isActive={item.isActive}
-                size={'lg'}
-                className={cn(
-                  item.className,
-                  'data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
-                )}
-                tooltip={t('user.user')}
-                asChild
-              >
-                {item.url && (
-                  <NavLink to={item.url}>
-                    {item.icon && <item.icon />}
-                    <span>{item.title}</span>
-                  </NavLink>
-                )}
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          )
-        )}
+        {mode === EnumNavigationVisibility.DESKTOP ?
+          <SidebarMenuDesktop items={navItemsFiltered}/> :
+          <SidebarMenuMobile items={navItemsFiltered}/>
+        }
       </SidebarMenu>
     </SidebarGroup>
   );

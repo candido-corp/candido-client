@@ -1,27 +1,34 @@
 import Header from '@/components/Common/Header/Header';
 import { SidebarMain } from '@/components/Common/Sidebar/SidebarMain';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
-import { SidebarItem } from '@/config/ConfigSidebars';
+import { getFullNavigationPlugins, RouteHandle } from '@/config/navigation';
+import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
 import { useAuth } from '@/hooks/useAuth';
-import { BaseFC } from '@/models/interfaces/BaseFC';
 import { cn } from '@/utils/shadcn';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useMatches } from 'react-router-dom';
 
-type SidebarLayoutProps = BaseFC & {
-  sidebarNavItems: SidebarItem[];
-};
+function getCurrentPluginId(
+  matches: ReturnType<typeof useMatches>
+): EnumNavigationPlugin | undefined {
+  for (const match of matches) {
+    const handle = match.handle as RouteHandle | undefined;
+    if (handle?.pluginId) return handle.pluginId;
+  }
+  return undefined;
+}
 
-const SidebarLayout: React.FC<SidebarLayoutProps> = ({ sidebarNavItems }) => {
-  const location = useLocation();
+const SidebarLayout: React.FC = () => {
   const { isUserVerifyStripeActive } = useAuth();
+  const matches = useMatches();
+  const currentPluginId = getCurrentPluginId(matches);
 
-  console.log('location', location.pathname);
+  const fullNavigationPlugins = getFullNavigationPlugins();
+  const currentPlugin = fullNavigationPlugins.find(
+    (p) => p.id === currentPluginId
+  );
 
-  // Updates sidebar items with isActive based on the current path
-  const updatedNavItems = sidebarNavItems.map((item) => ({
-    ...item,
-    isActive: item.url === location.pathname,
-  }));
+  const hasSidebarContent =
+    currentPlugin?.sidebar && currentPlugin.sidebar.length > 0;
 
   return (
     <div
@@ -32,9 +39,13 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ sidebarNavItems }) => {
       )}
     >
       <SidebarProvider className="flex flex-col">
-        <Header hasSidebar />
+        <Header hasSidebar={true} />
         <div className="flex flex-1">
-          <SidebarMain sidebarNavItems={updatedNavItems} />
+          <SidebarMain
+            fullNavigationPlugins={fullNavigationPlugins}
+            currentPlugin={currentPlugin}
+            showDesktopSidebar={!!hasSidebarContent}
+          />
           <SidebarInset className="!min-h-full py-6">
             <Outlet />
           </SidebarInset>
