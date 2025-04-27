@@ -13,6 +13,7 @@ export enum EnumRoutes {
 
   REGISTER = '/register',
   REGISTER_VERIFY = '/register-verify',
+  REGISTER_EMAIL_RESEND = '/register-email-resend',
 
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD = '/reset-password',

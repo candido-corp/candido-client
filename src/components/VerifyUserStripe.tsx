@@ -1,6 +1,8 @@
 import { useAuth } from '@/hooks/useAuth';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
 import { ArrowUpRight } from 'lucide-react';
+import { useFetcher } from 'react-router-dom';
 import WithAuthorization from './Common/WithAuthorization';
 import { Alert } from './ui/alert';
 import {
@@ -17,6 +19,8 @@ import {
 
 const VerifyUserStripe: React.FC = () => {
   const { user } = useAuth();
+  const fetcher = useFetcher();
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -50,7 +54,16 @@ const VerifyUserStripe: React.FC = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Resend Email</AlertDialogAction>
+          <fetcher.Form method="post" action={EnumRoutes.REGISTER_EMAIL_RESEND}>
+            <AlertDialogAction asChild>
+              <button
+                type="submit"
+                onClick={(e) => fetcher.submit(e.currentTarget.form)}
+              >
+                Resend Email
+              </button>
+            </AlertDialogAction>
+          </fetcher.Form>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
