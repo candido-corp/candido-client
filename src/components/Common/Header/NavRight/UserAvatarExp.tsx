@@ -1,11 +1,8 @@
-import {
-  CreditCard,
-  LogOut,
-  Settings,
-  User,
-} from "lucide-react"
+import { CreditCard, LogOut, Settings, User } from 'lucide-react';
 
-import { Button } from "@/components/ui/button"
+import LogoutForm from '@/components/auth/LogoutForm';
+import { ModeToggleGroup } from '@/components/Common/ModeToggleGroup.tsx';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,13 +11,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {useAuth} from "@/hooks/useAuth.tsx";
-import {ModeToggleGroup} from "@/components/Common/ModeToggleGroup.tsx";
-import {EnumRoutes} from "@/models/enums/EnumRoutes.ts";
-import {Form, NavLink} from "react-router-dom";
-import {useTranslation} from "react-i18next";
-import {cn} from "@/utils/shadcn.ts";
+} from '@/components/ui/dropdown-menu';
+import { useAuth } from '@/hooks/useAuth.tsx';
+import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
+import { cn } from '@/utils/shadcn.ts';
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 
 export function UserAvatarExp({ className }: { className?: string }) {
   const { t } = useTranslation();
@@ -64,19 +60,13 @@ export function UserAvatarExp({ className }: { className?: string }) {
           <DropdownMenuSeparator />
 
           <DropdownMenuItem>
-            <Form action={EnumRoutes.LOGOUT} method="post" className="w-full">
-              <button
-                type="submit"
-                className="flex w-full items-center gap-2"
-              >
-                <LogOut />
-                {t('logout.title')}
-              </button>
-            </Form>
+            <LogoutForm>
+              <LogOut />
+              {t('logout.title')}
+            </LogoutForm>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-
-  )
+  );
 }
