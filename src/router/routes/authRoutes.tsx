@@ -3,7 +3,7 @@ import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
 import LoginBlurPage from '@/pages/auth/LoginBlurPage';
 import LoginPage from '@/pages/auth/LoginPage';
 import RegisterPage from '@/pages/auth/RegisterPage';
-import RegisterVerifyByEmailPage from '@/pages/auth/RegisterVerifyByEmailPage';
+import RegisterVerifyPage from '@/pages/auth/RegisterVerifyPage';
 import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
 import ErrorPage from '@/pages/ErrorPage';
 import { AuthContextType } from '@/providers/AuthProvider';
@@ -47,7 +47,7 @@ export const authRoutes = (
       },
       {
         path: EnumRoutes.REGISTER_VERIFY,
-        element: <RegisterVerifyByEmailPage />,
+        element: <RegisterVerifyPage />,
         loader: loaderRegisterVerify(authContext, notificationContext),
       },
       {

@@ -17,8 +17,8 @@
     "description": "Enter your information to create an account",
     "sign_up": "Sign up"
   },
-  "register_verify_email": {
-    "title": "Register Verify Email"
+  "register_verify": {
+    "title": "Verify account"
   },
   "forgot_password": {
     "title": "Reset Password",
