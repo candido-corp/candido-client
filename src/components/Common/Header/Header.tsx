@@ -54,8 +54,8 @@ const Header: React.FC<HeaderProps> = ({ hasSidebar }) => {
             </div>
             <div className="flex flex-1 items-center justify-end gap-4">
               {/* <div className="w-full flex-1 md:w-auto md:flex-none">
-            <Input placeholder="Search..." id="search" />
-          </div> */}
+                <Input placeholder="Search..." id="search" />
+              </div> */}
               <NavRight />
             </div>
           </div>

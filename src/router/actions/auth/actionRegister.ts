@@ -1,23 +1,27 @@
-import { LoaderFunctionArgs } from 'react-router-dom';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
-import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister.ts';
-import { NotificationContextType } from '@/providers/NotificationProvider';
+import {
+  ApiRequestRegister,
+  RequestRegisterType,
+} from '@/api/v1/requests/ApiRequestRegister.ts';
 import { AuthContextType } from '@/providers/AuthProvider';
+import { NotificationContextType } from '@/providers/NotificationProvider';
+import { LoaderFunctionArgs } from 'react-router-dom';
 
 const actionRegister =
   ({ login }: AuthContextType, { toast }: NotificationContextType) =>
   async ({ request }: LoaderFunctionArgs) => {
     const data = await request.formData();
-    const registerData: Required<ApiRequestRegister> = {
-      first_name: data.get('first_name') as string,
-      last_name: data.get('last_name') as string,
-      email: data.get('email') as string,
-      password: data.get('password') as string,
-      confirm_password: data.get('confirm_password') as string,
+    const registerData: ApiRequestRegister = {
+      first_name: (data.get('first_name') as string) || undefined,
+      last_name: (data.get('last_name') as string) || undefined,
+      email: (data.get('email') as string) || undefined,
+      password: (data.get('password') as string) || undefined,
+      confirm_password: (data.get('confirm_password') as string) || undefined,
+      a: data.get('a') as RequestRegisterType,
     };
 
     try {
-      await NetworkClient.registerEmail({
+      await NetworkClient.register({
         data: registerData,
       });
       await login();

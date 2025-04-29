@@ -1,4 +1,7 @@
-import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister';
+import {
+  ApiRequestRegister,
+  RequestRegisterType,
+} from '@/api/v1/requests/ApiRequestRegister';
 import { z } from 'zod';
 
 const first_name: keyof ApiRequestRegister = 'first_name';
@@ -6,6 +9,7 @@ const last_name: keyof ApiRequestRegister = 'last_name';
 const email: keyof ApiRequestRegister = 'email';
 const password: keyof ApiRequestRegister = 'password';
 const confirm_password: keyof ApiRequestRegister = 'confirm_password';
+const a: keyof ApiRequestRegister = 'a';
 
 export const registerValidationSchema = z
   .object({
@@ -25,6 +29,7 @@ export const registerValidationSchema = z
       .regex(/[@]/, 'form_validation.password.special')
       .regex(/^\S*$/, 'form_validation.password.no_whitespace'),
     [confirm_password]: z.string().min(1, 'form_validation.password.required'),
+    [a]: z.nativeEnum(RequestRegisterType),
   })
   .refine(
     (values) => {
