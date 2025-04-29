@@ -1,5 +1,5 @@
+import { FlatNavItem } from '@/config/navigation';
 import { NavLink } from 'react-router-dom';
-import {FlatNavItem} from "@/config/navigation";
 
 interface NavMainProps {
   navItems: FlatNavItem[];
@@ -22,7 +22,7 @@ const NavMain: React.FC<NavMainProps> = ({ navItems, className }) => {
           })
           .map((item) => (
             <li key={item.id}>
-              <NavLink to={item.url} className={getNavLinkClass} end>
+              <NavLink to={item.url} className={getNavLinkClass}>
                 {item.title}
               </NavLink>
             </li>
