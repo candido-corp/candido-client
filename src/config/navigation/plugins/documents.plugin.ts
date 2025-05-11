@@ -1,9 +1,9 @@
 // documents.plugin.ts
-import { registerNavigationPlugin } from '../register';
 import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
+import { EnumNavigationVisibility } from '@/config/navigation/enums/EnumNavigationVisibility.ts';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { File, Files, Upload} from 'lucide-react';
-import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
+import { File, Files, Upload } from 'lucide-react';
+import { registerNavigationPlugin } from '../register';
 
 registerNavigationPlugin({
   id: EnumNavigationPlugin.DOCUMENTS,
@@ -12,10 +12,21 @@ registerNavigationPlugin({
     title: 'Documents',
     url: EnumRoutes.DOCUMENTS,
     icon: Files,
-    visibility: [EnumNavigationVisibility.MOBILE]
+    visibility: [EnumNavigationVisibility.MOBILE],
+    needsAuth: true,
   },
   sidebar: [
-    { id: 'documents', title: 'Documents', url: EnumRoutes.DOCUMENTS, icon: File },
-    { id: 'documents-upload', title: 'Upload', url: EnumRoutes.DOCUMENTS_UPLOAD, icon: Upload },
+    {
+      id: 'documents',
+      title: 'Documents',
+      url: EnumRoutes.DOCUMENTS,
+      icon: File,
+    },
+    {
+      id: 'documents-upload',
+      title: 'Upload',
+      url: EnumRoutes.DOCUMENTS_UPLOAD,
+      icon: Upload,
+    },
   ],
 });

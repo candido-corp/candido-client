@@ -13,7 +13,8 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ hasSidebar }) => {
-  const { isUserVerified } = useAuth();
+  const { isUserVerified, isAuthenticated } = useAuth();
+
   return (
     <>
       {!isUserVerified && <VerifyUserStripeComponentWithAuthorization />}
@@ -46,14 +47,11 @@ const Header: React.FC<HeaderProps> = ({ hasSidebar }) => {
 
               {/* Main Navigation */}
               <NavMain
-                navItems={Navigation.getNavbarItems()}
+                navItems={Navigation.getNavbarItems(isAuthenticated)}
                 className="hidden md:flex"
               />
             </div>
             <div className="flex flex-1 items-center justify-end gap-4">
-              {/* <div className="w-full flex-1 md:w-auto md:flex-none">
-                <Input placeholder="Search..." id="search" />
-              </div> */}
               <NavRight />
             </div>
           </div>

@@ -25,6 +25,7 @@ export type FlatNavItem = {
   roles?: string[];
   badgeCount?: number | (() => number);
   visible?: boolean | (() => boolean);
+  needsAuth?: boolean;
 };
 
 /**

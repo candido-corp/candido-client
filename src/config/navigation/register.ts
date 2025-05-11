@@ -19,14 +19,15 @@ export const registerNavigationPlugin = (plugin: NavigationPlugin) => {
 /**
  * Returns all registered navbar entries in config order.
  */
-export const getNavbarItems = (): FlatNavItem[] =>
+export const getNavbarItems = (isUserAuthenticated: boolean): FlatNavItem[] =>
   NAVIGATION_CONFIG.map(
     ({ id }) => plugins.find((p) => p.id === id)?.navbar
   ).filter(
     (item): item is FlatNavItem =>
       item !== undefined &&
       item.visibility !== undefined &&
-      item.visibility?.indexOf(EnumNavigationVisibility.DESKTOP) > -1
+      item.visibility?.indexOf(EnumNavigationVisibility.DESKTOP) > -1 &&
+      (item.needsAuth === isUserAuthenticated || item.needsAuth === false)
   );
 
 /**
@@ -41,12 +42,16 @@ export const getNavigationPlugins = (): NavigationPlugin[] =>
 /**
  * Returns all plugins with mobile visibility in config order.
  */
-export const getMobileNavigationPlugins = (): NavigationPlugin[] =>
+export const getMobileNavigationPlugins = (
+  isUserAuthenticated: boolean
+): NavigationPlugin[] =>
   getNavigationPlugins().filter(
     (p) =>
       p.navbar &&
       p.navbar.visibility &&
-      p.navbar.visibility?.indexOf(EnumNavigationVisibility.MOBILE) > -1
+      p.navbar.visibility?.indexOf(EnumNavigationVisibility.MOBILE) > -1 &&
+      (p.navbar.needsAuth === isUserAuthenticated ||
+        p.navbar.needsAuth === false)
   );
 
 /**

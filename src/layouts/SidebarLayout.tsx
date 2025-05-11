@@ -22,11 +22,11 @@ function getCurrentPluginId(
 }
 
 const SidebarLayout: React.FC = () => {
-  const { isUserVerified } = useAuth();
+  const { isUserVerified, isAuthenticated } = useAuth();
   const matches = useMatches();
   const currentPluginId = getCurrentPluginId(matches);
 
-  const mobileNavigationPlugins = getMobileNavigationPlugins();
+  const mobileNavigationPlugins = getMobileNavigationPlugins(isAuthenticated);
   const currentPlugin = currentPluginId
     ? getCurrentPlugin(currentPluginId)
     : undefined;
