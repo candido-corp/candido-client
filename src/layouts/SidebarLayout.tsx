@@ -18,7 +18,7 @@ function getCurrentPluginId(
 }
 
 const SidebarLayout: React.FC = () => {
-  const { isUserVerifyStripeActive } = useAuth();
+  const { isUserVerified } = useAuth();
   const matches = useMatches();
   const currentPluginId = getCurrentPluginId(matches);
 
@@ -33,8 +33,7 @@ const SidebarLayout: React.FC = () => {
   return (
     <div
       className={cn(
-        isUserVerifyStripeActive &&
-          '[--user-verified-stripe-height:theme(spacing.9)]',
+        !isUserVerified && '[--user-verified-stripe-height:theme(spacing.9)]',
         '[--header-height:calc(theme(spacing.14))]'
       )}
     >

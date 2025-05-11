@@ -21,7 +21,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({
   showDesktopSidebar,
   ...props
 }) => {
-  const { isUserVerifyStripeActive } = useAuth();
+  const { isUserVerified } = useAuth();
 
   const { isMobile } = useSidebar();
 
@@ -35,7 +35,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = ({
       collapsible="icon"
       {...props}
       className={
-        isUserVerifyStripeActive
+        !isUserVerified
           ? 'top-[calc(var(--header-height)+var(--user-verified-stripe-height))] !h-[calc(100svh-var(--header-height)-var(--user-verified-stripe-height))]'
           : 'top-[--header-height] !h-[calc(100svh-var(--header-height))]'
       }

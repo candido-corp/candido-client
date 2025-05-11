@@ -3,16 +3,14 @@ import {
   ApiRequestRegisterVerify,
   RequestRegisterVerifyType,
 } from '@/api/v1/requests/ApiRequestRegisterVerify';
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { AuthContextType } from '@/providers/AuthProvider';
 import { NotificationContextType } from '@/providers/NotificationProvider';
 import { handleLoaderError } from '@/utils/errors';
-import { LoaderFunctionArgs } from 'react-router-dom';
+import { LoaderFunctionArgs, redirect } from 'react-router-dom';
 
 const loaderRegisterVerify =
-  (
-    { login, isAuthenticated }: AuthContextType,
-    { toast }: NotificationContextType
-  ) =>
+  ({ login }: AuthContextType, { toast }: NotificationContextType) =>
   async ({ request }: LoaderFunctionArgs) => {
     const url = new URL(request.url);
     const registerVerifyData: ApiRequestRegisterVerify = {
@@ -33,7 +31,9 @@ const loaderRegisterVerify =
       await NetworkClient.registerVerify({
         data: registerVerifyData,
       });
-      !isAuthenticated && (await login());
+
+      //update user data with new access token
+      await login();
 
       toast({
         variant: 'default',
@@ -42,7 +42,7 @@ const loaderRegisterVerify =
         duration: 3000,
       });
 
-      return null;
+      return redirect(EnumRoutes.HOME);
     } catch (error) {
       handleLoaderError(error);
     }

@@ -20,7 +20,7 @@ import { NavLink } from 'react-router-dom';
 
 export function UserAvatarExp({ className }: { className?: string }) {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
 
   return (
     <div className={cn(className)}>
@@ -57,14 +57,19 @@ export function UserAvatarExp({ className }: { className?: string }) {
               <ModeToggleGroup />
             </DropdownMenuItem>
           </DropdownMenuGroup>
-          <DropdownMenuSeparator />
 
-          <DropdownMenuItem>
-            <LogoutForm>
-              <LogOut />
-              {t('logout.title')}
-            </LogoutForm>
-          </DropdownMenuItem>
+          {isAuthenticated && (
+            <>
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem>
+                <LogoutForm>
+                  <LogOut />
+                  {t('logout.title')}
+                </LogoutForm>
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

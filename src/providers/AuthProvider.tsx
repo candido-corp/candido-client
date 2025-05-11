@@ -63,7 +63,6 @@ export interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isUserVerified: boolean;
-  isUserVerifyStripeActive: boolean;
   login: () => Promise<void>;
   logout: () => void;
 }
@@ -75,13 +74,26 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthContextType['user']>(null);
+  const [isAuthenticated, setIsAuthenticated] =
+    useState<AuthContextType['isAuthenticated']>(false);
+  const [isUserVerified, setIsUserVerified] =
+    useState<AuthContextType['isUserVerified']>(false);
   const [loading, setLoading] = useState(true);
+
+  // Helper function to update all auth states based on user data
+  const updateAuthStates = (userData: AuthContextType['user']) => {
+    setUser(userData);
+    setIsAuthenticated(!!userData);
+    setIsUserVerified(
+      !!userData && userData.roles.includes(EnumUserRoles.USER_VERIFIED)
+    );
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
       const userData = await getAccessToken();
-      setUser(userData);
+      updateAuthStates(userData);
       setLoading(false);
     };
 
@@ -90,19 +102,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const login = async () => {
     const userData = await getAccessToken();
-    setUser(userData);
+    updateAuthStates(userData);
   };
 
   const logout = () => {
-    setUser(null);
+    updateAuthStates(null);
   };
-
-  const isAuthenticated = !!user;
-
-  const isUserVerified =
-    isAuthenticated && user.roles.includes(EnumUserRoles.USER_VERIFIED);
-
-  const isUserVerifyStripeActive = !isUserVerified;
 
   if (loading) {
     return <div>Loading...</div>;
@@ -114,7 +119,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         user,
         isAuthenticated,
         isUserVerified,
-        isUserVerifyStripeActive,
         login,
         logout,
       }}
