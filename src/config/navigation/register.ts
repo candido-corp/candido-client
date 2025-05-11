@@ -30,13 +30,22 @@ export const getNavbarItems = (): FlatNavItem[] =>
   );
 
 /**
- * Returns all plugins visible in config order (for mobile menu).
+ * Returns all plugins visible in config order.
  */
-export const getFullNavigationPlugins = (): NavigationPlugin[] =>
+export const getNavigationPlugins = (): NavigationPlugin[] =>
   NAVIGATION_CONFIG.map(({ id }) => plugins.find((p) => p.id === id)).filter(
     (p): p is NavigationPlugin =>
-      p !== undefined &&
-      p.navbar.visibility !== undefined &&
+      p !== undefined && p.navbar.visibility !== undefined
+  );
+
+/**
+ * Returns all plugins with mobile visibility in config order.
+ */
+export const getMobileNavigationPlugins = (): NavigationPlugin[] =>
+  getNavigationPlugins().filter(
+    (p) =>
+      p.navbar &&
+      p.navbar.visibility &&
       p.navbar.visibility?.indexOf(EnumNavigationVisibility.MOBILE) > -1
   );
 
@@ -46,6 +55,5 @@ export const getFullNavigationPlugins = (): NavigationPlugin[] =>
 export const getCurrentPlugin = (
   pluginId: EnumNavigationPlugin
 ): NavigationPlugin | undefined => {
-  const configItem = NAVIGATION_CONFIG.find(({ id }) => id === pluginId);
-  return configItem ? plugins.find((p) => p.id === configItem.id) : undefined;
+  return getNavigationPlugins().find((p) => p.id === pluginId);
 };

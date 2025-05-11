@@ -3,7 +3,7 @@ import { SidebarMain } from '@/components/Common/Sidebar/SidebarMain';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import {
   getCurrentPlugin,
-  getFullNavigationPlugins,
+  getMobileNavigationPlugins,
   RouteHandle,
 } from '@/config/navigation';
 import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
@@ -26,7 +26,7 @@ const SidebarLayout: React.FC = () => {
   const matches = useMatches();
   const currentPluginId = getCurrentPluginId(matches);
 
-  const fullNavigationPlugins = getFullNavigationPlugins();
+  const mobileNavigationPlugins = getMobileNavigationPlugins();
   const currentPlugin = currentPluginId
     ? getCurrentPlugin(currentPluginId)
     : undefined;
@@ -45,7 +45,7 @@ const SidebarLayout: React.FC = () => {
         <Header hasSidebar={true} />
         <div className="flex flex-1">
           <SidebarMain
-            fullNavigationPlugins={fullNavigationPlugins}
+            fullNavigationPlugins={mobileNavigationPlugins}
             currentPlugin={currentPlugin}
             showDesktopSidebar={!!hasSidebarContent}
           />
