@@ -1,7 +1,11 @@
 import Header from '@/components/Common/Header/Header';
 import { SidebarMain } from '@/components/Common/Sidebar/SidebarMain';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
-import { getFullNavigationPlugins, RouteHandle } from '@/config/navigation';
+import {
+  getCurrentPlugin,
+  getFullNavigationPlugins,
+  RouteHandle,
+} from '@/config/navigation';
 import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/utils/shadcn';
@@ -23,9 +27,9 @@ const SidebarLayout: React.FC = () => {
   const currentPluginId = getCurrentPluginId(matches);
 
   const fullNavigationPlugins = getFullNavigationPlugins();
-  const currentPlugin = fullNavigationPlugins.find(
-    (p) => p.id === currentPluginId
-  );
+  const currentPlugin = currentPluginId
+    ? getCurrentPlugin(currentPluginId)
+    : undefined;
 
   const hasSidebarContent =
     currentPlugin?.sidebar && currentPlugin.sidebar.length > 0;
