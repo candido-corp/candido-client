@@ -1,3 +1,4 @@
+import { UserAvatarExp } from '@/components/Common/Header/NavRight/UserAvatarExp.tsx';
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,
@@ -11,7 +12,6 @@ import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { ChartColumn } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import NavNotificationsDropdown from './NavNotificationsDropdown';
-import {UserAvatarExp} from "@/components/Common/Header/NavRight/UserAvatarExp.tsx";
 
 const NavRight: React.FC<BaseFC> = ({ className }) => {
   return (
@@ -22,7 +22,6 @@ const NavRight: React.FC<BaseFC> = ({ className }) => {
             <Button variant="ghost" size="icon" asChild>
               <NavLink
                 to={EnumRoutes.ANALYTICS}
-                end
                 className="[&.active]:text-primary"
               >
                 <ChartColumn />
@@ -34,7 +33,7 @@ const NavRight: React.FC<BaseFC> = ({ className }) => {
 
         <NavNotificationsDropdown />
 
-        <UserAvatarExp className="ml-2"/>
+        <UserAvatarExp className="ml-2" />
       </TooltipProvider>
     </nav>
   );

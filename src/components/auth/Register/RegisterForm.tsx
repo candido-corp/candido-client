@@ -1,6 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigation, useSubmit } from 'react-router-dom';
+import {
+  ApiRequestRegister,
+  RequestRegisterType,
+} from '@/api/v1/requests/ApiRequestRegister';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -9,16 +11,17 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { SubmitTarget } from 'react-router-dom/dist/dom';
 import { Input } from '@/components/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader2 } from 'lucide-react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/components/ui/button';
+import { useNavigation, useSubmit } from 'react-router-dom';
+import { SubmitTarget } from 'react-router-dom/dist/dom';
 import {
   registerValidationSchema,
   TRegisterFields,
 } from './registerValidation';
-import { Loader2 } from 'lucide-react';
-import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister';
 
 export const RegisterForm = () => {
   const { t } = useTranslation();
@@ -35,6 +38,7 @@ export const RegisterForm = () => {
     confirm_password: '',
     first_name: '',
     last_name: '',
+    a: RequestRegisterType.EMAIL,
   };
 
   const form = useForm<TRegisterFields>({

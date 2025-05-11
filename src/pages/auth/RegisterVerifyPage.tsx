@@ -1,13 +1,13 @@
-import { useLoaderData } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import PageContent from '@/components/Common/PageContent';
+import { useTranslation } from 'react-i18next';
+import { useLoaderData } from 'react-router-dom';
 
-const RegisterVerifyByEmailPage = () => {
+const RegisterVerifyPage = () => {
   const { t } = useTranslation();
   const data = useLoaderData() as { message: string }; //TODO fix type message
 
   return (
-    <PageContent title={t('register_verify_email.title')}>
+    <PageContent title={t('register_verify.title')}>
       <div>
         <p>{data.message}</p>
       </div>
@@ -15,4 +15,4 @@ const RegisterVerifyByEmailPage = () => {
   );
 };
 
-export default RegisterVerifyByEmailPage;
+export default RegisterVerifyPage;

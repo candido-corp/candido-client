@@ -1,3 +1,4 @@
+import LogoutForm from '@/components/auth/LogoutForm';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +14,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { BadgeCheck, LogOut } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Form, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ModeToggleGroup } from '../../ModeToggleGroup';
 
 const UserAvatar: React.FC = () => {
@@ -93,15 +94,10 @@ const UserAvatar: React.FC = () => {
           <>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Form action={EnumRoutes.LOGOUT} method="post" className="w-full">
-                <button
-                  type="submit"
-                  className="flex w-full items-center gap-2"
-                >
-                  <LogOut />
-                  {t('logout.title')}
-                </button>
-              </Form>
+              <LogoutForm>
+                <LogOut />
+                {t('logout.title')}
+              </LogoutForm>
             </DropdownMenuItem>
           </>
         )}

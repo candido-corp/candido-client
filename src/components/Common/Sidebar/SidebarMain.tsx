@@ -1,11 +1,13 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarRail, useSidebar,
+  SidebarRail,
+  useSidebar,
 } from '@/components/ui/sidebar';
-import {SidebarNavMain} from './SidebarNavMain';
-import {NavigationPlugin} from "@/config/navigation";
-import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
+import { NavigationPlugin } from '@/config/navigation';
+import { EnumNavigationVisibility } from '@/config/navigation/enums/EnumNavigationVisibility.ts';
+import { useAuth } from '@/hooks/useAuth';
+import { SidebarNavMain } from './SidebarNavMain';
 
 type SidebarMainProps = React.ComponentProps<typeof Sidebar> & {
   fullNavigationPlugins: NavigationPlugin[];
@@ -13,15 +15,15 @@ type SidebarMainProps = React.ComponentProps<typeof Sidebar> & {
   showDesktopSidebar: boolean;
 };
 
-export const SidebarMain: React.FC<SidebarMainProps> = (
-  {
-    fullNavigationPlugins,
-    currentPlugin,
-    showDesktopSidebar,
-    ...props
-  }) => {
+export const SidebarMain: React.FC<SidebarMainProps> = ({
+  fullNavigationPlugins,
+  currentPlugin,
+  showDesktopSidebar,
+  ...props
+}) => {
+  const { isUserVerified } = useAuth();
 
-  const {isMobile} = useSidebar()
+  const { isMobile } = useSidebar();
 
   if (!isMobile && !showDesktopSidebar) {
     return null;
@@ -32,14 +34,19 @@ export const SidebarMain: React.FC<SidebarMainProps> = (
       variant="inset"
       collapsible="icon"
       {...props}
-      className="top-[--header-height] !h-[calc(100svh-var(--header-height))]"
+      className={
+        !isUserVerified
+          ? 'top-[calc(var(--header-height)+var(--user-verified-stripe-height))] !h-[calc(100svh-var(--header-height)-var(--user-verified-stripe-height))]'
+          : 'top-[--header-height] !h-[calc(100svh-var(--header-height))]'
+      }
     >
       <SidebarContent>
         {/* Mobile: navigation plugins */}
         <SidebarNavMain
           className="md:hidden"
           navItems={fullNavigationPlugins}
-          mode={EnumNavigationVisibility.MOBILE}/>
+          mode={EnumNavigationVisibility.MOBILE}
+        />
 
         {/* Desktop: sidebar flat items */}
         <SidebarNavMain
@@ -49,7 +56,7 @@ export const SidebarMain: React.FC<SidebarMainProps> = (
         />
       </SidebarContent>
 
-      <SidebarRail/>
+      <SidebarRail />
     </Sidebar>
   );
 };

@@ -1,11 +1,8 @@
-import React, { createContext, useState, ReactNode, useEffect } from 'react';
-import {
-  EnumUserPermissions,
-  EnumUserRoles,
-} from '@/models/enums/EnumUsers.ts';
+import NetworkClient from '@/api/v1/NetworkClient';
+import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
-import NetworkClient from '@/api/v1/NetworkClient.ts';
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
 
 export interface JwtPayload {
   sub: string;
@@ -25,8 +22,10 @@ export const dataFromToken = (token: string | undefined): User | null => {
 
   return {
     email: decoded.sub,
-    roles: decoded.roles,
-    permissions: decoded.permissions,
+    roles: Array.isArray(decoded.roles) ? decoded.roles : [decoded.roles],
+    permissions: Array.isArray(decoded.permissions)
+      ? decoded.permissions
+      : [decoded.permissions],
   };
 };
 
@@ -50,19 +49,20 @@ export const getAccessToken = async (): Promise<User | null> => {
   return dataFromToken(accessToken);
 };
 
-export const isAuthenticated = async (): Promise<boolean> => {
+export const isUserAuthenticated = async (): Promise<boolean> => {
   return !!(await getAccessToken());
 };
 
 export interface User {
   email: string;
-  roles: EnumUserRoles;
-  permissions: EnumUserPermissions;
+  roles: EnumUserRoles[];
+  permissions: EnumUserPermissions[];
 }
 
 export interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
+  isUserVerified: boolean;
   login: () => Promise<void>;
   logout: () => void;
 }
@@ -74,13 +74,26 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthContextType['user']>(null);
+  const [isAuthenticated, setIsAuthenticated] =
+    useState<AuthContextType['isAuthenticated']>(false);
+  const [isUserVerified, setIsUserVerified] =
+    useState<AuthContextType['isUserVerified']>(false);
   const [loading, setLoading] = useState(true);
+
+  // Helper function to update all auth states based on user data
+  const updateAuthStates = (userData: AuthContextType['user']) => {
+    setUser(userData);
+    setIsAuthenticated(!!userData);
+    setIsUserVerified(
+      !!userData && userData.roles.includes(EnumUserRoles.USER_VERIFIED)
+    );
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
       const userData = await getAccessToken();
-      setUser(userData);
+      updateAuthStates(userData);
       setLoading(false);
     };
 
@@ -89,11 +102,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const login = async () => {
     const userData = await getAccessToken();
-    setUser(userData);
+    updateAuthStates(userData);
   };
 
   const logout = () => {
-    setUser(null);
+    updateAuthStates(null);
   };
 
   if (loading) {
@@ -102,7 +115,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated: !!user, login, logout }}
+      value={{
+        user,
+        isAuthenticated,
+        isUserVerified,
+        login,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

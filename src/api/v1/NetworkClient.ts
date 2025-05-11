@@ -3,12 +3,10 @@ import { ApiRequestAccountChangePassword } from '@/api/v1/requests/ApiRequestAcc
 import { ApiRequestLogin } from '@/api/v1/requests/ApiRequestLogin.ts';
 import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister.ts';
 import { ApiRequestRegisterCodeResend } from '@/api/v1/requests/ApiRequestRegisterCodeResend.ts';
-import { ApiRequestRegisterCodeVerify } from '@/api/v1/requests/ApiRequestRegisterCodeVerify.ts';
-import { ApiRequestRegisterEmailVerify } from '@/api/v1/requests/ApiRequestRegisterEmailVerify.ts';
+import { ApiRequestRegisterVerify } from '@/api/v1/requests/ApiRequestRegisterVerify';
 import { ApiRequestResetPasswordChangePassword } from '@/api/v1/requests/ApiRequestResetPasswordChangePassword.ts';
 import { ApiRequestResetPasswordCheckValidity } from '@/api/v1/requests/ApiRequestResetPasswordCheckValidity.ts';
 import { ApiRequestResetPasswordSend } from '@/api/v1/requests/ApiRequestResetPasswordSend.ts';
-import { ApiResponseRegisterCode } from '@/api/v1/responses/ApiResponseRegisterCode.ts';
 import ConfigApp from '@/config/ConfigApp.ts';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ApiRequestAccountChangeDetails } from './requests/ApiRequestAccountChangeDetails';
@@ -23,11 +21,10 @@ export enum EnumServerRoutes {
   LOGOUT = API_V1 + '/auth/logout',
   REFRESH_TOKEN = API_V1 + '/auth/token/refresh',
 
-  REGISTER_EMAIL = API_V1 + '/auth/register/email',
-  REGISTER_EMAIL_VERIFY = API_V1 + '/auth/register/email/verify',
+  REGISTER = API_V1 + '/auth/register',
+  REGISTER_VERIFY = API_V1 + '/auth/register/verify',
+  REGISTER_EMAIL_RESEND = API_V1 + '/auth/register/email/resend',
 
-  REGISTER_CODE = API_V1 + '/auth/register/code',
-  REGISTER_CODE_VERIFY = API_V1 + '/auth/register/code/verify',
   REGISTER_CODE_RESEND = API_V1 + '/auth/register/code/resend',
 
   RESET_PASSWORD_SEND = API_V1 + '/auth/reset-password/send',
@@ -106,37 +103,28 @@ class NetworkClient {
     return {} as AxiosResponse;
   }
 
-  @POST(EnumServerRoutes.REGISTER_EMAIL)
-  async registerEmail(_options: {
+  @POST(EnumServerRoutes.REGISTER)
+  async register(_options: {
     data: ApiRequestRegister;
   }): Promise<AxiosResponse> {
     return {} as AxiosResponse;
   }
 
-  @POST(EnumServerRoutes.REGISTER_EMAIL_VERIFY)
-  async registerEmailVerify(_options: {
-    data: ApiRequestRegisterEmailVerify;
+  @POST(EnumServerRoutes.REGISTER_VERIFY)
+  async registerVerify(_options: {
+    data: ApiRequestRegisterVerify;
   }): Promise<AxiosResponse> {
     return {} as AxiosResponse;
   }
 
-  @POST(EnumServerRoutes.REGISTER_CODE)
-  async registerCode(_options: {
-    data: ApiRequestRegister;
-  }): Promise<AxiosResponse<ApiResponseRegisterCode>> {
-    return {} as AxiosResponse<ApiResponseRegisterCode>;
+  @POST(EnumServerRoutes.REGISTER_EMAIL_RESEND)
+  async registerEmailResend(): Promise<AxiosResponse> {
+    return {} as AxiosResponse;
   }
 
   @POST(EnumServerRoutes.REGISTER_CODE_RESEND)
   async registerCodeResend(_options: {
     data: ApiRequestRegisterCodeResend;
-  }): Promise<AxiosResponse> {
-    return {} as AxiosResponse;
-  }
-
-  @POST(EnumServerRoutes.REGISTER_CODE_VERIFY)
-  async registerCodeVerify(_options: {
-    data: ApiRequestRegisterCodeVerify;
   }): Promise<AxiosResponse> {
     return {} as AxiosResponse;
   }

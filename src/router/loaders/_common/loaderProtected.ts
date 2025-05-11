@@ -1,7 +1,10 @@
-import { redirect } from 'react-router-dom';
-import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
-import { AuthContextType, isAuthenticated } from '@/providers/AuthProvider.tsx';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
+import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
+import {
+  AuthContextType,
+  isUserAuthenticated,
+} from '@/providers/AuthProvider.tsx';
+import { redirect } from 'react-router-dom';
 
 const loaderProtected =
   ({ logout }: AuthContextType) =>
@@ -15,7 +18,7 @@ const loaderProtected =
         : `?redirect=${encodeURIComponent(url.pathname + url.search)}`;
     const redirectTo = `${EnumRoutes.LOGIN}${paramsRedirect}`;
 
-    const authStatus = await isAuthenticated();
+    const authStatus = await isUserAuthenticated();
     if (!authStatus) {
       return redirect(redirectTo);
     }
