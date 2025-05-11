@@ -1,4 +1,4 @@
-import { CreditCard, LogOut, Settings, User } from 'lucide-react';
+import { CreditCard, LogIn, LogOut, Settings, User } from 'lucide-react';
 
 import LogoutForm from '@/components/auth/LogoutForm';
 import { ModeToggleGroup } from '@/components/Common/ModeToggleGroup.tsx';
@@ -24,54 +24,59 @@ export function UserAvatarExp({ className }: { className?: string }) {
 
   return (
     <div className={cn(className)}>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline">
-            <span className="inline-flex">{user?.email}</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <User />
-              <NavLink to={EnumRoutes.USER} className="w-full">
-                Profile
-              </NavLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <CreditCard />
-              <NavLink to={EnumRoutes.SETTINGS_BILLING} className="w-full">
-                Billing
-              </NavLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings />
-              <NavLink to={EnumRoutes.SETTINGS} className="w-full">
-                Settings
-              </NavLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="!focus:bg-transparent !hover:bg-transparent !active:bg-transparent">
-              <span>Theme</span>
-              <ModeToggleGroup />
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-
-          {isAuthenticated && (
-            <>
-              <DropdownMenuSeparator />
-
+      {isAuthenticated ? (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline">
+              <span className="inline-flex">{user?.email}</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
               <DropdownMenuItem>
-                <LogoutForm>
-                  <LogOut />
-                  {t('logout.title')}
-                </LogoutForm>
+                <User />
+                <NavLink to={EnumRoutes.USER} className="w-full">
+                  Profile
+                </NavLink>
               </DropdownMenuItem>
-            </>
-          )}
-        </DropdownMenuContent>
-      </DropdownMenu>
+              <DropdownMenuItem>
+                <CreditCard />
+                <NavLink to={EnumRoutes.SETTINGS_BILLING} className="w-full">
+                  Billing
+                </NavLink>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings />
+                <NavLink to={EnumRoutes.SETTINGS} className="w-full">
+                  Settings
+                </NavLink>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="!focus:bg-transparent !hover:bg-transparent !active:bg-transparent">
+                <span>Theme</span>
+                <ModeToggleGroup />
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem>
+              <LogoutForm>
+                <LogOut />
+                {t('logout.title')}
+              </LogoutForm>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <Button className="flex items-center gap-2" asChild>
+          <NavLink to={EnumRoutes.LOGIN} className="w-full">
+            <LogIn className="h-4 w-4" />
+            {t('login.title')}
+          </NavLink>
+        </Button>
+      )}
     </div>
   );
 }
