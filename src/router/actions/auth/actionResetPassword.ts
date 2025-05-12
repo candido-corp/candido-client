@@ -1,9 +1,10 @@
 import NetworkClient from '@/api/v1/NetworkClient.ts';
-import { NotificationContextType } from '@/providers/NotificationProvider';
 import { ApiRequestResetPasswordChangePassword } from '@/api/v1/requests/ApiRequestResetPasswordChangePassword';
-import { redirect } from 'react-router-dom';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { AuthContextType } from '@/providers/AuthProvider';
+import { NotificationContextType } from '@/providers/NotificationProvider';
+import { handleActionError } from '@/utils/errors';
+import { redirect } from 'react-router-dom';
 
 const actionResetPassword =
   ({ login }: AuthContextType, { toast }: NotificationContextType) =>
@@ -30,14 +31,11 @@ const actionResetPassword =
 
       return redirect(EnumRoutes.LOGIN);
     } catch (error) {
-      console.error('error: ', error);
-      toast({
-        variant: 'destructive',
-        title: 'Ops, something went wrong',
-        description: 'We could not reset your password. Please try again.',
-        duration: 3000,
-      });
-
+      handleActionError(
+        error,
+        'We could not reset your password. Please try again.',
+        toast
+      );
       return null;
     }
   };

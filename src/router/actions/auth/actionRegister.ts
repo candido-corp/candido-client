@@ -5,6 +5,7 @@ import {
 } from '@/api/v1/requests/ApiRequestRegister.ts';
 import { AuthContextType } from '@/providers/AuthProvider';
 import { NotificationContextType } from '@/providers/NotificationProvider';
+import { handleActionError } from '@/utils/errors';
 import { LoaderFunctionArgs } from 'react-router-dom';
 
 const actionRegister =
@@ -36,13 +37,11 @@ const actionRegister =
 
       return null;
     } catch (error) {
-      console.error('error: ', error);
-      toast({
-        variant: 'destructive',
-        title: 'Ops, something went wrong',
-        description: 'We could not register your account. Please try again.',
-        duration: 3000,
-      });
+      handleActionError(
+        error,
+        'We could not register your account. Please try again.',
+        toast
+      );
       return null;
     }
   };
