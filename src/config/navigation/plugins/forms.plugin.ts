@@ -1,9 +1,9 @@
 // forms.plugin.ts
-import { registerNavigationPlugin } from '../register';
 import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
+import { EnumNavigationVisibility } from '@/config/navigation/enums/EnumNavigationVisibility.ts';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
-import { NotebookPen, ChartColumn } from 'lucide-react';
-import {EnumNavigationVisibility} from "@/config/navigation/enums/EnumNavigationVisibility.ts";
+import { ChartColumn, NotebookPen } from 'lucide-react';
+import { registerNavigationPlugin } from '../register';
 
 registerNavigationPlugin({
   id: EnumNavigationPlugin.FORMS,
@@ -12,10 +12,24 @@ registerNavigationPlugin({
     title: 'Forms',
     url: EnumRoutes.FORMS,
     icon: NotebookPen,
-    visibility: [EnumNavigationVisibility.DESKTOP, EnumNavigationVisibility.MOBILE]
+    visibility: [
+      EnumNavigationVisibility.DESKTOP,
+      EnumNavigationVisibility.MOBILE,
+    ],
+    needsAuth: true,
   },
   sidebar: [
-    { id: 'created-opportunities', title: 'Created opportunities', url: EnumRoutes.FORMS, icon: NotebookPen },
-    { id: 'analytics-forms', title: 'Analytics', url: EnumRoutes.ANALYTICS_FORMS, icon: ChartColumn },
+    {
+      id: 'created-opportunities',
+      title: 'Created opportunities',
+      url: EnumRoutes.FORMS,
+      icon: NotebookPen,
+    },
+    {
+      id: 'analytics-forms',
+      title: 'Analytics',
+      url: EnumRoutes.ANALYTICS_FORMS,
+      icon: ChartColumn,
+    },
   ],
 });
