@@ -1,6 +1,7 @@
 import NetworkClient from '@/api/v1/NetworkClient.ts';
 import { ApiRequestAccountChangeDetails } from '@/api/v1/requests/ApiRequestAccountChangeDetails';
 import { NotificationContextType } from '@/providers/NotificationProvider';
+import { handleActionError } from '@/utils/errors';
 
 const actionAccountChangeDetails =
   ({ toast }: NotificationContextType) =>
@@ -31,15 +32,11 @@ const actionAccountChangeDetails =
 
       return true;
     } catch (error) {
-      console.error('error: ', error);
-      toast({
-        variant: 'destructive',
-        title: 'Ops, something went wrong',
-        description:
-          'We could not change your account details. Please try again.',
-        duration: 3000,
-      });
-
+      handleActionError(
+        error,
+        'We could not change your account details. Please try again.',
+        toast
+      );
       return null;
     }
   };
