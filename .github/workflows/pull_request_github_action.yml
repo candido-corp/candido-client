@@ -1,0 +1,25 @@
+name: Build candido-client
+
+on:
+  pull_request:
+    paths:
+      - 'candido-client/**'
+      - '.github/workflows/pull_request_github_action.yml'
+
+jobs:
+  build:
+    name: Build candido-client
+    runs-on: ubuntu-latest
+   
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.11
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
