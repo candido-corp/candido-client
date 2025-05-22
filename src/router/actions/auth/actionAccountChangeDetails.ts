@@ -10,13 +10,10 @@ const actionAccountChangeDetails =
     const changeAccountDetailsData: ApiRequestAccountChangeDetails = {
       first_name: data.get('first_name') as string,
       last_name: data.get('last_name') as string,
-      gender_id: Number(data.get('gender_id')),
-      birthdate: data.get('birthdate') as unknown as Date,
-      mobile_number: data.get('mobile_number') as string,
-      phone_number: data.get('phone_number') as string,
-      // address: null, // TODO fix
-      // created_at: '2024-01-18 19:38:13',
-      // deleted_at: null,
+      gender_id: Number(data.get('gender_id')) || undefined,
+      birthdate: data.get('birthdate') as string | undefined,
+      mobile_number: data.get('mobile_number') as string | undefined,
+      phone_number: data.get('phone_number') as string | undefined,
     };
     try {
       await NetworkClient.changeAccountDetails({

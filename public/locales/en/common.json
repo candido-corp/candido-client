@@ -54,7 +54,11 @@
     "email": "Email",
     "password": "Password",
     "confirm_password": "Confirm Password",
-    "submit": "Submit"
+    "submit": "Submit",
+    "gender_id": "Gender",
+    "birthdate": "Birthdate",
+    "mobile_number": "Mobile Number",
+    "phone_number": "Phone Number"
   },
   "form_validation": {
     "required": "This field is required",
