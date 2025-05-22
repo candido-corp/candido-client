@@ -12,6 +12,7 @@ import { useRouteLoaderData } from 'react-router-dom';
 const UserDetailsPage = () => {
   const userData = useRouteLoaderData(LOADER_USER_ID) as User;
   const [isEditing, setIsEditing] = useState(false);
+  const created_at = new Date(userData.created_at).toISOString().split('T')[0];
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -82,9 +83,7 @@ const UserDetailsPage = () => {
                 <Calendar className="h-5 w-5 text-muted-foreground" />
                 <div>
                   <p className="text-sm font-medium">Join Date</p>
-                  <p className="text-sm text-muted-foreground">
-                    {userData.created_at}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{created_at}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
