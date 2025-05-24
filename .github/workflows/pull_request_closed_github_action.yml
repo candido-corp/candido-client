@@ -13,7 +13,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    environment: DOCKER_REPO_TOKEN
 
     steps:
       - uses: actions/checkout@v4
