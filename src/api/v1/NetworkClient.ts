@@ -1,4 +1,4 @@
-import { GET, POST, PUT } from '@/api/v1/NetworkDecorator.ts';
+import { DELETE, GET, POST, PUT } from '@/api/v1/NetworkDecorator.ts';
 import { ApiRequestAccountChangePassword } from '@/api/v1/requests/ApiRequestAccountChangePassword.ts';
 import { ApiRequestLogin } from '@/api/v1/requests/ApiRequestLogin.ts';
 import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister.ts';
@@ -10,8 +10,10 @@ import { ApiRequestResetPasswordSend } from '@/api/v1/requests/ApiRequestResetPa
 import ConfigApp from '@/config/ConfigApp.ts';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ApiRequestAccountChangeDetails } from './requests/ApiRequestAccountChangeDetails';
+import { ApiRequestAccountDetailsAddress } from './requests/ApiRequestAccountDetailsAddress';
 import { ApiResponseAccount } from './responses/ApiResponseAccount';
 import { ApiResponseAccountDetails } from './responses/ApiResponseAccountDetails';
+import { ApiResponseAccountDetailsAddresses } from './responses/ApiResponseAccountDetailsAddresses';
 import { ApiResponseGeos } from './responses/ApiResponseGeos';
 
 export enum EnumServerRoutes {
@@ -34,8 +36,10 @@ export enum EnumServerRoutes {
     '/auth/reset-password/check-validity',
 
   ACCOUNT = API_V1 + '/me',
-  ACCOUNT_DETAILS = API_V1 + '/me/details',
   ACCOUNT_PASSWORD = API_V1 + '/me/password',
+  ACCOUNT_DETAILS = API_V1 + '/me/details',
+  ACCOUNT_DETAILS_ADDRESSES = API_V1 + '/me/details/addresses',
+  ACCOUNT_DETAILS_ADDRESS = API_V1 + '/me/details/addresses/:addressId',
 
   GENDERS = API_V1 + '/genders',
 
@@ -165,6 +169,32 @@ class NetworkClient {
     data: ApiRequestAccountChangeDetails;
   }): Promise<AxiosResponse<ApiResponseAccountDetails>> {
     return {} as AxiosResponse<ApiResponseAccountDetails>;
+  }
+
+  @GET(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESSES)
+  async getAccountDetailsAddresses(): Promise<
+    AxiosResponse<ApiResponseAccountDetailsAddresses>
+  > {
+    return {} as AxiosResponse<ApiResponseAccountDetailsAddresses>;
+  }
+
+  @POST(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESSES)
+  async addAccountDetailsAddress(_options: {
+    data: ApiRequestAccountDetailsAddress;
+  }): Promise<AxiosResponse<ApiResponseAccountDetailsAddresses>> {
+    return {} as AxiosResponse<ApiResponseAccountDetailsAddresses>;
+  }
+
+  @PUT(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESSES)
+  async changeAccountDetailsAddress(_options: {
+    data: ApiRequestAccountDetailsAddress;
+  }): Promise<AxiosResponse<ApiResponseAccountDetailsAddresses>> {
+    return {} as AxiosResponse<ApiResponseAccountDetailsAddresses>;
+  }
+
+  @DELETE(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESSES)
+  async deleteAccountDetailsAddress(): Promise<AxiosResponse<AxiosResponse>> {
+    return {} as AxiosResponse<AxiosResponse>;
   }
 
   @PUT(EnumServerRoutes.ACCOUNT_PASSWORD)
