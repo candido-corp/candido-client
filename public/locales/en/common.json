@@ -58,7 +58,13 @@
     "gender_id": "Gender",
     "birthdate": "Birthdate",
     "mobile_number": "Mobile Number",
-    "phone_number": "Phone Number"
+    "phone_number": "Phone Number",
+    "house_number": "House No.",
+    "street": "Street",
+    "city": "City",
+    "state": "State",
+    "zip": "Zip Code",
+    "is_primary": "Set as primary address"
   },
   "form_validation": {
     "required": "This field is required",

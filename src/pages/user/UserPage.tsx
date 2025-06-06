@@ -25,10 +25,10 @@ const UserPage = () => {
 
         <UserInfoCard
           title="Addresses"
-          value={'TODO'}
-          label="1 default address"
+          value={userData.address ? userData.address.street : 'No address'}
+          label={userData.address ? '1 default address' : 'No addresses added'}
           icon={<MapPin className="h-5 w-5" />}
-          linkTo="/user-addresses"
+          linkTo={EnumRoutes.USER_ADDRESSES}
         />
         {/* <div className="flex rounded-xl bg-muted/95 p-10">
           <div className="flex flex-col gap-3">
