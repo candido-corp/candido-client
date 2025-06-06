@@ -5,9 +5,6 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFetcher } from 'react-router-dom';
 
-/**
- * Props interface for UserDeleteAddressForm component
- */
 type UserDeleteAddressFormProps = BaseFC & {
   addressId: number;
   buttonTrigger: ButtonProps & {
@@ -15,10 +12,6 @@ type UserDeleteAddressFormProps = BaseFC & {
   };
 };
 
-/**
- * User Delete Address Form Component
- * Provides a confirmation dialog and form for deleting user addresses
- */
 const UserDeleteAddressForm: React.FC<UserDeleteAddressFormProps> = ({
   addressId,
   buttonTrigger,
@@ -29,18 +22,12 @@ const UserDeleteAddressForm: React.FC<UserDeleteAddressFormProps> = ({
   const fetcher = useFetcher();
   const { askConfirmation } = useNotification();
 
-  /**
-   * Memoized function to handle form submission
-   */
   const submitForm = useCallback(() => {
     const formData = new FormData();
     formData.append('addressId', addressId.toString());
     fetcher.submit(formData, { method: 'delete' });
   }, [addressId, fetcher]);
 
-  /**
-   * Handles the click event with confirmation dialog
-   */
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault(); // Prevent default form submission
