@@ -1,5 +1,5 @@
-import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import NetworkClient from '@/api/v1/NetworkClient.ts';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 type Method = 'get' | 'post' | 'put' | 'delete';
 
@@ -12,6 +12,7 @@ interface DecoratorConfig {
 interface RequestOptions {
   data?: never;
   params?: Record<string, any>;
+  pathParams?: Record<string, string | number>;
   axiosConfig?: AxiosRequestConfig;
 }
 
@@ -24,16 +25,26 @@ function createDecorator({ url, method, headers }: DecoratorConfig) {
     descriptor.value = async function (
       options: RequestOptions = {}
     ): Promise<any> {
-      const { data, params, axiosConfig = {} } = options;
+      const { data, params, pathParams, axiosConfig = {} } = options;
 
       console.info(
         'CALL -> Data:',
         data,
         '| Params:',
         params,
+        '| PathParams:',
+        pathParams,
         '| AxiosConfig:',
         axiosConfig
       );
+
+      // Replace path parameters in URL
+      let finalUrl = url;
+      if (pathParams) {
+        Object.entries(pathParams).forEach(([key, value]) => {
+          finalUrl = finalUrl.replace(`:${key}`, String(value));
+        });
+      }
 
       const customHeader = {
         'Content-Type': 'application/json',
@@ -42,7 +53,7 @@ function createDecorator({ url, method, headers }: DecoratorConfig) {
       };
 
       const config: AxiosRequestConfig = {
-        url,
+        url: finalUrl,
         method,
         headers: customHeader,
         data: method === 'post' || method === 'put' ? data : undefined,

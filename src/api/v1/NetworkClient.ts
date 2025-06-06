@@ -15,6 +15,8 @@ import { ApiResponseAccount } from './responses/ApiResponseAccount';
 import { ApiResponseAccountDetails } from './responses/ApiResponseAccountDetails';
 import { ApiResponseAccountDetailsAddresses } from './responses/ApiResponseAccountDetailsAddresses';
 import { ApiResponseGeos } from './responses/ApiResponseGeos';
+import { ApiResponseGeosAddressTypes } from './responses/ApiResponseGeosAddressTypes';
+import { ApiResponseGeosChildren } from './responses/ApiResponseGeosChildren';
 
 export enum EnumServerRoutes {
   API_V1 = '/api/v1',
@@ -45,6 +47,7 @@ export enum EnumServerRoutes {
 
   GEOS = API_V1 + '/geos',
   GEOS_CHILDREN = API_V1 + '/geos/:geoId/children',
+  GEOS_ADDRESS_TYPES = API_V1 + '/geos/address-types',
 }
 
 class NetworkClient {
@@ -185,15 +188,18 @@ class NetworkClient {
     return {} as AxiosResponse<ApiResponseAccountDetailsAddresses>;
   }
 
-  @PUT(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESSES)
+  @PUT(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESS)
   async changeAccountDetailsAddress(_options: {
+    pathParams: { addressId: string | number };
     data: ApiRequestAccountDetailsAddress;
   }): Promise<AxiosResponse<ApiResponseAccountDetailsAddresses>> {
     return {} as AxiosResponse<ApiResponseAccountDetailsAddresses>;
   }
 
-  @DELETE(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESSES)
-  async deleteAccountDetailsAddress(): Promise<AxiosResponse<AxiosResponse>> {
+  @DELETE(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESS)
+  async deleteAccountDetailsAddress(_options: {
+    pathParams: { addressId: string | number };
+  }): Promise<AxiosResponse<AxiosResponse>> {
     return {} as AxiosResponse<AxiosResponse>;
   }
 
@@ -215,8 +221,15 @@ class NetworkClient {
   }
 
   @GET(EnumServerRoutes.GEOS_CHILDREN)
-  async getCountriesChildren(): Promise<AxiosResponse> {
-    return {} as AxiosResponse;
+  async getCountriesChildren(_options: {
+    pathParams: { geoId: string | number };
+  }): Promise<AxiosResponse<ApiResponseGeosChildren>> {
+    return {} as AxiosResponse<ApiResponseGeosChildren>;
+  }
+
+  @GET(EnumServerRoutes.GEOS_ADDRESS_TYPES)
+  async getAddressTypes(): Promise<AxiosResponse<ApiResponseGeosAddressTypes>> {
+    return {} as AxiosResponse<ApiResponseGeosAddressTypes>;
   }
 }
 
