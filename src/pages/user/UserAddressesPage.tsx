@@ -189,6 +189,7 @@ const UserAddressesPage: React.FC = () => {
                             </>
                           ),
                         }}
+                        is_primary={address.is_primary}
                       />
                     </div>
                   </CardContent>
