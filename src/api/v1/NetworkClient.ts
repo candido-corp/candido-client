@@ -10,6 +10,7 @@ import { ApiRequestResetPasswordSend } from '@/api/v1/requests/ApiRequestResetPa
 import ConfigApp from '@/config/ConfigApp.ts';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ApiRequestAccountChangeDetails } from './requests/ApiRequestAccountChangeDetails';
+import { ApiRequestAccountChangeSettings } from './requests/ApiRequestAccountChangeSettings';
 import { ApiRequestAccountDetailsAddress } from './requests/ApiRequestAccountDetailsAddress';
 import { ApiResponseAccount } from './responses/ApiResponseAccount';
 import { ApiResponseAccountDetails } from './responses/ApiResponseAccountDetails';
@@ -42,6 +43,7 @@ export enum EnumServerRoutes {
   ACCOUNT_DETAILS = API_V1 + '/me/details',
   ACCOUNT_DETAILS_ADDRESSES = API_V1 + '/me/details/addresses',
   ACCOUNT_DETAILS_ADDRESS = API_V1 + '/me/details/addresses/:addressId',
+  ACCOUNT_SETTINGS = API_V1 + '/me/settings',
 
   GENDERS = API_V1 + '/genders',
 
@@ -199,6 +201,13 @@ class NetworkClient {
   @DELETE(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESS)
   async deleteAccountDetailsAddress(_options: {
     pathParams: { addressId: string | number };
+  }): Promise<AxiosResponse<AxiosResponse>> {
+    return {} as AxiosResponse<AxiosResponse>;
+  }
+
+  @PUT(EnumServerRoutes.ACCOUNT_SETTINGS)
+  async changeAccountSettings(_options: {
+    data: ApiRequestAccountChangeSettings;
   }): Promise<AxiosResponse<AxiosResponse>> {
     return {} as AxiosResponse<AxiosResponse>;
   }
