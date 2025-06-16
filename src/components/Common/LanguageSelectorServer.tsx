@@ -66,11 +66,6 @@ export const LanguageSelectorServer: React.FC<BaseFC> = ({ className }) => {
               <span>English</span>
             </div>
           </SelectItem>
-          <SelectItem value={'it'}>
-            <div className="flex items-center space-x-2">
-              <span>Italiano</span>
-            </div>
-          </SelectItem>
         </SelectContent>
       </Select>
     </div>
