@@ -43,7 +43,13 @@
     }
   },
   "user_addresses": {
-    "title": "Addresses"
+    "title": "Addresses",
+    "delete": {
+      "title": "Delete Address",
+      "message": "Are you sure you want to delete this address?",
+      "primary_title": "Delete Primary Address",
+      "primary_message": "Are you sure you want to delete your primary address? The first available address will automatically be set as your new primary address."
+    }
   },
   "logout": {
     "title": "Logout"
@@ -86,6 +92,28 @@
     "cancel": "Cancel",
     "error_dialog": {
       "ok": "ok"
+    }
+  },
+  "settings": {
+    "account": {
+      "title": "Account",
+      "description": "Manage your account settings and profile information"
+    },
+    "communication": {
+      "title": "Communication",
+      "description": "Configure your notification and communication preferences"
+    },
+    "billing": {
+      "title": "Billing",
+      "description": "Manage your billing information and subscription"
+    },
+    "preferences": {
+      "title": "Preferences",
+      "description": "Customize your language, theme and display preferences"
+    },
+    "security": {
+      "title": "Security",
+      "description": "Security settings and privacy controls"
     }
   }
 }
