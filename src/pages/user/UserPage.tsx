@@ -12,6 +12,16 @@ const UserPage = () => {
   const { t } = useTranslation();
   const userData = useRouteLoaderData(LOADER_USER_ID) as User;
 
+  const getAddressValue = () => {
+    if (!userData.address) {
+      return 'No address';
+    }
+    if (userData.address.display_name) {
+      return userData.address.display_name;
+    }
+    return 'Address';
+  };
+
   return (
     <PageContent title={t('user.title', { name: userData.first_name })}>
       <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -25,7 +35,7 @@ const UserPage = () => {
 
         <UserInfoCard
           title="Addresses"
-          value={userData.address ? userData.address.street : 'No address'}
+          value={getAddressValue()}
           label={userData.address ? '1 default address' : 'No addresses added'}
           icon={<MapPin className="h-5 w-5" />}
           linkTo={EnumRoutes.USER_ADDRESSES}

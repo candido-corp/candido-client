@@ -136,7 +136,7 @@ const UserAddressesPage: React.FC = () => {
                       </div>
                       <div className="flex-1">
                         <CardTitle className="text-lg">
-                          {address.street}
+                          {address.display_name}
                         </CardTitle>
                         <div className="mt-1 flex items-center gap-2">
                           <Badge variant="default">{address.type}</Badge>
@@ -202,7 +202,7 @@ const UserAddressesPage: React.FC = () => {
       {/* Dialog for editing or adding an address */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="sm:max-w-[550px]">
-          <DialogHeader className="flex-shrink-0">
+          <DialogHeader className="flex-shrink-0 px-1">
             <DialogTitle>
               {isNewAddress ? 'Add New Address' : 'Edit Address'}
             </DialogTitle>

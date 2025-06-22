@@ -17,6 +17,7 @@ const actionUserAddress =
       street: data.get('street') as string,
       house_number: data.get('house_number') as string,
       is_primary: data.get('is_primary') === 'true',
+      display_name: data.get('display_name') as string,
     };
 
     try {

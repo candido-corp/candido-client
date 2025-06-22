@@ -74,7 +74,25 @@ const UserAddressForm: React.FC<UserAddressFormProps> = ({
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col">
-        <div className="max-h-[50vh] flex-1 space-y-4 overflow-y-auto pb-4 pr-2">
+        <div className="max-h-[50vh] flex-1 space-y-4 overflow-y-auto px-1 pb-4">
+          {/* Display Name Field */}
+          <FormField
+            control={control}
+            name="display_name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Display Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter a name for this address (e.g., Home, Work, Office)"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           {/* Territory Selects */}
           <div className="space-y-2">
             <FormLabel>Country</FormLabel>

@@ -65,6 +65,7 @@ export const useUserAddress = ({
 
   const defaultValues: TAccountAddressFields = useMemo(
     () => ({
+      display_name: address?.display_name || '',
       territory_id: address?.territories?.[0]?.territory_id || 0,
       type_id: address?.type_id || addressTypes[0]?.address_type_id || 1,
       zip: address?.zip || '',

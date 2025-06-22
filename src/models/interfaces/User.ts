@@ -28,6 +28,7 @@ export type Address = {
   house_number: string;
   updated_at: string;
   is_primary: boolean;
+  display_name: string;
 };
 
 export type UserAddressType = {
