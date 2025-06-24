@@ -11,11 +11,12 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import UserAddressForm from '@/components/user/Address/UserAddressForm';
+import UserDeleteAddressForm from '@/components/user/Address/UserDeleteAddressForm';
+import UserSetPrimaryAddressForm from '@/components/user/Address/UserSetPrimaryAddressForm';
 import { Address, UserAddressType } from '@/models/interfaces/User';
 import { Edit, Home, MapPin, Plus, Trash2 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import UserDeleteAddressForm from './UserDeleteAddressForm';
 
 export interface TerritoryOption {
   territory_id: number;
@@ -151,6 +152,10 @@ const UserAddressesPage: React.FC = () => {
                         </div>
                       </div>
                     </div>
+                    <UserSetPrimaryAddressForm
+                      addressId={address.address_id}
+                      isPrimary={address.is_primary}
+                    />
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm">

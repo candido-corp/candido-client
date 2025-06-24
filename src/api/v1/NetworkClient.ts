@@ -15,6 +15,7 @@ import { ApiRequestAccountDetailsAddress } from './requests/ApiRequestAccountDet
 import { ApiResponseAccount } from './responses/ApiResponseAccount';
 import { ApiResponseAccountDetails } from './responses/ApiResponseAccountDetails';
 import { ApiResponseAccountDetailsAddresses } from './responses/ApiResponseAccountDetailsAddresses';
+import { ApiResponseAccountSettings } from './responses/ApiResponseAccountSettings';
 import { ApiResponseGeos } from './responses/ApiResponseGeos';
 import { ApiResponseGeosAddressTypes } from './responses/ApiResponseGeosAddressTypes';
 import { ApiResponseGeosChildren } from './responses/ApiResponseGeosChildren';
@@ -43,6 +44,8 @@ export enum EnumServerRoutes {
   ACCOUNT_DETAILS = API_V1 + '/me/details',
   ACCOUNT_DETAILS_ADDRESSES = API_V1 + '/me/details/addresses',
   ACCOUNT_DETAILS_ADDRESS = API_V1 + '/me/details/addresses/:addressId',
+  ACCOUNT_DETAILS_ADDRESS_PRIMARY = API_V1 +
+    '/me/details/addresses/:addressId/primary',
   ACCOUNT_SETTINGS = API_V1 + '/me/settings',
 
   GENDERS = API_V1 + '/genders',
@@ -203,6 +206,20 @@ class NetworkClient {
     pathParams: { addressId: string | number };
   }): Promise<AxiosResponse<AxiosResponse>> {
     return {} as AxiosResponse<AxiosResponse>;
+  }
+
+  @PUT(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESS_PRIMARY)
+  async setPrimaryAccountDetailsAddress(_options: {
+    pathParams: { addressId: string | number };
+  }): Promise<AxiosResponse<AxiosResponse>> {
+    return {} as AxiosResponse<AxiosResponse>;
+  }
+
+  @GET(EnumServerRoutes.ACCOUNT_SETTINGS)
+  async getAccountSettings(): Promise<
+    AxiosResponse<ApiResponseAccountSettings>
+  > {
+    return {} as AxiosResponse<ApiResponseAccountSettings>;
   }
 
   @PUT(EnumServerRoutes.ACCOUNT_SETTINGS)

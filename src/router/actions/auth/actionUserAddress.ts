@@ -1,5 +1,6 @@
 import NetworkClient from '@/api/v1/NetworkClient';
 import { ApiRequestAccountDetailsAddress } from '@/api/v1/requests/ApiRequestAccountDetailsAddress';
+import { PRIMARY_ADDRESS_ACTION } from '@/components/user/Address/UserSetPrimaryAddressForm';
 import { NotificationContextType } from '@/providers/NotificationProvider';
 import { handleActionError } from '@/utils/errors';
 import { LoaderFunctionArgs } from 'react-router-dom';
@@ -37,24 +38,41 @@ const actionUserAddress =
           break;
 
         case 'PUT':
-          // Edit existing address
-          const addressIdForUpdate = data.get('addressId') as string;
+          // Handle primary address toggle
+          const actionType = data.get('actionType') as string;
+          if (actionType === PRIMARY_ADDRESS_ACTION) {
+            const addressIdForPrimary = data.get('addressId') as string;
 
-          if (!addressIdForUpdate) {
-            throw new Error('Address ID is required for updating');
+            await NetworkClient.setPrimaryAccountDetailsAddress({
+              pathParams: { addressId: addressIdForPrimary },
+            });
+
+            toast({
+              variant: 'default',
+              title: 'Success!',
+              description: 'Primary address has been updated successfully.',
+              duration: 3000,
+            });
+          } else {
+            // Edit existing address
+            const addressIdForUpdate = data.get('addressId') as string;
+
+            if (!addressIdForUpdate) {
+              throw new Error('Address ID is required for updating');
+            }
+
+            await NetworkClient.changeAccountDetailsAddress({
+              pathParams: { addressId: addressIdForUpdate },
+              data: addressData,
+            });
+
+            toast({
+              variant: 'default',
+              title: 'Success!',
+              description: 'Your address has been updated successfully.',
+              duration: 3000,
+            });
           }
-
-          await NetworkClient.changeAccountDetailsAddress({
-            pathParams: { addressId: addressIdForUpdate },
-            data: addressData,
-          });
-
-          toast({
-            variant: 'default',
-            title: 'Success!',
-            description: 'Your address has been updated successfully.',
-            duration: 3000,
-          });
           break;
 
         case 'DELETE':
@@ -90,6 +108,7 @@ const actionUserAddress =
           errorMessage = 'We could not add your address. Please try again.';
           break;
         case 'PUT':
+          errorMessage = 'We could not update your address. Please try again.';
           errorMessage = 'We could not update your address. Please try again.';
           break;
         case 'DELETE':
