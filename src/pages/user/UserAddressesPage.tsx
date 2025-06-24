@@ -119,7 +119,7 @@ const UserAddressesPage: React.FC = () => {
           </Card>
         ) : (
           // Addresses exist - show address cards in a grid layout
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {addresses
               .sort((a, b) => {
                 // Primary address first, then all others
@@ -219,6 +219,7 @@ const UserAddressesPage: React.FC = () => {
                 countries={memoizedCountries}
                 isLoadingCountries={isLoadingCountries}
                 addressTypes={addressTypes}
+                hasExistingAddresses={addresses.length > 0}
               />
             )}
           </div>

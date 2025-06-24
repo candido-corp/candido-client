@@ -38,6 +38,7 @@ interface UserAddressFormProps {
   countries: TerritoryOption[];
   isLoadingCountries: boolean;
   addressTypes: UserAddressType[];
+  hasExistingAddresses: boolean; // Indicates if there are already other addresses
 }
 
 const UserAddressForm: React.FC<UserAddressFormProps> = ({
@@ -46,6 +47,7 @@ const UserAddressForm: React.FC<UserAddressFormProps> = ({
   countries,
   isLoadingCountries,
   addressTypes,
+  hasExistingAddresses,
 }) => {
   const { t } = useTranslation();
 
@@ -310,26 +312,33 @@ const UserAddressForm: React.FC<UserAddressFormProps> = ({
             )}
           />
 
-          <FormField
-            control={control}
-            name="is_primary"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center space-x-2 space-y-0">
-                <FormControl>
-                  <Input
-                    type="checkbox"
-                    className="h-4 w-4"
-                    checked={field.value}
-                    onChange={(e) => field.onChange(e.target.checked)}
-                  />
-                </FormControl>
-                <FormLabel className="font-normal">
-                  {t('form_fields.is_primary')}
-                </FormLabel>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {/* Show "Set as primary" checkbox only when:
+              1. Adding a new address AND there are already existing addresses (not the first address), OR
+              2. Editing a non-primary address (address exists and is not primary)
+          */}
+          {((!address && hasExistingAddresses) ||
+            (address && !address.is_primary)) && (
+            <FormField
+              control={control}
+              name="is_primary"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center space-x-2 space-y-0">
+                  <FormControl>
+                    <Input
+                      type="checkbox"
+                      className="h-4 w-4"
+                      checked={field.value}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                  </FormControl>
+                  <FormLabel className="font-normal">
+                    {t('form_fields.is_primary')}
+                  </FormLabel>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
         </div>
 
         {/* Fixed footer with buttons */}
