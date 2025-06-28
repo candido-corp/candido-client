@@ -10,12 +10,14 @@ const house_number: keyof ApiRequestAccountDetailsAddress = 'house_number';
 const is_primary: keyof ApiRequestAccountDetailsAddress = 'is_primary';
 
 export const accountAddressValidationSchema = z.object({
-  [display_name]: z.string(),
-  [territory_id]: z.number(),
-  [type_id]: z.number(),
-  [zip]: z.string(),
-  [street]: z.string(),
-  [house_number]: z.string(),
+  [display_name]: z.string().optional(),
+  [territory_id]: z.number().refine((val) => val > 0, {
+    message: 'Please select a valid location',
+  }),
+  [type_id]: z.number().min(1, 'form_validation.required'),
+  [zip]: z.string().min(1, 'form_validation.required'),
+  [street]: z.string().min(1, 'form_validation.required'),
+  [house_number]: z.string().min(1, 'form_validation.required'),
   [is_primary]: z.boolean(),
 });
 

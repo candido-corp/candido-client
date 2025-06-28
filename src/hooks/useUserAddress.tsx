@@ -79,6 +79,7 @@ export const useUserAddress = ({
   const form = useForm<TAccountAddressFields>({
     resolver,
     defaultValues,
+    mode: 'onSubmit',
   });
 
   // Territory options state - stores available options for each level

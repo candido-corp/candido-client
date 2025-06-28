@@ -10,11 +10,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { getAddressIconElement } from '@/components/user/Address/addressIcons';
 import UserAddressForm from '@/components/user/Address/UserAddressForm';
 import UserDeleteAddressForm from '@/components/user/Address/UserDeleteAddressForm';
 import UserSetPrimaryAddressForm from '@/components/user/Address/UserSetPrimaryAddressForm';
 import { Address, UserAddressType } from '@/models/interfaces/User';
-import { Edit, Home, MapPin, Plus, Trash2 } from 'lucide-react';
+import { Edit, MapPin, Plus, Trash2 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
@@ -133,11 +134,15 @@ const UserAddressesPage: React.FC = () => {
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <div className="flex items-center space-x-2">
                       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <Home className="h-4 w-4" />
+                        {getAddressIconElement(address.type, 'h-4 w-4')}
                       </div>
                       <div className="flex-1">
                         <CardTitle className="text-lg">
-                          {address.display_name}
+                          {address.display_name ||
+                            address.territories
+                              ?.slice(0, 2)
+                              .map((t) => t.territory_name)
+                              .join(', ')}
                         </CardTitle>
                         <div className="mt-1 flex items-center gap-2">
                           <Badge variant="default">{address.type}</Badge>

@@ -1,9 +1,8 @@
+import { Address } from '@/models/interfaces/User';
+
 export type ApiRequestAccountDetailsAddress = {
   territory_id: number;
-  type_id: number;
-  zip: string;
-  street: string;
-  house_number: string;
-  is_primary: boolean;
-  display_name: string;
-};
+} & Pick<
+  Address,
+  'display_name' | 'type_id' | 'zip' | 'street' | 'house_number' | 'is_primary'
+>;

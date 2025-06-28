@@ -1,4 +1,5 @@
 import PageContent from '@/components/Common/PageContent';
+import { getAddressIconElement } from '@/components/user/Address/addressIcons';
 import { ApplicationsBox } from '@/components/user/ApplicationsBox';
 import { UserInfoCard } from '@/components/user/UserInfoCard';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
@@ -19,7 +20,10 @@ const UserPage = () => {
     if (userData.address.display_name) {
       return userData.address.display_name;
     }
-    return 'Address';
+    return userData.address.territories
+      ?.slice(0, 2)
+      .map((t) => t.territory_name)
+      .join(', ');
   };
 
   return (
@@ -37,7 +41,13 @@ const UserPage = () => {
           title="Addresses"
           value={getAddressValue()}
           label={userData.address ? '1 default address' : 'No addresses added'}
-          icon={<MapPin className="h-5 w-5" />}
+          icon={
+            userData.address ? (
+              getAddressIconElement(userData.address.type, 'h-5 w-5')
+            ) : (
+              <MapPin className="h-5 w-5" />
+            )
+          }
           linkTo={EnumRoutes.USER_ADDRESSES}
         />
         {/* <div className="flex rounded-xl bg-muted/95 p-10">

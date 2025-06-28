@@ -109,7 +109,6 @@ const actionUserAddress =
           break;
         case 'PUT':
           errorMessage = 'We could not update your address. Please try again.';
-          errorMessage = 'We could not update your address. Please try again.';
           break;
         case 'DELETE':
           errorMessage = 'We could not delete your address. Please try again.';
