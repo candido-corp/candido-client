@@ -1,3 +1,4 @@
+import { EnumRoutes } from '@/models/enums/EnumRoutes';
 import { EnumUserSettingsKey } from '@/models/enums/EnumUsers';
 import { useCallback, useEffect, useState } from 'react';
 import { useFetcher } from 'react-router-dom';
@@ -60,9 +61,10 @@ export const useUserSettings = <T extends string>() => {
       formData.append('key', key);
       formData.append('value', newValue);
 
-      // Submit the request using FormData
+      // Submit the request using FormData to the settings preferences route
       fetcher.submit(formData, {
         method: 'put',
+        action: EnumRoutes.SETTINGS_PREFERENCES,
       });
     },
     [fetcher]
