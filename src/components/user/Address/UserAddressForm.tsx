@@ -71,12 +71,44 @@ const UserAddressForm: React.FC<UserAddressFormProps> = ({
     onSubmit,
   } = useUserAddress({ address, countries, addressTypes });
 
-  const { handleSubmit, control } = form;
+  const { handleSubmit, control, formState } = form;
+  const { errors } = formState;
 
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)} className="flex h-full flex-col">
         <div className="max-h-[50vh] flex-1 space-y-4 overflow-y-auto px-1 pb-4">
+          <FormField
+            control={control}
+            name="type_id"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Address Type</FormLabel>
+                <Select
+                  onValueChange={(value) => field.onChange(parseInt(value))}
+                  value={field.value.toString()}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select address type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {addressTypes.map((addressType) => (
+                      <SelectItem
+                        key={addressType.address_type_id}
+                        value={addressType.address_type_id.toString()}
+                      >
+                        {addressType.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           {/* Display Name Field */}
           <FormField
             control={control}
@@ -227,36 +259,12 @@ const UserAddressForm: React.FC<UserAddressFormProps> = ({
             </div>
           )}
 
-          <FormField
-            control={control}
-            name="type_id"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Address Type</FormLabel>
-                <Select
-                  onValueChange={(value) => field.onChange(parseInt(value))}
-                  value={field.value.toString()}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select address type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {addressTypes.map((addressType) => (
-                      <SelectItem
-                        key={addressType.address_type_id}
-                        value={addressType.address_type_id.toString()}
-                      >
-                        {addressType.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {/* Territory validation error */}
+          {errors.territory_id && (
+            <div className="text-sm font-medium text-destructive">
+              {errors.territory_id.message}
+            </div>
+          )}
 
           <div className="grid grid-cols-5 gap-2">
             <FormField
