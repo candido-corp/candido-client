@@ -27,4 +27,12 @@ export type Address = {
   street: string;
   house_number: string;
   updated_at: string;
+  is_primary: boolean;
+  display_name?: string;
+};
+
+export type UserAddressType = {
+  address_type_id: number;
+  address_type_key: string;
+  description: string;
 };

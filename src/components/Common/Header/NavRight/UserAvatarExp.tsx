@@ -1,7 +1,6 @@
 import { CreditCard, LogIn, LogOut, Settings, User } from 'lucide-react';
 
 import LogoutForm from '@/components/auth/LogoutForm';
-import { ModeToggleGroup } from '@/components/Common/ModeToggleGroup.tsx';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -17,6 +16,7 @@ import { EnumRoutes } from '@/models/enums/EnumRoutes.ts';
 import { cn } from '@/utils/shadcn.ts';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
+import { ModeToggleGroupServer } from '../../ModeToggleGroupServer';
 
 export function UserAvatarExp({ className }: { className?: string }) {
   const { t } = useTranslation();
@@ -55,7 +55,7 @@ export function UserAvatarExp({ className }: { className?: string }) {
               </DropdownMenuItem>
               <DropdownMenuItem className="!focus:bg-transparent !hover:bg-transparent !active:bg-transparent">
                 <span>Theme</span>
-                <ModeToggleGroup />
+                <ModeToggleGroupServer />
               </DropdownMenuItem>
             </DropdownMenuGroup>
 

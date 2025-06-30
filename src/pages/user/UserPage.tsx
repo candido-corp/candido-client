@@ -1,4 +1,5 @@
 import PageContent from '@/components/Common/PageContent';
+import { getAddressIconElement } from '@/components/user/Address/addressIcons';
 import { ApplicationsBox } from '@/components/user/ApplicationsBox';
 import { UserInfoCard } from '@/components/user/UserInfoCard';
 import { EnumRoutes } from '@/models/enums/EnumRoutes';
@@ -11,6 +12,19 @@ import { useRouteLoaderData } from 'react-router-dom';
 const UserPage = () => {
   const { t } = useTranslation();
   const userData = useRouteLoaderData(LOADER_USER_ID) as User;
+
+  const getAddressValue = () => {
+    if (!userData.address) {
+      return 'No address';
+    }
+    if (userData.address.display_name) {
+      return userData.address.display_name;
+    }
+    return userData.address.territories
+      ?.slice(0, 2)
+      .map((t) => t.territory_name)
+      .join(', ');
+  };
 
   return (
     <PageContent title={t('user.title', { name: userData.first_name })}>
@@ -25,10 +39,16 @@ const UserPage = () => {
 
         <UserInfoCard
           title="Addresses"
-          value={'TODO'}
-          label="1 default address"
-          icon={<MapPin className="h-5 w-5" />}
-          linkTo="/user-addresses"
+          value={getAddressValue()}
+          label={userData.address ? '1 default address' : 'No addresses added'}
+          icon={
+            userData.address ? (
+              getAddressIconElement(userData.address.type, 'h-5 w-5')
+            ) : (
+              <MapPin className="h-5 w-5" />
+            )
+          }
+          linkTo={EnumRoutes.USER_ADDRESSES}
         />
         {/* <div className="flex rounded-xl bg-muted/95 p-10">
           <div className="flex flex-col gap-3">

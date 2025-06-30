@@ -3,23 +3,12 @@ import { SidebarMain } from '@/components/Common/Sidebar/SidebarMain';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import {
   getCurrentPlugin,
+  getCurrentPluginId,
   getMobileNavigationPlugins,
-  RouteHandle,
 } from '@/config/navigation';
-import { EnumNavigationPlugin } from '@/config/navigation/enums/EnumNavigationPlugin';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/utils/shadcn';
 import { Outlet, useMatches } from 'react-router-dom';
-
-function getCurrentPluginId(
-  matches: ReturnType<typeof useMatches>
-): EnumNavigationPlugin | undefined {
-  for (const match of matches) {
-    const handle = match.handle as RouteHandle | undefined;
-    if (handle?.pluginId) return handle.pluginId;
-  }
-  return undefined;
-}
 
 const SidebarLayout: React.FC = () => {
   const { isUserVerified, isAuthenticated } = useAuth();

@@ -56,10 +56,10 @@ const UserChangeDetailsForm: React.FC<UserChangeDetailsFormProps> = ({
   const defaultValues: TAccountChangeDetailsFields = {
     first_name: userData.first_name,
     last_name: userData.last_name,
-    gender_id: userData.gender.id,
+    gender_id: userData.gender?.id || undefined,
     birthdate: userData.birthdate ? new Date(userData.birthdate) : undefined,
-    mobile_number: userData.mobile_number,
-    phone_number: userData.phone_number,
+    mobile_number: userData.mobile_number || '',
+    phone_number: userData.phone_number || '',
   };
 
   const form = useForm<TAccountChangeDetailsFields>({
@@ -69,8 +69,14 @@ const UserChangeDetailsForm: React.FC<UserChangeDetailsFormProps> = ({
 
   const { handleSubmit, control } = form;
 
-  const onSubmit: SubmitHandler<ApiRequestAccountChangeDetails> = (data) => {
-    submit(data as SubmitTarget, { method: 'put' });
+  const onSubmit: SubmitHandler<TAccountChangeDetailsFields> = (data) => {
+    const payload: ApiRequestAccountChangeDetails = {
+      ...data,
+      birthdate: data.birthdate
+        ? data.birthdate.toISOString().split('T')[0]
+        : undefined, // format date to string to avoid type error
+    };
+    submit(payload as SubmitTarget, { method: 'put' });
     handleIsEditing(false);
   };
 
@@ -91,6 +97,11 @@ const UserChangeDetailsForm: React.FC<UserChangeDetailsFormProps> = ({
                       placeholder={t('form_fields.first_name')}
                       id="first_name"
                       autoComplete="first_name"
+                      readOnly={!userData.can_change_name}
+                      className={cn(
+                        !userData.can_change_name &&
+                          'read-only:cursor-not-allowed read-only:opacity-50'
+                      )}
                       {...field}
                     />
                   </FormControl>
@@ -111,6 +122,11 @@ const UserChangeDetailsForm: React.FC<UserChangeDetailsFormProps> = ({
                       placeholder={t('form_fields.last_name')}
                       id="last_name"
                       autoComplete="last_name"
+                      readOnly={!userData.can_change_name}
+                      className={cn(
+                        !userData.can_change_name &&
+                          'read-only:cursor-not-allowed read-only:opacity-50'
+                      )}
                       {...field}
                     />
                   </FormControl>
@@ -164,7 +180,6 @@ const UserChangeDetailsForm: React.FC<UserChangeDetailsFormProps> = ({
                         <Button
                           variant={'outline'}
                           className={cn(
-                            'w-[240px] pl-3 text-left font-normal',
                             !field.value && 'text-muted-foreground'
                           )}
                         >

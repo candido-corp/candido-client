@@ -1,7 +1,8 @@
 import { NAVIGATION_CONFIG } from '@/config/navigation/_navigation.config.ts';
 import { EnumNavigationVisibility } from '@/config/navigation/enums/EnumNavigationVisibility.ts';
+import { useMatches } from 'react-router-dom';
 import { EnumNavigationPlugin } from './enums/EnumNavigationPlugin';
-import { FlatNavItem, NavigationPlugin } from './types';
+import { FlatNavItem, NavigationPlugin, RouteHandle } from './types';
 
 const plugins: NavigationPlugin[] = [];
 
@@ -77,3 +78,18 @@ export const getCurrentPlugin = (
 ): NavigationPlugin | undefined => {
   return getNavigationPlugins().find((p) => p.id === pluginId);
 };
+
+/**
+ * Get current plugin ID from route matches
+ * @param matches - Router matches from useMatches hook
+ * @returns Current plugin ID or undefined
+ */
+export function getCurrentPluginId(
+  matches: ReturnType<typeof useMatches>
+): EnumNavigationPlugin | undefined {
+  for (const match of matches) {
+    const handle = match.handle as RouteHandle | undefined;
+    if (handle?.pluginId) return handle.pluginId;
+  }
+  return undefined;
+}

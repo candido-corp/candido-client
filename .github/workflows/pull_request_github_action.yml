@@ -2,15 +2,12 @@ name: Build candido-client
 
 on:
   pull_request:
-    paths:
-      - 'candido-client/**'
-      - '.github/workflows/pull_request_github_action.yml'
 
 jobs:
   build:
     name: Build candido-client
     runs-on: ubuntu-latest
-   
+
     steps:
       - uses: actions/checkout@v4
 

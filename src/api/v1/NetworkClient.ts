@@ -1,4 +1,4 @@
-import { GET, POST, PUT } from '@/api/v1/NetworkDecorator.ts';
+import { DELETE, GET, POST, PUT } from '@/api/v1/NetworkDecorator.ts';
 import { ApiRequestAccountChangePassword } from '@/api/v1/requests/ApiRequestAccountChangePassword.ts';
 import { ApiRequestLogin } from '@/api/v1/requests/ApiRequestLogin.ts';
 import { ApiRequestRegister } from '@/api/v1/requests/ApiRequestRegister.ts';
@@ -10,9 +10,15 @@ import { ApiRequestResetPasswordSend } from '@/api/v1/requests/ApiRequestResetPa
 import ConfigApp from '@/config/ConfigApp.ts';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ApiRequestAccountChangeDetails } from './requests/ApiRequestAccountChangeDetails';
+import { ApiRequestAccountChangeSettings } from './requests/ApiRequestAccountChangeSettings';
+import { ApiRequestAccountDetailsAddress } from './requests/ApiRequestAccountDetailsAddress';
 import { ApiResponseAccount } from './responses/ApiResponseAccount';
 import { ApiResponseAccountDetails } from './responses/ApiResponseAccountDetails';
+import { ApiResponseAccountDetailsAddresses } from './responses/ApiResponseAccountDetailsAddresses';
+import { ApiResponseAccountSettings } from './responses/ApiResponseAccountSettings';
 import { ApiResponseGeos } from './responses/ApiResponseGeos';
+import { ApiResponseGeosAddressTypes } from './responses/ApiResponseGeosAddressTypes';
+import { ApiResponseGeosChildren } from './responses/ApiResponseGeosChildren';
 
 export enum EnumServerRoutes {
   API_V1 = '/api/v1',
@@ -34,13 +40,19 @@ export enum EnumServerRoutes {
     '/auth/reset-password/check-validity',
 
   ACCOUNT = API_V1 + '/me',
-  ACCOUNT_DETAILS = API_V1 + '/me/details',
   ACCOUNT_PASSWORD = API_V1 + '/me/password',
+  ACCOUNT_DETAILS = API_V1 + '/me/details',
+  ACCOUNT_DETAILS_ADDRESSES = API_V1 + '/me/details/addresses',
+  ACCOUNT_DETAILS_ADDRESS = API_V1 + '/me/details/addresses/:addressId',
+  ACCOUNT_DETAILS_ADDRESS_PRIMARY = API_V1 +
+    '/me/details/addresses/:addressId/primary',
+  ACCOUNT_SETTINGS = API_V1 + '/me/settings',
 
   GENDERS = API_V1 + '/genders',
 
   GEOS = API_V1 + '/geos',
   GEOS_CHILDREN = API_V1 + '/geos/:geoId/children',
+  GEOS_ADDRESS_TYPES = API_V1 + '/geos/address-types',
 }
 
 class NetworkClient {
@@ -167,6 +179,56 @@ class NetworkClient {
     return {} as AxiosResponse<ApiResponseAccountDetails>;
   }
 
+  @GET(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESSES)
+  async getAccountDetailsAddresses(): Promise<
+    AxiosResponse<ApiResponseAccountDetailsAddresses>
+  > {
+    return {} as AxiosResponse<ApiResponseAccountDetailsAddresses>;
+  }
+
+  @POST(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESSES)
+  async addAccountDetailsAddress(_options: {
+    data: ApiRequestAccountDetailsAddress;
+  }): Promise<AxiosResponse<ApiResponseAccountDetailsAddresses>> {
+    return {} as AxiosResponse<ApiResponseAccountDetailsAddresses>;
+  }
+
+  @PUT(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESS)
+  async changeAccountDetailsAddress(_options: {
+    pathParams: { addressId: string | number };
+    data: ApiRequestAccountDetailsAddress;
+  }): Promise<AxiosResponse<ApiResponseAccountDetailsAddresses>> {
+    return {} as AxiosResponse<ApiResponseAccountDetailsAddresses>;
+  }
+
+  @DELETE(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESS)
+  async deleteAccountDetailsAddress(_options: {
+    pathParams: { addressId: string | number };
+  }): Promise<AxiosResponse<AxiosResponse>> {
+    return {} as AxiosResponse<AxiosResponse>;
+  }
+
+  @PUT(EnumServerRoutes.ACCOUNT_DETAILS_ADDRESS_PRIMARY)
+  async setPrimaryAccountDetailsAddress(_options: {
+    pathParams: { addressId: string | number };
+  }): Promise<AxiosResponse<AxiosResponse>> {
+    return {} as AxiosResponse<AxiosResponse>;
+  }
+
+  @GET(EnumServerRoutes.ACCOUNT_SETTINGS)
+  async getAccountSettings(): Promise<
+    AxiosResponse<ApiResponseAccountSettings>
+  > {
+    return {} as AxiosResponse<ApiResponseAccountSettings>;
+  }
+
+  @PUT(EnumServerRoutes.ACCOUNT_SETTINGS)
+  async changeAccountSettings(_options: {
+    data: ApiRequestAccountChangeSettings;
+  }): Promise<AxiosResponse<AxiosResponse>> {
+    return {} as AxiosResponse<AxiosResponse>;
+  }
+
   @PUT(EnumServerRoutes.ACCOUNT_PASSWORD)
   async changeAccountPassword(_options: {
     data: ApiRequestAccountChangePassword;
@@ -185,8 +247,15 @@ class NetworkClient {
   }
 
   @GET(EnumServerRoutes.GEOS_CHILDREN)
-  async getCountriesChildren(): Promise<AxiosResponse> {
-    return {} as AxiosResponse;
+  async getCountriesChildren(_options: {
+    pathParams: { geoId: string | number };
+  }): Promise<AxiosResponse<ApiResponseGeosChildren>> {
+    return {} as AxiosResponse<ApiResponseGeosChildren>;
+  }
+
+  @GET(EnumServerRoutes.GEOS_ADDRESS_TYPES)
+  async getAddressTypes(): Promise<AxiosResponse<ApiResponseGeosAddressTypes>> {
+    return {} as AxiosResponse<ApiResponseGeosAddressTypes>;
   }
 }
 

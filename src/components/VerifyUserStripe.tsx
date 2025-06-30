@@ -28,7 +28,7 @@ const VerifyUserStripe: React.FC = () => {
           <button className="w-full px-2">
             <div className="flex w-full items-center justify-between py-2 text-sm">
               <span className="text-left font-bold">Account not verified</span>
-              <span className="hidden text-center md:block">
+              <span className="hidden text-center lg:block">
                 To verify your account please check your email
               </span>
               <div className="flex items-center text-right font-bold">

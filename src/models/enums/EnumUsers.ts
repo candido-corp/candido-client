@@ -17,3 +17,8 @@ export enum EnumUserGenders {
   MALE = 2,
   OTHER = 3,
 }
+
+export enum EnumUserSettingsKey {
+  LANGUAGE = 'S_LANG',
+  THEME = 'S_THEME',
+}

@@ -1,8 +1,15 @@
 import NetworkClient from '@/api/v1/NetworkClient';
+import { useApplyUserSettings } from '@/hooks/useApplyUserSettings';
 import { EnumUserPermissions, EnumUserRoles } from '@/models/enums/EnumUsers';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
-import React, { createContext, ReactNode, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
 export interface JwtPayload {
   sub: string;
@@ -81,6 +88,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     useState<AuthContextType['isUserVerified']>(false);
   const [loading, setLoading] = useState(true);
 
+  const { applySettings } = useApplyUserSettings();
+
   // Helper function to update all auth states based on user data
   const updateAuthStates = (userData: AuthContextType['user']) => {
     setUser(userData);
@@ -90,19 +99,42 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     );
   };
 
+  // Helper function to fetch and apply user settings
+  const fetchAndApplySettings = useCallback(async () => {
+    try {
+      const response = await NetworkClient.getAccountSettings();
+      if (response.data) {
+        applySettings(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching user settings:', error);
+    }
+  }, [applySettings]);
+
   useEffect(() => {
     const fetchUser = async () => {
       const userData = await getAccessToken();
       updateAuthStates(userData);
+
+      // If user is authenticated, fetch and apply their settings
+      if (userData) {
+        await fetchAndApplySettings();
+      }
+
       setLoading(false);
     };
 
     fetchUser();
-  }, []);
+  }, [fetchAndApplySettings]);
 
   const login = async () => {
     const userData = await getAccessToken();
     updateAuthStates(userData);
+
+    // If login is successful, fetch and apply user settings
+    if (userData) {
+      await fetchAndApplySettings();
+    }
   };
 
   const logout = () => {

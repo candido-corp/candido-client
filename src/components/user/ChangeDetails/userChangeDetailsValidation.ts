@@ -9,8 +9,8 @@ const mobile_number: keyof ApiRequestAccountChangeDetails = 'mobile_number';
 const phone_number: keyof ApiRequestAccountChangeDetails = 'phone_number';
 
 export const accountChangeDetailsValidationSchema = z.object({
-  [first_name]: z.string().optional(),
-  [last_name]: z.string().optional(),
+  [first_name]: z.string(),
+  [last_name]: z.string(),
   [gender_id]: z.coerce.number().optional(),
   [birthdate]: z.date().optional(),
   [mobile_number]: z.string().optional(),
