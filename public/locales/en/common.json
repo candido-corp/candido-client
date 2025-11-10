@@ -1,0 +1,119 @@
+{
+  "homepage": {
+    "title": "Homepage"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "login": {
+    "title": "Login",
+    "description": "Enter your email below to login to your account",
+    "register": "Create new user",
+    "sign_in": "Sign in",
+    "forgot_password": "Forgot your password?"
+  },
+  "register": {
+    "title": "Register",
+    "description": "Enter your information to create an account",
+    "sign_up": "Sign up"
+  },
+  "register_verify": {
+    "title": "Verify account"
+  },
+  "forgot_password": {
+    "title": "Reset Password",
+    "description": "Enter your email below and you will receive an email to reset your password",
+    "back_to_login": "Back to Login"
+  },
+  "reset_password": {
+    "title": "Reset Password",
+    "description": "Insert your new password below"
+  },
+  "user": {
+    "title": "Welcome back, {{name}}",
+    "user": "User",
+    "change_password": {
+      "title": "Change Password",
+      "message": "Are you sure? you will receive an email to reset your password"
+    },
+    "gender": {
+      "1": "Female",
+      "2": "Male",
+      "3": "Other"
+    }
+  },
+  "user_addresses": {
+    "title": "Addresses",
+    "delete": {
+      "title": "Delete Address",
+      "message": "Are you sure you want to delete this address?",
+      "primary_title": "Delete Primary Address",
+      "primary_message": "Are you sure you want to delete your primary address? The first available address will automatically be set as your new primary address."
+    }
+  },
+  "logout": {
+    "title": "Logout"
+  },
+  "form_fields": {
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "submit": "Submit",
+    "gender_id": "Gender",
+    "birthdate": "Birthdate",
+    "mobile_number": "Mobile Number",
+    "phone_number": "Phone Number",
+    "house_number": "House No.",
+    "street": "Street",
+    "city": "City",
+    "state": "State",
+    "zip": "Zip Code",
+    "is_primary": "Set as primary address"
+  },
+  "form_validation": {
+    "required": "This field is required",
+    "email_invalid": "Please enter a valid email address",
+    "password":  {
+      "required": "The password is required",
+      "min_length": "The password must be at least 8 characters long",
+      "max_length": "The password must be at most 16 characters long",
+      "uppercase": "The password must contain at least one uppercase letter",
+      "lowercase": "The password must contain at least one lowercase letter",
+      "digit": "The password must contain at least one digit",
+      "special": "The password must contain at least one special character(@)",
+      "no_whitespace": "The password must not contain whitespaces",
+      "match": "Passwords must match"
+    }
+  },
+  "notifications": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "error_dialog": {
+      "ok": "ok"
+    }
+  },
+  "settings": {
+    "account": {
+      "title": "Account",
+      "description": "Manage your account settings and profile information"
+    },
+    "communication": {
+      "title": "Communication",
+      "description": "Configure your notification and communication preferences"
+    },
+    "billing": {
+      "title": "Billing",
+      "description": "Manage your billing information and subscription"
+    },
+    "preferences": {
+      "title": "Preferences",
+      "description": "Customize your language, theme and display preferences"
+    },
+    "security": {
+      "title": "Security",
+      "description": "Security settings and privacy controls"
+    }
+  }
+}

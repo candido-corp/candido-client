@@ -1,0 +1,13 @@
+.env
+.env.example
+.env.local
+.gitignore
+.nvmrc
+README.md
+.vscode
+.git
+.idea
+.prettierrc
+.prettierignore
+
+node_modules
